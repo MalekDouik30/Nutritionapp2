@@ -1,0 +1,41 @@
+
+<div class="list-wrapper pt-2">
+    <div class="card-body">
+        <div class="text-center">
+            <h2 class="card-title">Ajouter un nouveau rendez-vous</h2>
+        </div>
+
+    <form class="form-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+   
+      <div class="form-group">
+        <label>Nom patient </label>
+        <br>
+      <input class="form-control" list="rdz_nomPatient"  autocomplete="off" name="rdz_nomPatient" [(ngModel)]="nomPatientVar">
+      <datalist id="rdz_nomPatient">
+           <option *ngFor="let item of this.patService.listPatient"  ngValue="{{item.patId}} " >{{item.patNom}} {{item.patPrenom}}</option>
+      </datalist>
+
+      </div>
+
+      <div class="form-group">
+        <label>Date et heure </label>
+          <input type="datetime-local"  min="{{this.myDate}}" class="form-control" name="filterDateFrom" [(ngModel)]="filterDateFrom"/>
+      </div>
+  
+      <div class="mt-3">
+          <div class="text-center">
+            <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+          </div>
+      </div>
+  
+    </form>
+    <div class="mt-3">
+        <div class="text-center">
+            <button type="button" class="btn btn-block btn-secondary btn-lg font-weight-medium auth-form-btn btn-secondary-change" (click)="closeDialog()" >Retour</button>
+       </div>
+    </div>
+  </div>
+  <!--EndForm-->
+  
+  </div>
+

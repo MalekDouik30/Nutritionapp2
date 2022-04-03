@@ -1,0 +1,207 @@
+<div class="list-wrapper pt-2">
+    <div class="card-body">
+        <div class="text-center">
+            <h2 class="card-title">Ajouter un patient</h2>
+        </div>
+    <!--Form-->
+    <form class="form-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+      <div class="row">
+        <!--Nom-->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Nom <span class="error-msg">*</span></label>
+            <input type="text" class="form-control form-control-lg" placeholder="Nom" #nom="ngModel"
+              [(ngModel)]="patService.fromData.patNom" name="nom" required />
+            <div class="error-msg" *ngIf="(nom.touched || monform.submitted) && nom.errors?.required">
+              Le champs Nom est obligatoire!
+            </div>
+          </div>
+        </div>
+
+        <!--Prenom-->
+        <div class="col-md-6">
+            <div class="form-group">
+              <label> Prénom <span class="error-msg">*</span></label>
+              <input type="text" class="form-control form-control-lg" placeholder="Prénom" #prenom="ngModel"
+                [(ngModel)]="patService.fromData.patPrenom" name="prenom" required />
+              <div class="error-msg" *ngIf="(prenom.touched || monform.submitted) && prenom.errors?.required">
+                Le champs Prenom est obligatoire!
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!--Age-->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Age <span class="error-msg">*</span></label>
+            <input type="number" class="form-control form-control-lg" placeholder="Age"
+              #age="ngModel" [(ngModel)]="patService.fromData.patAge" name="age" required min="0" max="120">
+            <div class="error-msg" *ngIf="(age.touched || monform.submitted) && age.errors?.required">
+              Le champs Age est obligatoire!
+            </div>
+          </div>
+        </div>
+
+        <!--Téléphone-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Numéro Téléphone <span class="error-msg">*</span></label>
+                <input type="number" class="form-control form-control-lg" placeholder="Numéro de téléphone"
+                        #telephone="ngModel" [(ngModel)]="patService.fromData.patTelephone" name="telephone" pattern="^[23579][0-9]{7}$">
+            
+                <div class="error-msg" *ngIf="(telephone.touched || monform.submitted) && telephone.errors?.pattern">
+                  Le numéro de téléphone n'est pas correcte! 
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <div class="row">
+      <!-- Profession -->
+        <div class="col-md-6">
+          <div class="form-group">
+              <label>Profession</label>
+              <select class="form-control form-control-lg" [(ngModel)]="patService.fromData.patProfession" #profession="ngModel" name="profession" placeholder="Profession" >
+
+                <option value="élève/étudiant">Elève/étudiant</option>
+                <option value="Fonctionnaire (secteur public)">Fonctionnaire (secteur public)</option>
+                <option value="Fonctionnaire (secteur privé)">Fonctionnaire (secteur privé)</option>
+                <option value="Au chomage/ à la retraite/ femme au foyer">Au chomage/ à la retraite/ femme au foyer</option>
+                <option value="Indépendant">Indépendant</option>
+              </select>
+          </div>
+        </div>
+      
+    <!-- Situation Familiale -->
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Situation Familiale</label>
+            <select  class="form-control form-control-lg" placeholder="Situation Familiale" #situationFamiliale="ngModel"
+            [(ngModel)]="patService.fromData.patSituationFamiliale" name="situationFamiliale">
+                <option value="célibataire">célibataire</option>
+                <option value="marié">marié(e)</option>
+                <option value="fiancé">fiancé(e)</option>
+                <option value="divorcé">divorcé(e)</option>
+                <option value="veuf">veuf(ve)</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+    <!-- Adresse -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Adresse</label>
+                    <textarea type="text" class="form-control form-control-lg"
+                    placeholder="Adresse" #adresse="ngModel" [(ngModel)]="patService.fromData.patAdresse"
+                    name="adresse"> 
+                    </textarea>
+            </div>
+        </div>
+
+    <!-- Sexe -->
+    <div class="col-md-6">   
+        <div class="form-group">
+            <label>Sexe<span class="error-msg">*</span></label>
+            <select class="form-control form-control-lg" [(ngModel)]="patService.fromData.patSexe" #etat="ngModel" name="sexe">
+                <option value=Homme>Homme</option>
+                <option value=Femme>Femme</option>
+            </select>  
+        </div> 
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <!--Mail-->
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" class="form-control form-control-lg" placeholder="Email" #email="ngModel"
+              [(ngModel)]="patService.fromData.patMail" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required />
+            
+            <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.required">
+              Le champs e-mail est obligatoire!
+            </div>
+            <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.pattern">
+              Entrez une adresse e-mail valide!
+            </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <!--Poids-->
+            <div class="form-group">
+              <label>Poids(Kg) <span class="error-msg">*</span> </label>
+              <input type="number" class="form-control form-control-lg" placeholder="Poids(Kg)" #poids="ngModel"
+            [(ngModel)]="patService.fromData.patPoids" name="poids" min=0 required/>
+
+                <div class="error-msg" *ngIf="(poids.touched || monform.submitted) && poids.errors?.required">
+                  Le poids est obligatoire!
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <!--Taille-->
+        <div class="form-group">
+          <label>Taille <span class="error-msg">*</span> </label>
+          <input type="number" class="form-control form-control-lg" placeholder="Taille" #taille="ngModel"
+          [(ngModel)]="patService.fromData.patTaille" name="taille" min=0 required/>
+
+          <div class="error-msg" *ngIf="(taille.touched || monform.submitted) && taille.errors?.required">
+            La taille est obligatoire!
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <!--Tour du Taille-->
+        <div class="form-group">
+          <label>Tour du taille <span class="error-msg">*</span> </label>
+          <input type="number" class="form-control form-control-lg" placeholder="Tour du taille" #tourTaille="ngModel"
+          [(ngModel)]="patService.fromData.patToureTaille" name="tourTaille" min=0 required/>
+
+          <div class="error-msg" *ngIf="(tourTaille.touched || monform.submitted) && tourTaille.errors?.required">
+            La tour du taille est obligatoire!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label>Motif de consultation <span class="error-msg">*</span> </label>
+        <input type="text" class="form-control form-control-lg" placeholder="Motif de consultation" #motifConsultation="ngModel"
+        [(ngModel)]="patService.fromData.patMotifConsultation" name="motifConsultation" required/>
+
+        <div class="error-msg" *ngIf="(motifConsultation.touched || monform.submitted) && motifConsultation.errors?.required">
+          Motif de consultation est obligatoire!
+        </div>
+
+
+
+      </div>
+
+    </div>
+              
+      <div class="mt-3">
+          <div class="text-center">
+            <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+          </div>
+      </div>
+  
+    </form>
+      <!--EndForm-->
+    <div class="mt-3">
+        <div class="text-center">
+            <button type="button" class="btn btn-block btn-secondary btn-lg font-weight-medium auth-form-btn btn-secondary-change" (click)="closeDialog()" >Retour</button>
+       </div>
+    </div>
+  </div>
+
+  </div>
+
+

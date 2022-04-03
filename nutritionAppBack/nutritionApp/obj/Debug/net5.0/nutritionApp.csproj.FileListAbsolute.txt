@@ -1,0 +1,121 @@
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\appsettings.json
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.exe
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.deps.json
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.runtimeconfig.json
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.runtimeconfig.dev.json
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\ref\nutritionApp.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.csproj.AssemblyReference.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.AssemblyInfoInputs.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.AssemblyInfo.cs
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.csproj.CoreCompileInputs.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\staticwebassets\nutritionApp.StaticWebAssets.Manifest.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\staticwebassets\nutritionApp.StaticWebAssets.xml
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\scopedcss\bundle\nutritionApp.styles.css
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.RazorTargetAssemblyInfo.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\ref\nutritionApp.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.genruntimeconfig.cache
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Humanizer.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Extensions.Caching.SqlServer.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Runtime.Caching.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik.ELAMANATAKAFUL\Documents\Workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.csproj.AssemblyReference.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.AssemblyInfoInputs.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.AssemblyInfo.cs
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.csproj.CoreCompileInputs.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\ref\nutritionApp.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\appsettings.json
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.StaticWebAssets.xml
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.exe
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.deps.json
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.runtimeconfig.json
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.runtimeconfig.dev.json
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\ref\nutritionApp.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\nutritionApp.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Humanizer.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Extensions.Caching.SqlServer.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Runtime.Caching.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\scopedcss\bundle\nutritionApp.styles.css
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\staticwebassets\nutritionApp.StaticWebAssets.Manifest.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.RazorTargetAssemblyInfo.cache
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.csproj.CopyComplete
+C:\Users\m.douik\OneDrive - Assurances El Amana Takaful\Documents\workspace\nutritionApp\nutritionAppBack\nutritionApp\obj\Debug\net5.0\nutritionApp.genruntimeconfig.cache

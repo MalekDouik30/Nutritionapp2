@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="main-panel">
+    <div class="container-scroller">
+        <app-navbar></app-navbar>
+
+              <div class="card-body">
+                <h2>Gestion des paramètres globaux</h2>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                        <tr> 
+                        <th class="font-weight-bold" >Nombre de tentatives</th>
+                        <th class="font-weight-bold" >Mot de passe par défaut</th>
+                        <th class="font-weight-bold" >Modifier</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of paramService.listparametres">
+                        <td> {{ item.parNombreTentatives }} </td>
+                        <td> {{ item.parMotPasseParDefaut }} </td>
+                        <td>                                                    
+                            <button type="button" class="btn btn-success btn-icon" (click)="onSelection(item)"> 
+                                <i class="mdi mdi-sync"></i>
+                            </button>
+                         
+                         </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+       
+    
+
+
+
+
+        
+
+</div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,586 @@
+
+<ng-container *ngIf="this.verifcationVar==true">
+  <div class="list-wrapper pt-2">
+    <div class="card-body">
+        <div class="text-center">
+            <h2 class="card-title">Dossier un patient</h2>
+        </div>
+       <form class="form-sample"  #monform="ngForm" (submit)="onSubmit(monform)">
+        <mat-tab-group #tabGroup>
+            <!----------------------------------------View1-------------------------------------------------------------------->
+            <mat-tab label="Pathologies">
+                <br>
+                <!-- Motif de consultation -->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Motif de consultation</label>
+               
+                    </div>
+                </div>
+                <!-- Pathologies -->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Pathologies</label>
+                        <div class="form-check form-check-flat form-check-primary" *ngFor="let option of pathologieOptions">
+                            <label class="form-check-label">
+                                <input #check type="checkbox" class="form-check-input" [checked]="pathologieAnswer.indexOf(option)>=0" (change)="onChangePathologie(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                            </label>
+                        </div>
+                        <label>Autre</label> <input type="text" [(ngModel)]="pathologieInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=1" type="button" class="btn btn-inverse-danger btn-icon" title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+            </mat-tab>
+            <!----------------------------------------View2-------------------------------------------------------------------->
+            <mat-tab label="Antécédents"> 
+                <br>
+                <!--Antécédents Personnels-->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Antécédents Personnels</label>
+                        <div class="form-check form-check-flat form-check-primary" *ngFor="let option of antecedentOptions">
+                            <label class="form-check-label">
+                                <input #check type="checkbox" class="form-check-input" [checked]="antecedentAnswer.indexOf(option)>=0" (change)="onChangeAntecedent(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                            </label>
+                        </div>
+
+                        <label>Autre</label> <input type="text" [(ngModel)]="antecedentInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                    </div>
+                </div>
+                <!--Antécédents Familiaux-->
+                <div class="row">
+                    <div class="form-group">
+                        <label>Antécédents Familiaux</label> <input type="text" [(ngModel)]="antecedentFamiliauxInput" name="somthing" class="form-control form-control-lg" placeholder="Antécédents Familiaux">
+                    </div>
+                </div>
+                
+                
+                <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=0" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    <button mat-button (click)="tabGroup.selectedIndex=2" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+            </mat-tab>
+            <!----------------------------------------View3-------------------------------------------------------------------->
+            <mat-tab label="Historique de l'obésité">
+            <br>
+            <div class="row">
+                <div class="form-group"> 
+                    <label>Poids maximal atteint</label> <input type="text" [(ngModel)]="historiquePoidsMax" name="somthing" class="form-control form-control-lg" placeholder="Poids maximal atteint">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">             
+                    <label>Circonstances de prise de poids</label> <input type="text" [(ngModel)]="historiqueCircoPrisePoids" name="somthing" class="form-control form-control-lg" placeholder="Circonstances de prise de poids">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">             
+                    <label>Régime suivi</label> <input type="text" [(ngModel)]="historiqueRegimeSuivi" name="somthing" class="form-control form-control-lg" placeholder="Régime suivi">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">              
+                    <label>Perte pondérale suite au régime</label> <input type="text" [(ngModel)]="historiquePertePonderale" name="somthing" class="form-control form-control-lg" placeholder="Perte pondérale suite au régime">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">             
+                    <label>Cause d'arret de régime</label> <input type="text" [(ngModel)]="historiqueCause" name="somthing" class="form-control form-control-lg" placeholder="Cause d'arret de régime">
+                </div>
+            </div>
+                
+            <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=1" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    <button mat-button (click)="tabGroup.selectedIndex=3" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+
+            </mat-tab>
+            <!----------------------------------------View4-------------------------------------------------------------------->
+            <mat-tab label="Historique diabète">
+                <div class="row">
+                    <div class="form-group">
+                        <br>
+                        <!-- Type diabète -->
+                        <label> Type diabète</label>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="diabete" value="Diabète type 1" [(ngModel)]="historiquetypeDiabete"> Diabète type 1 <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="diabete" value="Diabète type 2" [(ngModel)]="historiquetypeDiabete"> Diabète type 2 <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="diabete" value="Diabète type gestationnel" [(ngModel)]="historiquetypeDiabete"> Diabète type gestationnel <i class="input-helper"></i>
+                            </label>
+                        </div>
+
+                           
+                        <!-- Traitement -->
+                        <label> Traitement </label>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="traitement" value="Insuline" [(ngModel)]="historiquetraitement"> Insuline <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="traitement" value="ADO" [(ngModel)]="historiquetraitement"> ADO <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="traitement" value="Mixte" [(ngModel)]="historiquetraitement"> Mixte <i class="input-helper"></i>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=2" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    <button mat-button (click)="tabGroup.selectedIndex=4" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+
+            </mat-tab>
+
+            <!----------------------------------------View5-------------------------------------------------------------------->
+            <mat-tab label="Historique Amaigrissement">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Poids minimal atteint</label> <input type="text" [(ngModel)]="amaigrissementPoidsMin" name="somthing" class="form-control form-control-lg" placeholder="Poids minimal atteint">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Période de perte penderale</label> <input type="text" [(ngModel)]="amaigrissementPeriodePerte" name="somthing" class="form-control form-control-lg" placeholder="Période de perte penderale">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Nombre de Kg perdus</label> <input type="text" [(ngModel)]="amaigrissementNbeKgPerdus" name="somthing" class="form-control form-control-lg" placeholder="Nbre de Kg perdus">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Cause de la perte</label> <input type="text" [(ngModel)]="amaigrissementCausePerte" name="somthing" class="form-control form-control-lg" placeholder="Cause de la perte">
+                    </div>
+                </div>
+                
+
+                <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=3" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    <button mat-button (click)="tabGroup.selectedIndex=5" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+            </mat-tab>
+            
+            <!----------------------------------------View6-------------------------------------------------------------------->
+            <mat-tab label="Habitudes alimentaires">
+              
+                    <div class="row">
+                        <div class="form-group">
+                            <br>
+                            <label> Préférences gustatives</label>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudePrefGustative" value="Sucré" [(ngModel)]="habitudePrefGustative"> Sucré <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudePrefGustative" value="Salé" [(ngModel)]="habitudePrefGustative"> Salé <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <label>Autre</label> <input type="text" [(ngModel)]="habitudePrefGustative" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Alcool</label>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeAlcool" value="Oui" [(ngModel)]="habitudeAlcool"> Oui <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeAlcool" value="Non" [(ngModel)]="habitudeAlcool"> Non <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <label>Quantité</label> <input type="text" [(ngModel)]="habitudeAlcoolQuantite" name="somthing1" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeAlcool=='Non'">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Tabac</label>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeTabac" value="Oui" [(ngModel)]="habitudeTabac"> Oui <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeTabac" value="Non" [(ngModel)]="habitudeTabac"> Non <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <label>Nombre de cigarettes </label> <input type="text" [(ngModel)]="habitudeTabacQuantite" name="somthing2" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeTabac=='Non'">
+                        </div>
+                    </div>
+               
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Où prenez vous vos repas ?</label>
+                            <div class="form-check form-check-flat form-check-primary" *ngFor="let option of habitudeOuRepasOptions">
+                                <label class="form-check-label">
+                                    <input #check type="checkbox" class="form-check-input" [checked]="habitudeOuRepasAnswer.indexOf(option)>=0" (change)="onChangehabitudeOuRepas(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                                </label>
+                            </div>
+                            <label>Autre</label> <input type="text" [(ngModel)]="habitudeOuRepasInput" name="somthing3" class="form-control form-control-lg" placeholder="Autre choix">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Combien de repas prenez vous par jour ?</label>
+                            <input type="number" [(ngModel)]="habitudeNbreRepasJour" name="somthing10" class="form-control form-control-lg" placeholder="Nombre de repas par jour ">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Vous mangez</label>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="En famille" [(ngModel)]="habitudeTypeRepas"> En famille <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="Avec les amis" [(ngModel)]="habitudeTypeRepas"> Avec les amis <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="Tout seul" [(ngModel)]="habitudeTypeRepas"> Tout seul <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label> Avez Vous un problème de mastication ? </label>
+
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Oui" [(ngModel)]="habitudeProblemeMastication"> Oui <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Non" [(ngModel)]="habitudeProblemeMastication"> Non <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Peut-etre" [(ngModel)]="habitudeProblemeMastication"> Peut-etre <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Quantité d'eau par jour ? </label><input type="text" [(ngModel)]="habitudeQteEau" name="somthing8" class="form-control form-control-lg" placeholder="Quantité d'eau par jour" >
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Pratiquer vous du sport ou de l'activité physique ? </label>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeDosSport" value="Oui" [(ngModel)]="habitudeDosSport"> Oui <i class="input-helper"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="habitudeDosSport" value="Non" [(ngModel)]="habitudeDosSport"> Non <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">                    
+                            <label>Quel type de sport ? </label><input type="text" [(ngModel)]="habitudeTypeSport" name="somthing5" class="form-control form-control-lg" placeholder="Quel type de sport" [disabled]="habitudeDosSport=='Non'">
+                        </div>    
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Durée </label><input type="text" [(ngModel)]="habitudeDureSport" name="somthing5" class="form-control form-control-lg" placeholder="Durée" [disabled]="habitudeDosSport=='Non'">
+                        </div>    
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Fréquence </label><input type="text" [(ngModel)]="habitudeFrequenceSport" name="somthing5" class="form-control form-control-lg" placeholder="Fréquence" [disabled]="habitudeDosSport=='Non'">
+                        </div>
+                    </div>
+
+         
+
+                    <div class="text-center">
+                        <button mat-button (click)="tabGroup.selectedIndex=4" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                        <button mat-button (click)="tabGroup.selectedIndex=6" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                    </div>
+            </mat-tab>
+
+            <!----------------------------------------View7-------------------------------------------------------------------->
+            <mat-tab label="Troubles du comportement alimentaire">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <label>TCA</label>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="TCA" value="Boulimie" [(ngModel)]="TCA"> Boulimie <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="TCA" value="Anorexie" [(ngModel)]="TCA"> Anorexie <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="TCA" value="Syndrome de l'alimentation nocturne" [(ngModel)]="TCA"> Syndrome de l'alimentation nocturne <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="TCA" value="Grignotage" [(ngModel)]="TCA"> Grignotage <i class="input-helper"></i>
+                            </label>
+                        </div>
+                        <label>Autre </label><input type="text" [(ngModel)]="inputTCA" name="somthing85" class="form-control form-control-lg" placeholder="Autre choix">
+                    </div>
+                </div>
+
+                    <div class="text-center">
+                        <button mat-button (click)="tabGroup.selectedIndex=5" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                        <button mat-button (click)="tabGroup.selectedIndex=7" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                    </div>
+            </mat-tab>
+
+            <!----------------------------------------View8-------------------------------------------------------------------->
+            <mat-tab label="Paramètres anthropométriques">
+                <br>
+                <label>Poids (Kg)</label><input type="number" [(ngModel)]="ParamPoids" name="somthing75" class="form-control form-control-lg" placeholder="Poids">
+                <br>
+                <label>Taille (m) </label><input type="number" [(ngModel)]="ParamTaille" name="somthing25" class="form-control form-control-lg" placeholder="Taille">
+                <br>
+                <label>Tour du taille </label><input type="number" [(ngModel)]="ParamTour_taille" name="somthing45" class="form-control form-control-lg" placeholder="Tour du taille">
+                <div class="text-center">
+                    <button mat-button (click)="tabGroup.selectedIndex=6" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    <button mat-button (click)="tabGroup.selectedIndex=8" type="button" class="btn btn-inverse-danger btn-icon"  title="Suivant"> <i class="mdi mdi-page-last"></i> </button>
+                </div>
+            </mat-tab>
+            <!----------------------------------------View9-------------------------------------------------------------------->
+            <mat-tab label="Enquête alimentaire">
+                    <div class="row">
+                        <div class="form-group">
+                            <br>
+                            <!-- Petit dej -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group"> 
+                                        <h2> Petit-déjeuner </h2>
+                                            <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedpetitDejeuner" name="selectedpetitDejeuner" (change)="addInputsQuantite()">
+                                                <ng-option *ngFor="let item of alimService.listAliments" value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}+">{{item.alimNomFr}}</ng-option>
+                                            </ng-select>
+                                        </div>              
+                                    </div>
+                                <div class="col-md-6">
+                                    <form [formGroup]="formQuantitePetitDejeuner">
+                                    <table>
+                                    <!--Quantite-->
+                                    <tr> 
+                                        <ng-container formArrayName="inputQuantitePetitDejeuner" *ngFor ="let item of inputQuantitePetitDejeuner.controls; let i = index">
+                                            <td>
+                                                <label>Quantité(g)</label>
+                                                    <input  class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                    <!--Fréquence-->
+                                    <tr> 
+                                        <ng-container formArrayName="inputFrequencePetitDejeuner" *ngFor ="let item of inputFrequencePetitDejeuner.controls; let i = index">
+                                            <td>
+                                                <label>Fréquence(S) </label>
+                                                    <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                </table>
+                                </form>
+                            </div>
+                            
+                            <table>
+                                <tr> 
+                                    <td>
+                                        <label>&nbsp;&nbsp;&nbsp;&nbsp;Protides</label>
+                                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtidePetitDej | number : '1.2-2'}}" disabled/> 
+                                    </td>
+                                    <td>
+                                        <label>Lipides</label>
+                                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipidePetitDej | number : '1.2-2'}}" disabled/> 
+                                    </td>
+                                    <td>
+                                        <label>Glucides</label>
+                                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucidePetitDej | number : '1.2-2'}}" disabled/> 
+                                    </td>
+                                    <td>
+                                        <label>Calories</label>
+                                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCaloriePetitDej | number : '1.2-2'}}" disabled/> 
+                                    </td>
+                                    <td>
+                                        <label>%Kcal</label>
+                                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorie | number : '1.2-2'}}" disabled/> 
+                                    </td>
+ 
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        
+                        <!-- Dejeuner -->
+                        <div class="row">
+                            <div class="form-group">
+                                <h2> Déjeuner </h2>
+                            </div>
+                        </div>
+                        
+
+                        <!-- Diner -->
+                        <div class="row">
+                            <div class="form-group">
+                                <h2> Diner </h2>
+                            </div>
+                        </div>
+
+                        <!-- Totaux -->
+                        <div class="row">
+                            <div class="form-group">
+                                <h2> Totaux </h2>
+                            </div>
+                        </div>
+
+                            <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                                <button type="button" class="btn btn-inverse-info btn-fw" (click)="onCalcule()"> Calculer</button>
+                            </div>
+                           
+
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button (click)="tabGroup.selectedIndex=7" type="button" class="btn btn-inverse-danger btn-icon"  title="Précedent"> <i class="mdi mdi-page-first"></i> </button>
+                    </div>                    
+                <div class="mt-3">
+                    <div class="text-center">
+                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+                    </div>
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+    </form>
+    </div>
+    </div>
+</ng-container>
+<!-------------------------------------------------------------------------------------------------------------->
+<ng-container *ngIf="this.verifcationVar==false">
+        <div class="row">
+            <h3 class="card-title">Dossier Patient </h3> 
+            <div class="template-demo">
+                <button type="button" class="btn btn-inverse-primary btn-fw"> <i class="mdi mdi-swap-horizontal"></i>Modifier </button>                        
+                <button type="button" class="btn btn-inverse-danger btn-fw" mwlConfirmationPopover 
+                (confirm)="onDelete(this.dosPatientSelectId)"
+                popoverTitle="Êtes-vous sûr de vouloir supprimer ce Dossier ?"> <i class="mdi mdi-delete-forever" ></i>Supprimer </button>
+            </div>
+                    
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <ul class="icon-data-list">
+                        <li>
+                            <div class="d-flex">
+                            <img src="" alt="user" width="50" class="rounded-circle">
+                            <div>
+                                <p class="text-info mb-1">ID du patient  : {{this.dosPatient.dosPatientId}}</p>
+                                <p class="mb-0"><b>Pathologies :</b> <small>{{this.dosPatient.dosPathologies}} </small> </p>
+                                <p class="mb-0"><b>Antécédents Personnels :</b> <small>{{this.dosPatient.dosAntecedentsPersonnels}} </small> </p>
+                                <p class="mb-0"><b>Antécédents Familiaux : </b><small>{{this.dosPatient.dosAntecedentsFamiliaux}}</small> </p>
+                                <p class="mb-0"><b>Poids maximal atteint : </b><small>{{this.dosPatient.dosPoidsMaximal}}</small> </p>
+                                <p class="mb-0"><b>Circonstances de prise de poids: </b><small>{{this.dosPatient.dosCirconstancePrisePoids}}</small> </p>
+                                <p class="mb-0"><b>Régime suivi :</b> <small>{{this.dosPatient.dosRegime}}</small> </p>
+                                <p class="mb-0"><b>Perte pondérale suite au régime : </b><small>{{this.dosPatient.dosPerteRegime}}</small> </p>
+                                <p class="mb-0"><b>Cause d'arret de régime :</b> <small>{{this.dosPatient.dosCauseArretRegime}}</small> </p>
+                                <p class="mb-0"><b>Type diabète :</b> <small>{{this.dosPatient.dosDiabete}}</small> </p>
+                                <p class="mb-0"><b>Traitement :</b> <small>{{this.dosPatient.dosTraitementDiabete}}</small> </p>
+                                <p class="mb-0"><b>Poids minimal atteint :</b> <small>{{this.dosPatient.dosHistoriqueAmaigrissement}}</small> </p>
+                                <p class="mb-0"><b>Période de perte penderale :</b> <small>{{this.dosPatient.dosAntecedentsFamiliaux}}</small> </p>
+                                <p class="mb-0"><b>Nombre de Kg perdus : </b><small>{{this.dosPatient.dosAntecedentsFamiliaux}}</small> </p>
+                                <p class="mb-0"><b>Cause de la perte :</b> <small>{{this.dosPatient.dosAntecedentsFamiliaux}}</small> </p>
+                                <p class="mb-0"><b>Préférences gustatives :</b> <small>{{this.dosPatient.dosPreferencesGustatives}}</small> </p>
+                                <p class="mb-0"><b>Alcool :</b> <small>{{this.dosPatient.dosAlcool}}</small> </p>
+                                <p class="mb-0"><b>Quantité d'alcool :</b> <small>{{this.dosPatient.dosQuantiteAlcool}}</small> </p>
+                                <p class="mb-0"><b>Tabac :</b> <small>{{this.dosPatient.dosTabac}}</small> </p>
+                                <p class="mb-0"><b>Quantité de Tabac :</b> <small>{{this.dosPatient.dosQuantiteTabac}}</small> </p>
+                                <p class="mb-0"><b>Où prenez vous vos repas : </b><small>{{this.dosPatient.dosLieuxRepas}}</small> </p>
+                                <p class="mb-0"><b>Combien de repas prenez vous par jour ? :</b> <small>{{this.dosPatient.dosNombreRepas}}</small> </p>
+                                <p class="mb-0"><b>Vous mangez : </b><small>{{this.dosPatient.dosTypeRepas}}</small> </p>
+                                <p class="mb-0"><b>Avez Vous un problème de mastication ? :</b> <small>{{this.dosPatient.dosProblemeMastication}}</small> </p>
+                                <p class="mb-0"><b>Pratiquer vous du sport ou de l'activité physique ? :</b> <small><ng-container *ngIf="this.dosPatient.dosSport==true"> Oui </ng-container>
+                                                                                                                    <ng-container *ngIf="this.dosPatient.dosSport==false"> Non </ng-container></small> </p>
+                                <p class="mb-0"><b>Quel type de sport ? : </b><small>{{this.dosPatient.dosTypeSport}}</small> </p>
+                                <p class="mb-0"><b>Durée :</b> <small>{{this.dosPatient.dosDureeSport}}</small> </p>
+                                <p class="mb-0"><b>Fréquence :</b> <small>{{this.dosPatient.dosFrequenceSport}}</small> </p>
+                                <p class="mb-0"><b>TCA : </b><small>{{this.dosPatient.dosTca}}</small> </p>
+                                <p class="mb-0"><b>Poids (Kg) :</b> <small>{{this.dosPatient.dosPoids}}</small> </p>
+                                <p class="mb-0"><b>Taille (m) :</b> <small>{{this.dosPatient.dosTaille}}</small> </p>
+                                <p class="mb-0"><b>Tour du taille : </b><small>{{this.dosPatient.dosTourTaille}}</small> </p>
+                               
+               
+                            </div>
+                            </div>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+          </div>
+          <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="text-center">
+                    <i class="menu-arrow"></i> <h4>Résultat de l'enquête alimentaire  </h4> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+</ng-container>

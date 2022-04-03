@@ -1,0 +1,19 @@
+export class Patient{
+    patId=0
+    patNom=""
+    patPrenom=""
+    patAge=0
+    patTelephone=0
+    patProfession=""
+    patSituationFamiliale=""
+    patAdresse=""
+    patSexe=""
+    patMail=""
+    patEtat=true
+    patNutritionnisteId=""
+    patPoids=0
+    patTaille=0
+    patToureTaille=0
+    patImc=0
+    patMotifConsultation=""
+}

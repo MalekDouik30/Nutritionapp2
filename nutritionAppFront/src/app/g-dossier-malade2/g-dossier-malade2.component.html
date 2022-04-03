@@ -1,0 +1,1331 @@
+<app-header></app-header>
+<div class="container-scroller">
+  <app-navbar></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+   <div class="main-panel">
+
+
+
+
+
+          <!--//////////////////////////////////////////////////////////////////////////////////////-->
+          <ng-container  *ngIf="this.verifcationExistDossier==true">
+            <div class="content-wrapper pb-0">
+            <div class="page-header flex-wrap">
+                <div class="header-left">
+                  <h1>Nouveau dossier patient </h1>
+                </div>
+                <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                </div>
+              </div>
+              <!--Card-->
+            <!--------------------- View1 ------------------------------------------------------------->
+            <ng-container *ngIf="displayView=='view1'">
+              <div class="row">
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewPathologiesAntecedent()">
+                  <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_12.jpg)'}">
+                      <div class="card-body d-flex align-items-center">
+                          <div class="text-white">
+                              <div>
+                                <h1 class="text-color-black font-20 font-weight-semibold mb-0" > Pathologies et Antécédents </h1> 
+                              </div>   
+                          </div>     
+                      </div>
+                  </div>
+              </div>
+
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewHistoriqueObesite()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_7.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <div>
+                                  <h1 class="text-color-black font-20 font-weight-semibold mb-0" > Historique obésité </h1> 
+                                </div>   
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewHistoriqueAmaigrissement()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_6.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <div>
+                                    <h1 class="text-color-black font-20 font-weight-semibold mb-0"> Historique amaigrissement </h1>
+                                </div> 
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+            
+            <!--Card-->
+       
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewHistoriqueDiabete()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_8.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <div>
+                                  <h1 class="text-color-black font-20 font-weight-semibold mb-0"> Historique diabète </h1> 
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewHistoriqueAlimentaire()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_11.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <div>
+                                    <h1 class="text-color-black font-20 font-weight-semibold mb-0"> Habitudes alimentaires </h1> 
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewTroubleTCA()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_9.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <div>
+                                    <h1 class="text-color-black font-20 font-weight-semibold mb-0"> Troubles du comportement alimentaire TCA </h1> 
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                </div>   
+                <div class="col-sm-6 stretch-card grid-margin cursor-dossier-medecin" (click)="changeViewEnqueteAlimentaire()">
+                    <div class="card card-img" [ngStyle]="{ background: 'url(assets/images/dashboard/img_10.jpg)'}">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="text-white">
+                                <h1 class="text-color-black font-20 font-weight-semibold mb-0"> Enquête alimentaire </h1> 
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </ng-container>
+
+    <!--------------------- View 1.1 ------------------------------------------------------------->
+    <form class="form-sample"  #monform="ngForm" (submit)="onSubmit(monform)">
+    <ng-container *ngIf="displayView=='view8'">
+      <h3 class="mb-3">Pathologies et Antécédents</h3>
+      <div class="row">
+        <div class="col-sm-12 stretch-card grid-margin">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card border-0">
+                  <div class="card-body"> 
+                    <!--Pathologie-->
+                    <div class="row">
+                      <div class="form-group">
+                          <label> <b>Pathologies</b></label>
+                          <div class="form-check form-check-flat form-check-primary" *ngFor="let option of pathologieOptions">
+                              <label class="form-check-label">
+                                  <input #check type="checkbox" class="form-check-input" [checked]="pathologieAnswer.indexOf(option)>=0" (change)="onChangePathologie(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                              </label>
+                          </div>
+                          <label>Autre</label> <input type="text" [(ngModel)]="pathologieInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                      </div>
+                    </div>
+                    <!--Antécedents-->
+                    <div class="row">
+                      <div class="form-group">
+                          <label> <b>Antécédents Personnels</b></label>
+                          <div class="form-check form-check-flat form-check-primary" *ngFor="let option of antecedentOptions">
+                              <label class="form-check-label">
+                                  <input #check type="checkbox" class="form-check-input" [checked]="antecedentAnswer.indexOf(option)>=0" (change)="onChangeAntecedent(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                              </label>
+                          </div>
+                          <label>Autre</label> <input type="text" [(ngModel)]="antecedentInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                      </div>
+                  </div>
+                  <!--Antécédents Familiaux-->
+                  <div class="row">
+                      <div class="form-group">
+                          <label><b>Antécédents Familiaux</b></label> <input type="text" [(ngModel)]="antecedentFamiliauxInput" name="somthing" class="form-control form-control-lg" placeholder="Antécédents Familiaux">
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+          <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewAcceuilDossierPatient()"><i class="mdi mdi-page-first"></i></button>
+        </span>
+      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+        <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueObesite()"><i class="mdi mdi-page-last"></i></button>
+    </span>
+    </div>
+    </ng-container>
+    <!--------------------- View 2 ------------------------------------------------------------->
+      <ng-container *ngIf="displayView=='view2'"> 
+          <h3 class="mb-3">Historique obésité</h3>
+          <div class="row">
+            <div class="col-sm-12 stretch-card grid-margin">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <!--Historique Diabète-->
+                        <div class="row">
+                          <div class="form-group"> 
+                              <label><b>Poids maximal atteint</b></label> <input type="text" [(ngModel)]="historiquePoidsMax" name="somthing" class="form-control form-control-lg" placeholder="Poids maximal atteint">
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group">             
+                              <label><b>Circonstances de prise de poids</b></label> <input type="text" [(ngModel)]="historiqueCircoPrisePoids" name="somthing" class="form-control form-control-lg" placeholder="Circonstances de prise de poids">
+          
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group">             
+                              <label><b>Régime suivi</b></label> <input type="text" [(ngModel)]="historiqueRegimeSuivi" name="somthing" class="form-control form-control-lg" placeholder="Régime suivi">
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group">              
+                              <label><b>Perte pondérale suite au régime</b></label> <input type="text" [(ngModel)]="historiquePertePonderale" name="somthing" class="form-control form-control-lg" placeholder="Perte pondérale suite au régime">
+          
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group">             
+                              <label><b>Cause d'arret de régime</b></label> <input type="text" [(ngModel)]="historiqueCause" name="somthing" class="form-control form-control-lg" placeholder="Cause d'arret de régime">
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+              <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewPathologiesAntecedent()"><i class="mdi mdi-page-first"></i></button>
+            </span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                  <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAmaigrissement()"><i class="mdi mdi-page-last"></i></button>
+              </span>
+          </div>
+      </ng-container>
+    <!--------------------- View 3 ------------------------------------------------------------->
+      <ng-container *ngIf="displayView=='view3'">
+        <h3 class="mb-3">Historique amaigrissement</h3>
+        <div class="row">
+          <div class="col-sm-12 stretch-card grid-margin">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <!--Historique Amaigrissement-->
+                      <div class="row">
+                        <div class="form-group">
+                            <label><b>Poids minimal atteint</b></label> <input type="text" [(ngModel)]="amaigrissementPoidsMin" name="somthing" class="form-control form-control-lg" placeholder="Poids minimal atteint">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                            <label><b>Période de perte penderale</b></label> <input type="text" [(ngModel)]="amaigrissementPeriodePerte" name="somthing" class="form-control form-control-lg" placeholder="Période de perte penderale">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                            <label><b>Nombre de Kg perdus</b></label> <input type="text" [(ngModel)]="amaigrissementNbeKgPerdus" name="somthing" class="form-control form-control-lg" placeholder="Nbre de Kg perdus">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                            <label><b>Cause de la perte</b></label> <input type="text" [(ngModel)]="amaigrissementCausePerte" name="somthing" class="form-control form-control-lg" placeholder="Cause de la perte">
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+              <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueObesite()"><i class="mdi mdi-page-first"></i></button>
+          </span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+              <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueDiabete()"><i class="mdi mdi-page-last"></i></button>
+          </span>
+        </div>
+      </ng-container>
+
+    <!--------------------- View 4 ------------------------------------------------------------->
+
+    <ng-container *ngIf="displayView=='view4'">
+      <h3 class="mb-3">Historique diabète</h3>
+
+      <div class="row">
+        <div class="col-sm-12 stretch-card grid-margin">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card border-0">
+                  <div class="card-body">
+
+                    <div class="row">
+                      <div class="form-group">
+                          <br>
+                          <!-- Type diabète -->
+                          <label> <b>Type diabète</b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="diabete" value="Diabète type 1" [(ngModel)]="historiquetypeDiabete"> Diabète type 1 <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="diabete" value="Diabète type 2" [(ngModel)]="historiquetypeDiabete"> Diabète type 2 <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="diabete" value="Diabète type gestationnel" [(ngModel)]="historiquetypeDiabete"> Diabète type gestationnel <i class="input-helper"></i>
+                              </label>
+                          </div>
+  
+                          <!-- Traitement -->
+                          <label> <b>Traitement </b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="traitement" value="Insuline" [(ngModel)]="historiquetraitement"> Insuline <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="traitement" value="ADO" [(ngModel)]="historiquetraitement"> ADO <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="traitement" value="Mixte" [(ngModel)]="historiquetraitement"> Mixte <i class="input-helper"></i>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+            <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAmaigrissement()"><i class="mdi mdi-page-first"></i></button>
+        </span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAlimentaire()"><i class="mdi mdi-page-last"></i></button>
+        </span>
+      </div>
+    </ng-container>
+
+    <!--------------------- View 5 ------------------------------------------------------------->
+
+    <ng-container *ngIf="displayView=='view5'">
+      <h3 class="mb-3">Habitudes alimentaires</h3>
+        <div class="col-sm-12 stretch-card grid-margin">
+          <div class="card">
+              <div class="col-md-4">
+                <div class="card border-0">
+                  <div class="card-body">
+
+                    <div class="row">
+                      <div class="form-group">
+                          <br>
+                          <label><b> Préférences gustatives</b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudePrefGustative" value="Sucré" [(ngModel)]="habitudePrefGustative"> Sucré <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudePrefGustative" value="Salé" [(ngModel)]="habitudePrefGustative"> Salé <i class="input-helper"></i>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label> <b>Alcool</b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeAlcool" value="Oui" [(ngModel)]="habitudeAlcool"> Oui <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeAlcool" value="Non" [(ngModel)]="habitudeAlcool"> Non <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <label><b>Quantité</b></label> <input type="text" [(ngModel)]="habitudeAlcoolQuantite" name="somthing1" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeAlcool=='Non'">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label> Tabac</label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeTabac" value="Oui" [(ngModel)]="habitudeTabac"> Oui <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeTabac" value="Non" [(ngModel)]="habitudeTabac"> Non <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <label><b>Nombre de cigarettes</b> </label> <input type="text" [(ngModel)]="habitudeTabacQuantite" name="somthing2" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeTabac=='Non'">
+                      </div>
+                  </div>             
+                  <div class="row">
+                      <div class="form-group">
+                          <label> <b>Où prenez vous vos repas ?</b></label>
+                          <div class="form-check form-check-flat form-check-primary" *ngFor="let option of habitudeOuRepasOptions">
+                              <label class="form-check-label">
+                                  <input #check type="checkbox" class="form-check-input" [checked]="habitudeOuRepasAnswer.indexOf(option)>=0" (change)="onChangehabitudeOuRepas(option,check.checked)"> {{option}} <i class="input-helper"></i> 
+                              </label>
+                          </div>
+                          <label>Autre</label> <input type="text" [(ngModel)]="habitudeOuRepasInput" name="somthing3" class="form-control form-control-lg" placeholder="Autre choix">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label><b> Combien de repas prenez vous par jour ?</b></label>
+                          <input type="number" [(ngModel)]="habitudeNbreRepasJour" name="somthing10" class="form-control form-control-lg" placeholder="Nombre de repas par jour ">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label> <b>Vous mangez</b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="En famille" [(ngModel)]="habitudeTypeRepas"> En famille <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="Avec les amis" [(ngModel)]="habitudeTypeRepas"> Avec les amis <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeTypeRepas" value="Tout seul" [(ngModel)]="habitudeTypeRepas"> Tout seul <i class="input-helper"></i>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label> <b>Avez Vous un problème de mastication ? </b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Oui" [(ngModel)]="habitudeProblemeMastication"> Oui <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Non" [(ngModel)]="habitudeProblemeMastication"> Non <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeProblemeMastication" value="Peut-etre" [(ngModel)]="habitudeProblemeMastication"> Peut-etre <i class="input-helper"></i>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label> <b>Quantité d'eau par jour ?</b></label><input type="text" [(ngModel)]="habitudeQteEau" name="somthing8" class="form-control form-control-lg" placeholder="Quantité d'eau par jour" >
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label><b>Pratiquer vous du sport ou de l'activité physique ? </b></label>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeDosSport" value="Oui" [(ngModel)]="habitudeDosSport"> Oui <i class="input-helper"></i>
+                              </label>
+                          </div>
+                          <div class="form-check form-check-flat form-check-primary">
+                              <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="habitudeDosSport" value="Non" [(ngModel)]="habitudeDosSport"> Non <i class="input-helper"></i>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="form-group">                    
+                          <label><b>Quel type de sport ? </b></label><input type="text" [(ngModel)]="habitudeTypeSport" name="somthing5" class="form-control form-control-lg" placeholder="Quel type de sport" [disabled]="habitudeDosSport=='Non'">
+                      </div>    
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label><b>Durée</b> </label><input type="text" [(ngModel)]="habitudeDureSport" name="somthing5" class="form-control form-control-lg" placeholder="Durée" [disabled]="habitudeDosSport=='Non'">
+                      </div>    
+                  </div>
+                  <div class="row">
+                      <div class="form-group">
+                          <label><b>Fréquence </b></label><input type="text" [(ngModel)]="habitudeFrequenceSport" name="somthing5" class="form-control form-control-lg" placeholder="Fréquence" [disabled]="habitudeDosSport=='Non'">
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+            <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueDiabete()"><i class="mdi mdi-page-first"></i></button>
+        </span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewTroubleTCA()"><i class="mdi mdi-page-last"></i></button>
+        </span>
+      </div>
+    </ng-container>
+
+    <!--------------------- View 6 ------------------------------------------------------------->
+
+    <ng-container *ngIf="displayView=='view6'">
+      <h3 class="mb-3">Troubles du comportement alimentaire TCA </h3>
+      <div class="card">
+        <div class="col-md-4">
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group">
+                    <label><b>TCA</b></label>
+                    <div class="form-check form-check-flat form-check-primary">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="TCA" value="Boulimie" [(ngModel)]="TCA"> Boulimie <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-flat form-check-primary">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="TCA" value="Anorexie" [(ngModel)]="TCA"> Anorexie <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-flat form-check-primary">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="TCA" value="Syndrome de l'alimentation nocturne" [(ngModel)]="TCA"> Syndrome de l'alimentation nocturne <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-flat form-check-primary">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="TCA" value="Grignotage" [(ngModel)]="TCA"> Grignotage <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <label>Autre </label><input type="text" [(ngModel)]="inputTCA" name="somthing85" class="form-control form-control-lg" placeholder="Autre choix">
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+            <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAlimentaire()"><i class="mdi mdi-page-first"></i></button>
+        </span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewEnqueteAlimentaire()"><i class="mdi mdi-page-last"></i></button>
+        </span>
+      </div>
+    </ng-container>
+    <!--------------------- View 7 : Enquete Alimentaire------------------------------------------------------------->
+    <ng-container *ngIf="displayView=='view7'"> 
+        <h3 class="mb-3">Enquête alimentaire</h3>
+        <div class="card">
+          
+            <div class="card border-0">
+              <div class="card-body">
+                <div class="row">
+                  <!--------Petit Déj ---------------->
+                  <div class="col-md-6">
+                    <div class="form-group"> 
+                      <h3 class="font-weight-500 mb-xl-4 text-primary"> Petit-déjeuner </h3>
+                          <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedpetitDejeuner" name="selectedpetitDejeuner" (change)="addInputsQuantite()">
+                              <ng-option *ngFor="let item of alimService.listAliments" 
+value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+/{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+/{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+/{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                          </ng-select>
+                    </div>
+                  </div>
+                  <div class="col-md-6 table-freq-quant-inputs">
+                    <form [formGroup]="formQuantitePetitDejeuner" style="overflow:x">
+                      <table>
+                        <!--Quantite-->
+                          <tr> 
+                            <ng-container formArrayName="inputQuantitePetitDejeuner" *ngFor ="let item of inputQuantitePetitDejeuner.controls; let i = index">
+                              <td >
+                                  <label>Quantité(g)</label>
+                                      <input  class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
+                              </td>
+                            </ng-container>
+                          </tr>
+                            <!--Fréquence-->
+                          <tr> 
+                              <ng-container formArrayName="inputFrequencePetitDejeuner" *ngFor ="let item of inputFrequencePetitDejeuner.controls; let i = index">
+                                <td >
+                                  <label>Fréquence(S) </label>
+                                    <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
+                                </td>
+                              </ng-container>
+                          </tr>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+                <div class="row table-scroll-x">
+                  <table>
+                    <tr> 
+                        <td>
+                            <label>Protides</label>
+                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtidePetitDej | number : '1.2-2'}}" disabled/> 
+                        </td>
+                        <td>
+                            <label>Lipides</label>
+                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipidePetitDej | number : '1.2-2'}}" disabled/> 
+                        </td>
+                        <td>
+                            <label>Glucides</label>
+                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucidePetitDej | number : '1.2-2'}}" disabled/> 
+                        </td>
+                        <td>
+                            <label>Calories</label>
+                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCaloriePetitDej | number : '1.2-2'}}" disabled/> 
+                        </td>
+                        <td>
+                            <label>%Kcal</label>
+                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorie | number : '1.2-2'}}" disabled/> 
+                        </td>
+
+                    </tr>
+                </table>
+                </div>
+
+                <br>
+
+                <!-------- Déj ---------------->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group"> 
+                      <h3 class="font-weight-500 mb-xl-4 text-primary"> Déjeuner </h3>
+                          <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedDejeuner" name="selectedDejeuner" (change)="addInputsQuantiteDej()">
+                              <ng-option *ngFor="let item of alimService.listAliments"
+value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+/{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+/{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+/{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                          </ng-select>
+                    </div>
+                  </div>
+                
+                <div class="col-md-6 table-freq-quant-inputs">
+                  <form [formGroup]="formQuantiteDejeuner">
+                    <table>
+                      <!--Quantite-->
+                        <tr> 
+                          <ng-container formArrayName="inputQuantiteDejeuner" *ngFor ="let item of inputQuantiteDejeuner.controls; let i = index">
+                            <td >
+                                <label>Quantité(g)</label>
+                                    <input class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
+                            </td>
+                          </ng-container>
+                        </tr>
+                          <!--Fréquence-->
+                        <tr> 
+                            <ng-container formArrayName="inputFrequenceDejeuner" *ngFor ="let item of inputFrequenceDejeuner.controls; let i = index">
+                              <td >
+                                <label>Fréquence(S) </label>
+                                  <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
+                              </td>
+                            </ng-container>
+                        </tr>
+                    </table>
+                  </form>
+                </div>
+              </div>
+              <div class="row table-scroll-x">
+                <table >
+                  <tr> 
+                      <td>
+                          <label>Protides</label>
+                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDejeuner | number : '1.2-2'}}" disabled/> 
+                      </td>
+                      <td>
+                          <label>Lipides</label>
+                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDejeuner | number : '1.2-2'}}" disabled/> 
+                      </td>
+                      <td>
+                          <label>Glucides</label>
+                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDejeuner | number : '1.2-2'}}" disabled/> 
+                      </td>
+                      <td>
+                          <label>Calories</label>
+                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDejeuner | number : '1.2-2'}}" disabled/> 
+                      </td>
+                      <td>
+                          <label>%Kcal</label>
+                          <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
+                      </td>
+
+                  </tr>
+              </table>
+              </div>
+              <br>
+              <!-------- Diner ---------------->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <h3 class="font-weight-500 mb-xl-4 text-primary"> Diner </h3>
+                        <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedDiner" name="selectedDiner" (change)="addInputsDiner()">
+                            <ng-option *ngFor="let item of alimService.listAliments"
+value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+/{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+/{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+/{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                        </ng-select>
+                  </div>
+                </div>
+              
+              <div class="col-md-6 table-freq-quant-inputs">
+                <form [formGroup]="formQuantiteDiner">
+                  <table>
+                    <!--Quantite-->
+                      <tr> 
+                        <ng-container formArrayName="inputQuantiteDiner" *ngFor ="let item of inputQuantiteDiner.controls; let i = index">
+                          <td >
+                              <label>Quantité(g)</label>
+                                  <input  class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
+                          </td>
+                        </ng-container>
+                      </tr>
+                        <!--Fréquence-->
+                      <tr> 
+                          <ng-container formArrayName="inputFrequenceDiner" *ngFor ="let item of inputFrequenceDiner.controls; let i = index">
+                            <td >
+                              <label>Fréquence(S) </label>
+                                <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
+                            </td>
+                          </ng-container>
+                      </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+            <div class="row table-scroll-x">
+              <table>
+                <tr> 
+                    <td>
+                        <label>Protides</label>
+                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDiner | number : '1.2-2'}}" disabled/> 
+                    </td>
+                    <td>
+                        <label>Lipides</label>
+                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDiner | number : '1.2-2'}}" disabled/> 
+                    </td>
+                    <td>
+                        <label>Glucides</label>
+                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDiner | number : '1.2-2'}}" disabled/> 
+                    </td>
+                    <td>
+                        <label>Calories</label>
+                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDiner | number : '1.2-2'}}" disabled/> 
+                    </td>
+                    <td>
+                        <label>%Kcal</label>
+                        <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
+                    </td>
+
+                </tr>
+            </table>
+            </div>
+            
+            <br>
+            <!---------------- Totaux ---------------->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group"> 
+                  <h3 class="font-weight-500 mb-xl-4 text-primary"> Totaux % calorique </h3>
+            </div>
+            </div>
+            </div>
+
+            <div class="row table-scroll-x">
+                    <table>
+                      <tr> 
+                          <td>
+                              <label>Protides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Lipides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Glucides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Calories</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>%Kcal</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorieT/100 | number : '1.2-2'}}" disabled/> 
+                          </td>
+      
+                      </tr>
+                  </table>
+                  </div>
+            <br>   
+            
+            <!--Button Calculer-->
+            <div class="text-center">
+              <button type="button" class="btn btn-inverse-info btn-fw" (click)="onCalcule()"> Calculer</button>
+            </div>
+              </div>
+            </div>
+        </div>
+   
+        <br>
+
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+                <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewTroubleTCA()"><i class="mdi mdi-page-first"></i></button>
+            </span>
+
+            <!--Button Confirmer-->
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+              <div class="text-center">
+                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+                </div>
+          </span>
+  
+        </div>
+    </ng-container>
+  </form>
+    </div>
+
+  </ng-container>
+
+  <!--//////////////////////////////////////////////////////////////////////////////////////-->
+  <!--//////////////////////////////////////////////////////////////////////////////////////-->
+  <ng-container *ngIf="this.verifcationExistDossier==false">
+    
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title" >Consulter dossier patient </h1>
+
+          <!-- Boutons suprrimer / Modifier -->
+          <div class="template-demo">
+            <!--button type="button" class="btn btn-inverse-primary btn-fw"> <i class="mdi mdi-swap-horizontal"></i>Modifier </button-->                        
+            <button type="button" class="btn btn-inverse-danger btn-fw" mwlConfirmationPopover 
+            (confirm)="onDelete(this.patService.idPatient)"
+            popoverTitle="Êtes-vous sûr de vouloir supprimer ce Dossier ?"> <i class="mdi mdi-delete-forever" ></i>Supprimer </button>  
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-md-20 mx-auto">
+              <ul class="nav nav-pills nav-pills-custom" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-home-tab" data-bs-toggle="pill" href="#pills-health" role="tab" aria-controls="pills-home" aria-selected="false"> Informations patient  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-contact" aria-selected="false"> Pathologies et Antécédents</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-career" role="tab" aria-controls="pills-profile" aria-selected="false"> Historique obésité </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-music" role="tab" aria-controls="pills-contact" aria-selected="false"> Historique amaigrissement </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-vibes" role="tab" aria-controls="pills-contact" aria-selected="false"> Historique diabète </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-energy" role="tab" aria-controls="pills-contact" aria-selected="false"> Habitude alimentaires </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-TCA" role="tab" aria-controls="pills-contact" aria-selected="false">TCA</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-enqueteAlimentaire" role="tab" aria-controls="pills-contact" aria-selected="false"> Enquête alimentaire</a>
+                </li>
+              </ul>
+              <br>
+              <div class="tab-content tab-content-custom-pill" id="pills-tabContent">
+              <!--1.Information patient-->
+              
+              <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-home-tab">  
+                <div class="row">
+                  <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> {{this.patService.PatientById.patNom}} {{this.patService.PatientById.patPrenom}} </h3>
+                        <p class="card-title">{{this.patService.PatientById.patAge}} ans </p>
+                        <ul>
+                            <li ><p class="mb-2 mb-xl-0"><i class="mdi mdi-cellphone-basic text-primary"></i> &nbsp; {{this.patService.PatientById.patTelephone}}</p></li>
+                            <li ><p class="mb-2 mb-xl-0"><i class="mdi mdi-email text-primary"></i> &nbsp;{{this.patService.PatientById.patMail}}</p></li>
+                            <li ><p class="mb-2 mb-xl-0"><i class="mdi mdi-briefcase text-primary"></i> &nbsp; Profession : {{this.patService.PatientById.patProfession}}</p></li>
+                            <li ><p class="mb-2 mb-xl-0"><i class="mdi mdi-human-male-girl text-primary"></i> &nbsp; Situation Familiale : {{this.patService.PatientById.patSituationFamiliale}}</p></li>
+                            <li ><p class="mb-2 mb-xl-0"><i class="mdi mdi-gender-male-female text-primary"></i> &nbsp; Sexe : {{this.patService.PatientById.patSexe}}</p></li>
+                            <li ><p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="ci:home-alt-outline"></span> &nbsp; Adresse : {{this.patService.PatientById.patAdresse}}</p></li>
+                            <li > <p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="healthicons:weight-outline"></span> &nbsp; Poids (kg) : {{this.patService.PatientById.patPoids}}</p></li>
+                            <li > <p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="mdi:human-male-height-variant"></span> &nbsp; Taille (m) : {{this.patService.PatientById.patTaille}}</p></li>
+                            <li > <p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="tabler:jump-rope"></span> &nbsp; Tour de taille : {{this.patService.PatientById.patToureTaille}}</p></li>
+                            <li > <p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="gis:pin-earth"></span> &nbsp; Origine : {{this.patService.PatientById.patToureTaille}}</p></li>
+                            <li > <h3 class="font-weight-500 mb-xl-4 text-primary"> IMC : {{this.patService.PatientById.patImc | number: '1.2-2' }}</h3></li>
+                            <li ><h3 class="card-title"> Motif de consultation :</h3>  {{this.patService.PatientById.patMotifConsultation}} </li>
+      
+                        </ul>               
+            
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 stretch-card grid-margin">
+                    <div class="zoom-out">
+                      <img src="../../../assets/images/samples/Information-patient.jpg" class="rounded img-shadow" alt="sample image">
+                    </div>
+                  </div>
+                
+                </div>
+                </div>
+                
+    
+                <!--------------------------------------------->
+                <!--Enquete Alimentaire + Pathologies -->
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-contact-tab"> 
+                <div class="row">
+                  <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Pathologies : </h3>
+                        <ul>
+                          <ng-container *ngIf="this.dosPatient.dosPathologies.length > 1">
+                            <li *ngFor="let item of this.dosPatient.dosPathologies.split(',')">{{item}}</li>
+                          </ng-container>
+                        </ul>               
+                      <h3 class="font-weight-500 mb-xl-4 text-primary"> Antécédents personnels :</h3>
+                        <ul>
+                          <ng-container *ngIf="this.dosPatient.dosAntecedentsPersonnels.length > 1">
+                            <li *ngFor="let item of this.dosPatient.dosAntecedentsPersonnels.split(',')">{{item}}</li>
+                          </ng-container>
+                        </ul>
+                      <h3 class="font-weight-500 mb-xl-4 text-primary"> Antécédents familiaux :</h3>
+                        <ul>
+                            <li>{{ this.dosPatient.dosAntecedentsFamiliaux}}</li>
+                      </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 stretch-card grid-margin">
+                    <div class="zoom-out">
+                      <img src="../../../assets/images/samples/pathoo.jpg" class="rounded img-shadow" alt="sample image">
+                    </div>
+                  </div>
+                </div>
+
+                </div>
+                <!--------------------------------------------->
+                <!--Historique obésité-->
+                <div class="tab-pane fade" id="pills-career" role="tabpanel" aria-labelledby="pills-profile-tab">
+                  <div class="row">
+                    <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Poids maximal atteint : </h3>
+                          <ul> 
+                              <li>{{ this.dosPatient.dosPoidsMaximal}} kg </li>
+                          </ul>               
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Circonstances de prise de poids :</h3>
+                          <ul>      
+                              <li>{{ this.dosPatient.dosCirconstancePrisePoids }}</li>
+                          </ul>
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Régime suivi :</h3>
+                          <ul>
+                              <li>{{ this.dosPatient.dosRegime}}</li>
+                        </ul>
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Perte pondérale suite au régime :</h3>
+                        <ul>
+                            <li>{{ this.dosPatient.dosPerteRegime}}</li>
+                        </ul>
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Cause d'arret de régime :</h3>
+                        <ul>
+                            <li>{{ this.dosPatient.dosCauseArretRegime}}</li>
+                        </ul>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xl-3 stretch-card grid-margin">
+                      <div class="zoom-out">
+                        <img src="../../../assets/images/samples/hist-obesite.jpg" class="rounded img-shadow" alt="sample image">
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                
+                <!--------------------------------------------->
+                <!--Historique Amegrissement-->                
+                <div class="tab-pane fade" id="pills-music" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div class="row">
+                    <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Poids minimal atteint : </h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosHistoriqueAmaigrissement.split(',')[0]}} kg</li>
+                          </ul>               
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Période de perte penderale :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosHistoriqueAmaigrissement.split(',')[1]}}</li>
+                          </ul>
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Nombre de Kg perdus :</h3>
+                          <ul>
+                              <li>{{ this.dosPatient.dosHistoriqueAmaigrissement.split(',')[2]}} kg </li>
+                        </ul>
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Cause de la perte :</h3>
+                          <ul>
+                              <li>{{ this.dosPatient.dosHistoriqueAmaigrissement.split(',')[3]}}</li>
+                        </ul>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xl-3 stretch-card grid-margin">
+                      <div class="zoom-out">
+                        <img src="../../../assets/images/samples/hist-amaigrissement.jpg" class="rounded img-shadow" alt="sample image">
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+               
+                <!--------------------------------------------->
+                <!--Historique Diabète -->  
+                <div class="tab-pane fade" id="pills-vibes" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div class="row">
+                    <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Type diabète : </h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosDiabete }} </li>
+                          </ul>               
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Traitement :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosTraitementDiabete }}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xl-3 stretch-card grid-margin">
+                      <div class="zoom-out">
+                        <img src="../../../assets/images/samples/histo-diabete.jpg" class="rounded img-shadow" alt="sample image">
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+
+                <!--------------------------------------------->
+                <!--Habitude alimentaires -->  
+                <div class="tab-pane fade active show" id="pills-energy" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div class="row">
+                    <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Préférences gustatives : </h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosPreferencesGustatives }} </li>
+                          </ul>               
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Alcool :</h3>
+                          <ul>
+                              <li>{{ this.dosPatient.dosAlcool }}   {{ this.dosPatient.dosQuantiteAlcool }}</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Tabac :</h3>
+                          <ul>
+                              <li>{{ this.dosPatient.dosTabac }} - Quantité : {{ this.dosPatient.dosQuantiteTabac }}</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Lieu de repas :</h3>
+                            <ng-container *ngIf="this.dosPatient.dosPathologies.length > 1">
+                              <li *ngFor="let item of this.dosPatient.dosLieuxRepas.split(',')">{{item}}</li>
+                            </ng-container>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Nombre de repas par jour :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosNombreRepas }} repas</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Type de repas :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosTypeRepas }}</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Problème de mastication :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosProblemeMastication }}</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Quantité d'eau par jour :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosQuantiteEau }} L</li>
+                          </ul>
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Sport ou activité physique :</h3>
+                          <ul>
+                              <li *ngIf="this.dosPatient.dosSport == true">Oui </li>
+                              <li *ngIf="this.dosPatient.dosSport == false">Non </li>
+                          </ul>
+                          <h3 *ngIf="this.dosPatient.dosTypeSport!=null" class="font-weight-500 mb-xl-4 text-primary"> Type de sport :</h3>
+                          <ul *ngIf="this.dosPatient.dosTypeSport!=null" >
+                              <li>{{this.dosPatient.dosTypeSport }}</li>
+                          </ul>
+                          <h3 *ngIf="this.dosPatient.dosDureeSport!=null" class="font-weight-500 mb-xl-4 text-primary"> Durée :</h3>
+                          <ul *ngIf="this.dosPatient.dosDureeSport!=null">
+                              <li>{{this.dosPatient.dosDureeSport }}</li>
+                          </ul>
+                          <h3 *ngIf="this.dosPatient.dosFrequenceSport!=null" class="font-weight-500 mb-xl-4 text-primary"> Fréquence :</h3>
+                          <ul *ngIf="this.dosPatient.dosFrequenceSport!=null">
+                              <li>{{this.dosPatient.dosFrequenceSport }}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xl-3 stretch-card grid-margin">
+                      <div class="zoom-out">
+                        <img src="../../../assets/images/samples/habitude-alimentaire.jpg" class="rounded img-shadow img-size" alt="sample image">
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                <!--------------------------------------------------->
+                <!--TCA --------------------------------------------->
+                <div class="tab-pane fade" id="pills-TCA" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div class="row">
+                    <div class="col-xl-9 stretch-card grid-margin" style="width: 630px;">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Type diabète : </h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosDiabete }} </li>
+                          </ul>               
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Traitement :</h3>
+                          <ul>
+                              <li>{{this.dosPatient.dosTraitementDiabete }}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xl-3 stretch-card grid-margin">
+                      <div class="zoom-out">
+                        <img src="../../../assets/images/samples/TCA.jpg" class="rounded img-shadow" alt="sample image">
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                <!--------------------------------------------------->
+                <!--Enquete Alimentaire-->
+                <div class="tab-pane fade" id="pills-enqueteAlimentaire" role="tabpanel" aria-labelledby="pills-contact-tab">
+                  <div class="media">
+                    <div class="media-body">
+                      <div class="row">
+                        <h3 class="font-weight-500 mb-xl-4 text-primary"> Résultat de l'enquête alimentaire : </h3>
+                        <table style="margin-bottom: 20px;">
+                          <thead>
+                            <tr>
+                              <th> # </th>
+                              <th>Protides</th>
+                              <th>Lipides</th>
+                              <th>Glucides</th>
+                              <th>Calories</th>
+ 
+                            </tr>
+                          </thead>
+                          <tbody> 
+                            <tr>
+                              <td> <b>Petit-déjeuner</b></td>
+                              <td>{{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }}</td>
+                              <td>{{ listResultatEnquetebyId.ptDejLipide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.ptDejGluicide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.ptDejCalorie  | number : '1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                              <td> <b>Déjeuner</b></td>
+                              <td>{{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }}</td>
+                              <td>{{ listResultatEnquetebyId.dejLipide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.dejGluicide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.dejCalorie  | number : '1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                              <td> <b>Diner</b></td>
+                              <td>{{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }}</td>
+                              <td>{{ listResultatEnquetebyId.dinerLipide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.dinerGluicide  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.dinerCalorie  | number : '1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                              <td> <b>Totaux</b></td>
+                              <td>{{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }}</td>
+                              <td>{{ listResultatEnquetebyId.lipidesG100G  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.glucidesG100G  | number : '1.2-2'  }}</td>
+                              <td>{{ listResultatEnquetebyId.energieKcal100G  | number : '1.2-2' }}</td>
+                            </tr>
+                               
+                          </tbody>
+                        </table>
+                        
+                        <br><br><hr><br>
+                        <h3>Total par semaine</h3>
+                        <table>
+                          <thead>
+                          <tr>
+                            <th> # </th>
+                            <th></th> 
+                            <th> # </th> 
+                            <th></th> 
+                          </tr>
+                        </thead>
+                        <tbody> 
+                          <tr>
+                            <td> <b>EauG</b></td>
+                            <td> {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }}</td>
+                            <td> <b>SodiumMg</b></td>
+                            <td> {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }}</td>                  
+                          </tr>
+
+                          <tr>
+                            <td> <b>FibresAlimentairesG</b></td>
+                            <td> {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </td>
+                            <td> <b>ZincMg</b></td>
+                            <td> {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }}</td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AlcoolG</b></td>
+                            <td>{{ listResultatEnquetebyId.alcoolG100G | number : '1.2-2' }} </td>
+                            <td> <b>RetinolΜg</b></td>
+                            <td>{{ listResultatEnquetebyId.retinolmg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AgSaturésG</b></td>
+                            <td> {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineDΜg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AgMonoinsaturésG</b></td>
+                            <td> {{ listResultatEnquetebyId.agMonoinsaturesG100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineEMg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AgPolyinsaturésG</b></td>
+                            <td>{{ listResultatEnquetebyId.agPolyinsaturesG100G | number : '1.2-2' }} </td>
+                            <td> <b>VitamineK1Μg</b></td>
+                            <td> {{ listResultatEnquetebyId.vitamineK1mg100G | number : '1.2-2' }}</td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AgW6G100G </b></td>
+                            <td> {{ listResultatEnquetebyId.agW6G100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineCMg</b></td>
+                            <td> {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }}</td>  
+                          </tr>
+                          <tr>
+                            <td> <b>AgW3G</b></td>
+                            <td> {{ listResultatEnquetebyId.agW3G100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineB1Mg</b></td>
+                            <td> {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }}</td>  
+                          </tr>
+                          <tr>
+                            <td> <b>CholestérolMg</b></td>
+                            <td>{{ listResultatEnquetebyId.cholesterolMg100G | number : '1.2-2' }} </td>
+                            <td> <b>VitamineB2Mg</b></td>
+                            <td> {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }}</td>  
+                          </tr>
+                          <tr>
+                            <td> <b>CalciumMg</b></td>
+                            <td> {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineB3Mg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>CuivreMg</b></td>
+                            <td> {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineB5Mg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineB5Mg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>FerMg</b></td>
+                            <td>{{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </td>
+                            <td> <b>VitamineB6Mg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>MagnesiumMg</b></td>
+                            <td> {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineB9Μg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>PhosphoreMg</b></td>
+                            <td> {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }}</td>
+                            <td> <b>VitamineB12Μg</b></td>
+                            <td>{{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </td>  
+                          </tr>
+                          <tr>
+                            <td> <b>PotassiumMg</b></td>
+                            <td> {{ listResultatEnquetebyId.potassiumMg100G | number : '1.2-2' }}</td>
+                            <td> </td>
+                            <td> </td>  
+                          </tr>
+    
+                        </tbody>
+
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+    <!--//////////////////////////////////////////////////////////////////////////////////////-->
+    <br>
+  </div>
+</div>
+</div>
+<app-footer></app-footer>
+
+
+

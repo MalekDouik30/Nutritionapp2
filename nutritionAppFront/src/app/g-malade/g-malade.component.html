@@ -1,0 +1,118 @@
+<app-header></app-header>
+<div class="container-scroller">
+  <app-navbar></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+   <div class="main-panel">
+        <div class="content-wrapper pb-0">
+        <div class="page-header flex-wrap">
+            <div class="header-left">
+              <h2>Module de gestion des Patient</h2>
+                <!--Recherche utilisateur-->
+                <div class="form-group row">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Recherche..."
+                        [(ngModel)]="searchWord">
+                    </div>
+                  </div>
+            </div>
+            <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text" (click)="onAjouterPatient()">
+                  <i class="mdi mdi-account-plus"></i> Ajouter Patient 
+                </button>
+            </div>
+          </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">La liste des patients</h4>
+                  </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="font-weight:bold;" >Nom Prénom </th>
+                            <th style="font-weight:bold;">Age</th>
+                            <th style="font-weight:bold;">Téléphone</th>
+                            <th style="font-weight:bold;" >Sexe</th>
+                            <th style="font-weight:bold;">Profession</th>
+                            <th style="font-weight:bold;">Situation <br>Familiale</th>
+                            <th style="font-weight:bold;"> E-mail</th>
+                            <th style="font-weight:bold;" >Etat</th>
+                            <th style="font-weight:bold;">Consulter Dossier</th>
+                            <th style="font-weight:bold;">Supprimer</th>
+                            <th style="font-weight:bold;" >Modifier</th>
+
+                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of patService.listPatient | filter: searchWord">
+                            <td>
+                                {{ item.patNom }} {{ item.patPrenom }}
+                            </td> 
+                            <td>
+                                {{ item.patAge }}
+                            </td> 
+                            <td>
+                                {{ item.patTelephone }}
+                            </td>
+                            <td>
+                                {{ item.patSexe }}
+                            </td>
+                            <td>
+                                {{ item.patProfession }}
+                            </td>
+                            <td>
+                                {{ item.patSituationFamiliale }}
+                            </td>
+                            <td>
+                                {{ item.patMail }} 
+                            </td>
+                            <td>
+                              <ng-container *ngIf="item.patEtat == false" >
+                                <label class="badge badge-danger">Supprimé</label>
+                              </ng-container>
+                              <ng-container *ngIf="item.patEtat == true" >
+                                <label class="badge badge-success">Actif</label>
+                              </ng-container>
+                            </td>
+
+                            <td>
+                              
+                                <button type="button" class="btn btn-inverse-dark btn-icon" title="Dossier du patient"
+                                (click)="onDossierPatient(item)" [disabled]="!item.patEtat">
+                                    <i class="mdi mdi-account-card-details"></i>
+                                  </button>
+                                  &nbsp;
+                                  <button type="button" class="btn btn-inverse-warning btn-icon" title="Remarques"
+                                  (click)="onRemarque(item)" [disabled]="!item.patEtat">
+                                      <i class="mdi mdi-file-document"></i>
+                                  </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-inverse-danger btn-icon"
+                                mwlConfirmationPopover 
+                                (confirm)="onSupprimerPatient(item.patId)"
+                                popoverTitle="Êtes-vous sûr de vouloir supprimer ce patient ?">
+                                    <i class="mdi mdi-account-remove"></i>
+                                </button>
+                            </td>
+                            <td> 
+                                <button type="button" class="btn btn-inverse-info btn-icon" 
+                                (click)="onModifierPatient(item)"> 
+                                <i class="mdi mdi-account-check"></i>
+                                </button> 
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  
+                </div>
+             
+        
+
+</div>
+</div>
+</div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,45 @@
+<h4 class="card-title">Modifier ce paramètre globale </h4>
+
+<form class="form-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+          <!--Mot de passe -->
+    <div class="form-group">
+        <div class="mt-3">
+            <label>Mot de passe</label>
+                <input type="text" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de passe"
+            #password="ngModel" [(ngModel)]="service.fromData.parMotPasseParDefaut" name="password" required
+            pattern="^(?=.*[a-zA-Z])(?=.*[0-9].*[0-9])(?=.*[!@#$&*]).{12,}$">
+
+            <div class="error-msg" *ngIf="(password.touched || monform.submitted) && password.errors?.required">
+                Le champs mot de passe est obligatoire!
+            </div>
+            <div class="error-msg" *ngIf="(password.touched || monform.submitted) && password.errors?.pattern">
+                <p>Le champs mot de passe doit commencer par une lettre contenir au moins 12 caractères, <br>à la fois des chiffres,
+                des lettres majuscule, minuscule et des caractères spéciaux !</p>
+            </div>
+        </div>
+        </div>
+        <div class="mt-3"> 
+          <!--Numbre tentative-->
+          <div class="form-group">
+            <label>Nombre de tentatives</label>
+            <input type="number" class="form-control form-control-lg" placeholder="Nombre de tentative d'accès" #nom="ngModel"
+              [(ngModel)]="service.fromData.parNombreTentatives" name="nom" required min="0" />
+          </div>
+          <!--Numbre tentative-->
+        </div>
+ 
+  <div class="mt-3 text-center">
+        <button class="btn btn-primary btn-lg btn-block" type="submit"
+          [disabled]="monform.invalid" style="padding-left: 60px;padding-right: 60px;">Confirmer</button>
+      </div>
+
+      
+  
+</form>
+
+<div class="mt-3 text-center">
+    <button class="btn btn-info btn-lg btn-block" (click)="generatePassword()">  mot  de passe <br> aléatoire</button>
+</div>
+<div class="mt-3 text-center">
+    <button type="button" class="btn btn-secondary btn-lg btn-block btn-secondary-change" (click)="closeDialog()" style="padding-left: 70px;padding-right: 70px;">Retour</button>
+</div>

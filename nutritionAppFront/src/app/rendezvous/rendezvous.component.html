@@ -1,0 +1,120 @@
+<app-header></app-header>
+<div class="main-panel">
+    <div class="container-scroller">
+        <app-navbar></app-navbar>
+        <div class="content-wrapper pb-0">
+        <div class="page-header flex-wrap">
+            <div class="header-left">
+              <h2>Gestion des rendez-vous</h2>
+                <!--Recherche utilisateur-->
+                <div class="form-group row">
+                  <table>
+                    <tr>
+                      <td>
+                        <button type="button" class="btn btn-outline-secondary" (click)="ondisplayFilter()">
+                          <i class="mdi mdi-filter"></i>
+                        </button>
+                        </td> 
+                      <td>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Recherche..."
+                        [(ngModel)]="searchWord">                     
+                       </div>
+                      </td> 
+                    </tr>
+                </table>
+                </div>
+
+                <ng-container *ngIf="testFilter">
+                  <form class="form-sample scroll-x" #searchForm="ngForm" (submit)="search(searchForm)">
+                    <div class="table-responsive">
+                    <table class="table">
+               
+                      
+                    <tr>
+                      <td><button type="button" class="close" aria-label="Close" (click)="oncloseFilter()" >
+
+                        <span aria-hidden="true">&times;</span>
+                    </button></td>
+                      <td>
+                        <div class="col-14 border-left-top-lg border-left-top-sm">
+                          <div class="d-flex p-2">
+                          <mat-form-field appearance="fill" class="example-full-width" >
+                              <mat-label>Plage dates rendez-vous</mat-label>
+                              <mat-date-range-input [formGroup]="rangeDateCreation" [rangePicker]="picker">
+                                  <input matStartDate formControlName="start" placeholder="Date de début">
+                                  <input matEndDate formControlName="end" placeholder="Date de fin">
+                              </mat-date-range-input>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-date-range-picker #picker></mat-date-range-picker>
+                              <mat-error *ngIf="rangeDateCreation.controls.start.hasError('matStartDateInvalid')">Date de début invalide</mat-error>
+                              <mat-error *ngIf="rangeDateCreation.controls.end.hasError('matEndDateInvalid')">Date de fin invalide</mat-error>
+                          </mat-form-field>
+                      </div>
+                      </div>  
+                      </td>
+                      <td>
+                        <button class="btn btn-outline-primary"> Recherche</button>
+                      </td>
+                    </tr>
+                  </table>
+                  </div>
+                </form>
+
+                </ng-container>
+
+            </div>
+            <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text" (click)="onAjouterRendez_vous()">
+                  <i class="mdi mdi-calendar-clock"></i> Nouveau rendez-vous
+                </button>
+            </div>
+          </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Mes Rendez-vous</h4>
+                  </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="font-weight:bold;">Date de rendez-vous</th>
+                            <th style="font-weight:bold;" >Nom du patient</th>
+                            <th style="font-weight:bold;">Supprimer</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of rdzService.listRendezvous.reverse() | filter: searchWord"
+                          [ngStyle]="{'background-color': verifDateRdz(item.rendDate) ? 'gainsboro' : 'nicewhite'}" 
+                          >
+                            <td>
+                                {{item.rendDate| date: 'dd/MM/yyyy HH:mm' }} 
+                            </td> 
+                             <td>
+                              <ng-container *ngFor="let i of this.patService.listPatient">
+                                <ng-container *ngIf="i.patId == item.rendPatientId">
+                                    {{i.patNom}}  {{i.patPrenom}} 
+                                </ng-container>
+                              </ng-container>
+                            </td>
+          
+                            <td>
+                              <button type="button" class="btn btn-inverse-danger btn-icon"
+                                mwlConfirmationPopover 
+                                (confirm)="onSupprimerRendezvous(item.rendId)"
+                                popoverTitle="Êtes-vous sûr de vouloir supprimer ce rendez-vous ?">
+                                    <i class="mdi mdi-alarm-off"></i>
+                                </button>
+                            </td>
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>              
+                </div>
+    </div>
+</div>
+</div>
+<app-footer></app-footer>

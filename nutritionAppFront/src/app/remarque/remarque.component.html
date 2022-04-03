@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Recommandations : </h4>
+                <input type="text" class="form-control todo-list-input" [(ngModel)]="searchWord" placeholder="Recherche ... ">
+                <br>
+                <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                            <th style="font-weight:bold;" >Recommandations </th>
+                            <th style="font-weight:bold;">Date</th>
+                            <th style="font-weight:bold;" > </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of remService.listRemarqueByPatient.reverse()| filter: searchWord  | paginate:{itemsPerPage:5, currentPage: p} ">
+                            <td style="white-space:pre-wrap; word-wrap:break-word">
+                                {{item.remDescription}}
+                            </td> 
+                            <td  >
+                                {{item.remDateAjout |  date: 'yyyy-MM-dd'}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" 
+                                (click)="supprimerRemarque(item.remId)">
+                                <i class="mdi mdi-window-close text-danger close"></i>
+                                </button>
+                            </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                      <!--Paginator-->
+                        <pagination-controls nextLabel="Suivant" previousLabel="Précédent" (pageChange)="p = $event"> </pagination-controls>
+                      <!--End Paginator--> 
+                </div>
+        
+                <br>
+                <form class="form-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+                    <div class="add-items d-flex mb-0 mt-2">
+                        <textarea cols="2" rows="5" class="form-control todo-list-input" [(ngModel)]="remService.fromData.remDescription" name="remDescription" placeholder="Ajoutez Remarque"></textarea>
+                            <button class="btn btn-inverse-primary btn-rounded btn-icon" type="submit" style="margin-left: 5px;"><i class="mdi mdi-plus-circle-outline"></i></button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+

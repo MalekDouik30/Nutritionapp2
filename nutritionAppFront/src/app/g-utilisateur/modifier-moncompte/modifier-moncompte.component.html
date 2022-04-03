@@ -1,0 +1,138 @@
+<app-header></app-header>
+<div class="main-panel">
+    <div class="container-scroller">
+        <app-navbar></app-navbar>
+        <div class="content-wrapper pb-0">
+
+        <!--1st view-->
+            <div class="update-profile-center" *ngIf="changeView=='View1'" >
+                <div class="col-md-4 mb-3"> 
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="assets/images/faces/user.png" alt="Admin" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h2>{{decodedLogin}}</h2>
+                                <h4>Email : {{decodedMail}}</h4>
+                                <h5>Role : {{decodedRole}}</h5>
+                                <h5>Date de création de compte : {{utiDateCreation}}</h5>
+                                
+                                <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">                                 
+                                    <button type="button" class="btn btn-outline-success" (click)="majMonProfile()" style="margin-bottom: 5px;width: 190px;">
+                                      <i class="mdi mdi-pen" ></i> Modifier Compte 
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger btn-fw" (click)="majMonMotPasse()" >
+                                        <i class="mdi mdi-reload btn-icon-prepend"></i> Modifier Mot de passe
+                                      </button>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!--2nd view-->
+        <div class="row" *ngIf="changeView == 'View2'" >   
+                    <div class="col-md-6">                     
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="assets/images/faces/user.png" alt="Admin" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h2>{{decodedLogin}}</h2>
+                                <h4>Email : {{decodedMail}}</h4>
+                                <h5>Role : {{decodedRole}}</h5>
+                                <h5>Nom & Prénom : {{decodedName}}</h5>
+                                
+                                <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                                    <button type="button" class="btn btn-outline-danger btn-fw" (click)="majMonMotPasse()">
+                                        <i class="mdi mdi-reload btn-icon-prepend" ></i> Modifier Mot de passe
+                                      </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h4 class="card-title">Mettre à jour mon compte</h4>
+                            </div>
+                            <!--Login-->
+                            <form class="forms-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+                              <div class="form-group">
+                                <label for="exampleInputUsername1">Nom d'utilisateur (Login)</label>
+                                <input type="text" class="form-control" value="{{decodedLogin}}" placeholder="Nom d'utilisateur (Login)" #login="ngModel" [(ngModel)]="utiService.fromData.utiLogin" 
+                                name="login" required maxlength="20" >
+                                <div class="error-msg" *ngIf="(login.touched || monform.submitted) && login.errors?.required">
+                                    Le champs Nom d'utilisateur est obligatoire!
+                                  </div>
+                              </div>
+
+                             <!--E-Mail--> 
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Adresse e-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Adresse e-mail" value="{{decodedMail}}" required
+                                [(ngModel)]="utiService.fromData.utiEmail" #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.required">
+                                    Le champs e-mail est obligatoire!
+                                  </div>
+                                  <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.pattern">
+                                    Entrez une adresse e-mail valide!
+                                  </div>
+                              </div>
+                            <!--Nom & Prénom -->
+                              <div class="form-group">
+                                <label for="exampleInputNom1">Nom & Prénom</label>
+                                <input type="text" class="form-control" [(ngModel)]="utiService.fromData.utiNom" name="nom" #nom="ngModel" id="nom" placeholder="Nom & Prénom" required />
+                                <div class="error-msg" *ngIf="(nom.touched || monform.submitted) && nom.errors?.required">
+                                    Le champs Nom & Prénom est obligatoire!
+                                  </div>
+                              </div>
+
+                              <button type="submit" class="btn btn-primary me-2" type="submit" [disabled]="monform.invalid"> Confirmer </button>
+                              <button class="btn btn-light" (click)="annulerMaj()" >Annuler</button>
+                            </form>
+                          </div>
+                    </div>    
+            </div>
+            <!--3rd view-->
+            <div class="row" *ngIf="changeView == 'View3'" >
+                <div class="col-md-6">                     
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="assets/images/faces/user.png" alt="Admin" class="rounded-circle" width="150">
+                        <div class="mt-3">
+                            <h2>{{decodedLogin}}</h2>
+                            <h4>Email : {{decodedMail}}</h4>
+                            <h5>Role : {{decodedRole}}</h5>
+                            <h5>Nom & Prénom : {{decodedName}}</h5>
+                            
+                            <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                                <button type="button" class="btn btn-outline-success" (click)="majMonProfile()" style="margin-bottom: 5px;width: 190px;">
+                                    <i class="mdi mdi-pen" ></i> Modifier Compte 
+                                  </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h4 class="card-title">Mettre à mon mot de passe</h4>
+                            <form class="forms-sample" #monform="ngForm" (submit)="onSubmit2(monform)">
+
+                                <button type="submit" class="btn btn-primary me-2" type="submit" > Confirmer </button>
+                                <button class="btn btn-light" (click)="annulerMaj()" >Annuler</button>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+       
+        
+
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

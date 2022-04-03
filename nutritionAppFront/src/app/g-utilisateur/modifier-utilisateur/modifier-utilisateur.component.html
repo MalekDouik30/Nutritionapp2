@@ -1,0 +1,98 @@
+<div class="list-wrapper pt-2">
+    <div class="card-body">
+        <div class="text-center">
+            <h2 class="card-title">Modifier utilisateur</h2>
+        </div>
+    <!--Form-->
+    <form class="form-sample" #monform="ngForm" (submit)="onSubmit(monform)">
+      <div class="row">
+        <div class="col-md-6">
+          <!--Nom-->
+          <div class="form-group">
+            <label>Prénom & Nom  </label>
+            <input type="text" class="form-control form-control-lg" placeholder="Nom" #nom="ngModel"
+              [(ngModel)]="utiService.fromData.utiNom" name="nom" required />
+            <div class="error-msg" *ngIf="(nom.touched || monform.submitted) && nom.errors?.required">
+              Le champs Nom est obligatoire!
+            </div>
+          </div>
+          <!--End Nom-->
+        </div>
+        <div class="col-md-6">
+          <!--Login-->
+          <div class="form-group">
+            <label>Login  </label>
+            <input type="text" class="form-control form-control-lg" placeholder="Login"
+              #login="ngModel" [(ngModel)]="utiService.fromData.utiLogin" name="login" required maxlength="20">
+  
+            <div class="error-msg" *ngIf="(login.touched || monform.submitted) && login.errors?.required">
+              Le champs Login est obligatoire!
+            </div>
+          </div>
+          <!--End Login-->
+        </div>
+      </div>
+  
+      <!--Mail-->
+      <div class="form-group">
+        <label> Mail  </label>
+        <input type="email" class="form-control form-control-lg" placeholder="Email" #email="ngModel"
+          [(ngModel)]="utiService.fromData.utiEmail" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required />
+        
+        <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.required">
+          Le champs e-mail est obligatoire!
+        </div>
+        <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.pattern">
+          Entrez une adresse e-mail valide!
+        </div>
+      </div>
+      <!-- End Mail-->
+      
+      <div class="row">
+  <!-- Role -->
+       
+        <div class="col-md-6">
+        
+        <div class="form-group">
+          <label>Role</label>
+          <select class="form-control form-control-lg" [(ngModel)]="utiService.fromData.utiRole" #role="ngModel" name="role">
+            <ng-container *ngFor="let item of rolService.listRole">
+            <option value="{{item.rolId}}" > {{item.rolLibelle }}</option>
+          </ng-container>
+          </select>
+        </div>
+      </div>
+ 
+
+      <!-- End Role -->
+      <!-- Etat -->
+      <div class="col-md-6">
+      <div class="form-group">
+        <label> Etat  </label>
+        <select class="form-control form-control-lg" [(ngModel)]="etatUser" #etat="ngModel" name="etat" aria-placeholder="Etat" placeholder="Etat">
+          <option value=true>Active</option>
+          <option value=false>Bloqué</option>
+        </select>
+      </div>
+      </div>
+    
+    </div>
+      <!-- End Etat -->
+  
+      <div class="mt-3">
+          <div class="text-center">
+            <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+          </div>
+      </div>
+  
+    </form>
+    <div class="mt-3">
+        <div class="text-center">
+            <button type="button" class="btn btn-block btn-secondary btn-lg font-weight-medium auth-form-btn btn-secondary-change" (click)="closeDialog()" >Retour</button>
+       </div>
+    </div>
+  </div>
+  <!--EndForm-->
+  
+  </div>
+
