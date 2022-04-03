@@ -3866,7 +3866,7 @@ textarea.form-control-lg {
     -webkit-filter: brightness(90%);
     filter: brightness(90%); }
   .form-check-input:focus {
-    border-color: #86b7fe;
+    border-color: #ffa69e;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
@@ -11885,9 +11885,9 @@ code {
   height: 35px;
   width: 35px;
   border-radius: 4px;
-  border: 2px solid #5e6eed; }
+  border: 2px solid #FFA69E; }
   .main-panel .content-wrapper .btn-outline-sales i {
-    color: #5e6eed; }
+    color: #FFA69E; }
   .main-panel .content-wrapper .btn-outline-sales.profit {
     border: 2px solid #00cff4; }
 
@@ -11998,7 +11998,7 @@ code {
       .main-panel .content-wrapper .color-card-wrapper .card-body .color-card-outer .color-card i {
         font-size: 20px; }
       .main-panel .content-wrapper .color-card-wrapper .card-body .color-card-outer .color-card.primary {
-        background: #5e6eed; }
+        background: #FFA69E; }
 
 .color-card-wrapper .card-body {
   position: relative;
@@ -12028,7 +12028,7 @@ code {
       .color-card-wrapper .card-body .color-card-outer .color-card i {
         font-size: 20px; }
       .color-card-wrapper .card-body .color-card-outer .color-card.primary {
-        background: #5e6eed; }
+        background: #FFA69E; }
 
 .hexagon {
   height: 26px;
@@ -13332,7 +13332,7 @@ code {
       width: 17px;
       height: 17px;
       border-radius: 2px;
-      border: solid #5e6eed;
+      border: solid #FFA69E;
       border-width: 2px;
       -webkit-transition: all;
       transition: all;
@@ -13355,7 +13355,7 @@ code {
       font-weight: bold;
       color: #ffffff; }
     .form-check .form-check-label input[type="checkbox"]:checked + .input-helper:before {
-      background: #5e6eed;
+      background: #FFA69E;
       border-width: 0; }
     .form-check .form-check-label input[type="checkbox"]:checked + .input-helper:after {
       width: 18px;
@@ -16215,3 +16215,9 @@ width: 124.08px;
 }
 
 .fixed-table{ word-break: break-all;}
+
+
+.img-DoosierPatient{
+  width: 400px;
+  height: auto;
+}
