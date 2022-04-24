@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { ResultatEnquete } from './resultat-enquete';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { ResultatEnquete } from './resultat-enquete';
 export class ResultatEnqueteService {
 
   constructor(public http:HttpClient) { }
-  readonly baseURL = data.back_webservices.resultatEnqueteAliementaire_url;
+  readonly baseURL = environment.resultatEnqueteAliementaire_url;
 
   listResultatEnquete : ResultatEnquete[] | undefined;
 

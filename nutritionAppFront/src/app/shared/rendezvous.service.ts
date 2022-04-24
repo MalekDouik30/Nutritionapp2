@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Rendezvous } from './rendezvous';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class RendezvousService {
   urlParamsSearch="";
 
   constructor(public http:HttpClient) { }
-  readonly baseURL = data.back_webservices.rendezvous_url;
+  readonly baseURL = environment.rendezvous_url;
 
 
   getRdz(idMedecin:number){

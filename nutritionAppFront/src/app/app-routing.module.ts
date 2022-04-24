@@ -12,6 +12,7 @@ import { GMaladeComponent } from './g-malade/g-malade.component';
 import {GDossierMalade2Component  } from './g-dossier-malade2/g-dossier-malade2.component';
 import {GDossierMaladeComponent  } from './g-dossier-malade/g-dossier-malade.component';
 import {RendezvousComponent  } from './rendezvous/rendezvous.component';
+import { SimulateurComponent } from './simulateur/simulateur.component';
 
 import data from './config/appSettings.json';
 import {RoleGuardGuard} from './shared/role-guard.guard';
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path:'malade', component:GMaladeComponent,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}},
   { path:'dossier-malade2', component:GDossierMalade2Component,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}},
   { path:'dossier-malade', component:GDossierMaladeComponent,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}},
-  { path:'rendez-vous', component:RendezvousComponent,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}}
+  { path:'rendez-vous', component:RendezvousComponent,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}},
+  { path:'simulateur', component:SimulateurComponent,canActivate:[AuthentificationService], data: { role: [data.userRoleIndb.admin_id , data.userRoleIndb.utilisateur_id ]}}
 
 ];
 

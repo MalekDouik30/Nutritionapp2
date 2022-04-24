@@ -1,0 +1,35 @@
+.centered {
+    position: absolute;
+    top: 50%;
+   
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+
+
+  .card-body{
+    margin-left: 20px;
+  }
+
+
+  .enquete-input{
+    padding-top: 7px;
+    padding-left: 7px;
+    padding-bottom: 7px;
+    padding-right: 7px;
+}
+
+
+
+
+@media screen and (min-width: 294px) {
+    .freq-input{
+        margin-left: 15px;
+    }
+  }
+  @media screen and (max-width: 294px) {
+    .freq-input{
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+  }

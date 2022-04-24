@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AlimentService } from '../shared/aliment.service';
+import { ContrainteAlimentaireService } from '../shared/contrainte-alimentaire.service';
 import { DossierPatientService } from '../shared/dossier-patient.service';
 import { DossierPatient } from '../shared/dossierPatient';
 import { PatientService } from '../shared/patient.service';
@@ -15,49 +16,78 @@ import { ResultatEnqueteService } from '../shared/resultat-enquete.service';
   styleUrls: ['./g-dossier-malade2.component.scss']
 })
 export class GDossierMalade2Component implements OnInit {
+
+  inputPetitDejVide=true
+  inputDejVide=true
+  inputDinerVide=true
+
   listResultatEnquetebyId : ResultatEnquete ;
   displayView="view1"
   verifcationExistDossier:boolean
   dosPatient:any
   dosPatientSelectId:number
 
+  patTailleinput1:string
+  patTailleinput2:string
+
+  autrePathologie=true
+  autreAntecedentPersonnel=true
+  sexePatient:string
+
 
   // Pdej
-  formQuantitePetitDejeuner :FormGroup;
-  get inputQuantitePetitDejeuner(){
-    return this.formQuantitePetitDejeuner.get('inputQuantitePetitDejeuner') as FormArray;
-  }
-  get inputFrequencePetitDejeuner(){
-    return this.formQuantitePetitDejeuner.get('inputFrequencePetitDejeuner') as FormArray;
+  formQuantitePetitDejeuner: FormGroup; 
+  formQuantiteDejeuner: FormGroup; 
+  formQuantiteDiner: FormGroup; 
+
+  
+  get inputQuantitePetitDejeuner() {
+    return this.formQuantitePetitDejeuner.get(
+      'inputQuantitePetitDejeuner'
+    ) as FormArray;
   }
 
   //Dej
-  formQuantiteDejeuner :FormGroup;
-  get inputQuantiteDejeuner(){
-    return this.formQuantiteDejeuner.get('inputQuantiteDejeuner') as FormArray;
-  }
-  get inputFrequenceDejeuner(){
-    return this.formQuantiteDejeuner.get('inputFrequenceDejeuner') as FormArray;
+  get inputQuantiteDejeuner() {
+    return this.formQuantiteDejeuner.get(
+      'inputQuantiteDejeuner'
+    ) as FormArray;
   }
 
-  // Diner
-  formQuantiteDiner :FormGroup;
-  get inputQuantiteDiner(){
-    return this.formQuantiteDiner.get('inputQuantiteDiner') as FormArray;
-  }
-  get inputFrequenceDiner(){
-    return this.formQuantiteDiner.get('inputFrequenceDiner') as FormArray;
+  get inputQuantiteDiner() {
+    return this.formQuantiteDiner.get(
+      'inputQuantiteDiner'
+    ) as FormArray;
   }
 
-constructor(public router:Router,public fb:FormBuilder,public alimService:AlimentService,public dossPatService:DossierPatientService,public patService:PatientService,public toaster:ToastrService , public resEnqueteService:ResultatEnqueteService) { }
+constructor(public router:Router,
+  public fb:FormBuilder,
+  public alimService:AlimentService,
+  public dossPatService:DossierPatientService,
+  public patService:PatientService,
+  public toaster:ToastrService , 
+  public resEnqueteService:ResultatEnqueteService,
+  public contrainteAlimService:ContrainteAlimentaireService) { 
+
+    this.formQuantitePetitDejeuner = new FormGroup({
+      inputQuantitePetitDejeuner: new FormArray([]),
+    });
+    this.formQuantiteDejeuner = new FormGroup({
+      inputQuantiteDejeuner: new FormArray([]),
+    });
+    this.formQuantiteDiner = new FormGroup({
+      inputQuantiteDiner: new FormArray([]),
+    });
+
+  }
   
   /** Formulaire Dossient Patient*/
   //1. Pathologie + Antécédents
   pathologieAnswer=["HTA"]
-  pathologieOptions=["HTA","Diabète type 1","Diabète type 2","Hypercholestérolémie","Hypertriglycéridémie","Insuffisance rénale","Syndrome néphrotique","Problème hépatique","Maladie cardiovasculaire","Maladie coeliaque","RGO","Cancer","Anémie"]
+  pathologieOptions=["HTA","Diabète type 1","Diabète type 2","Hypercholestérolémie","Hypertriglycéridémie","Insuffisance rénale","Syndrome néphrotique","Problème hépatique","Maladie cardiovasculaire","Maladie coeliaque","RGO","Cancer","Anémie","Autre"]
   pathologieInput:string
   antecedentAnswer=["HTA"]
-  antecedentOptions=["HTA","Diabète type 1","Diabète type 2","Hypercholestérolémie","Hypertriglycéridémie","Cancer"]
+  antecedentOptions=["HTA","Diabète type 1","Diabète type 2","Hypercholestérolémie","Hypertriglycéridémie","Cancer","Autre"]
   antecedentInput:string
   antecedentFamiliauxInput:string
   //2. Historique de l'obésité
@@ -98,15 +128,16 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
  
   CaloriePetitDejeuner =0
   QuantitePetitDejeuner:string
-  selectedpetitDejeuner = [];
+  selectedpetitDejeuner: any = []; 
 
   CalorieDejeuner=0
   QuantiteDejeuner:string
-  selectedDejeuner = [];
+  selectedDejeuner: any = []; // dej
+  
 
   CalorieDiner=0
   QuantiteDiner:string
-  selectedDiner = [];
+  selectedDiner: any = []; // dej
 
   nbreTotaleCalorie=0
 
@@ -166,10 +197,13 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
   changeViewPathologiesAntecedent(){
     this.displayView="view8"
   }
+  changeViewInfoPoidsTaille(){
+    this.displayView="view9"
+  }
+
 
   onDelete(id:number){    
-    console.log("FFFFFFFFFFFFFFFF")
-    console.log(id)
+
 
     this.dossPatService.deleteDossierPatient(id).subscribe(
       res=>{
@@ -198,7 +232,6 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
   ngOnInit(): void {
     // liste des aliments:
     this.alimService.getAliment()
-
     // list Enquete
     this.resEnqueteService.getResultatEnqueteAlimById(this.patService.idPatient).subscribe(
       res => {this.listResultatEnquetebyId = res as ResultatEnquete}
@@ -244,6 +277,7 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
  
   }
   onSubmit(monform:NgForm){
+
     if(typeof this.pathologieInput !== "undefined"){
       this.pathologieAnswer.indexOf(this.pathologieInput) === -1 ? this.pathologieAnswer.push(this.pathologieInput) : console.log("This item already exists");
     }
@@ -296,6 +330,7 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
    console.log(this.dossPatService.fromDataDossierPatient)
 
    // Ajouter Dossier Patient
+   
    this.dossPatService.addDossierPatient().subscribe(
     res=>{
       this.resetForm(monform);
@@ -312,6 +347,24 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
       this.toaster.error("Échec d'ajouter dossier patient : "+ err.error.message,"Ajout")
       console.log(err);}
    )
+
+    // Ajouter le poids / la taille / la toure de taille d'un patient  
+    this.patService.getPatientByIdResolver(this.patService.idPatient).subscribe(
+      patient=>{
+        this.patService.fromData.patPoids
+        this.patService.fromData.patTaille =  parseFloat(this.patTailleinput1 + "." + this.patTailleinput2)
+        this.patService.fromData.patTaille
+        this.patService.fromData.patToureTaille
+
+        this.sexePatient = this.patService.fromData.patSexe
+
+        this.patService.fromData.patImc = this.patService.fromData.patPoids  / (this.patService.fromData.patTaille*this.patService.fromData.patTaille)
+        this.patService.putPatient()
+      }
+
+    )
+
+
   }
 
   resetForm(monForm:NgForm){
@@ -320,6 +373,13 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
   }
 
   onChangePathologie(option:string,checked:boolean){
+    if(option == "Autre"){
+      this.autrePathologie=false
+    }
+    if(option != "Autre"){
+      this.autrePathologie=true
+    }
+
     if (checked && this.pathologieAnswer.indexOf(option)<0){
         this.pathologieAnswer=[...this.pathologieAnswer,option]
         .sort((a,b)=>this.pathologieOptions.indexOf(a)>this.pathologieOptions.indexOf(b)?1:-1)
@@ -328,6 +388,13 @@ constructor(public router:Router,public fb:FormBuilder,public alimService:Alimen
  }
 
  onChangeAntecedent(option:string,checked:boolean){
+
+  if(option=="Autre"){
+    this.autreAntecedentPersonnel = false
+  }
+  if(option!="Autre"){
+this.autreAntecedentPersonnel=true
+  }
   if (checked && this.antecedentAnswer.indexOf(option)<0){
       this.antecedentAnswer=[...this.antecedentAnswer,option]
       .sort((a,b)=>this.antecedentOptions.indexOf(a)>this.antecedentOptions.indexOf(b)?1:-1)
@@ -384,6 +451,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   let nbreTotaleVitamineB9mg=0
   let nbreTotaleVitamineB12mg=0
 
+
   this.resEnqueteService.fromData.ptDejProtide = this.nbreTotaleProtidePetitDej
   this.resEnqueteService.fromData.ptDejLipide =this.nbreTotaleLipidePetitDej
   this.resEnqueteService.fromData.ptDejGluicide = this.nbreTotaleGlucidePetitDej
@@ -399,12 +467,9 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   this.resEnqueteService.fromData.dinerGluicide = this.nbreTotaleGlucideDiner
   this.resEnqueteService.fromData.dinerCalorie = this.nbreTotaleCalorieDiner
 
-
-
-
   var resNbeAlimentxQ=0
   for (let i = 0; i < caloriesarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(caloriesarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(caloriesarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
   }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleCalorie=resNbeAlimentxQ
@@ -412,7 +477,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 2. Calcule Glucide
   resNbeAlimentxQ=0
   for (let i = 0; i < glucidearray.length; i++) {      
-    resNbeAlimentxQ += ((Number(glucidearray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(glucidearray[i]) * inputQuantite[i])/100)*inputFrequence[i]
   }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleGlucide=resNbeAlimentxQ
@@ -420,7 +485,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 3. Calcule Lipide
   resNbeAlimentxQ=0
   for (let i = 0; i < lipidearray.length; i++) {      
-    resNbeAlimentxQ += ((Number(lipidearray[i]) * inputQuantite.value[i])/100)* inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(lipidearray[i]) * inputQuantite[i])/100)* inputFrequence[i]
   }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleLipide=resNbeAlimentxQ
@@ -428,7 +493,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 4. Calcule Protidie
   resNbeAlimentxQ=0
   for (let i = 0; i < protidearray.length; i++) {      
-      resNbeAlimentxQ += ((Number(protidearray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+      resNbeAlimentxQ += ((Number(protidearray[i]) * inputQuantite[i])/100)*inputFrequence[i]
   }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleProtide=resNbeAlimentxQ
@@ -438,14 +503,14 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 5. Calcule Eau
   resNbeAlimentxQ=0
   for (let i = 0; i < eauarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(eauarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(eauarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleEau=resNbeAlimentxQ
   // 6. Calcule Fibre Alimentaire
   resNbeAlimentxQ=0
   for (let i = 0; i < fibreAlimentairearray.length; i++) {      
-    resNbeAlimentxQ += ((Number(fibreAlimentairearray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(fibreAlimentairearray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleFibreAlimentaire=resNbeAlimentxQ
@@ -453,21 +518,21 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 7. Calcule Alcool
   resNbeAlimentxQ=0
   for (let i = 0; i < alcoolarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(alcoolarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(alcoolarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleAlcool=resNbeAlimentxQ
   // 8. Calcule agSatures
   resNbeAlimentxQ=0
   for (let i = 0; i < agSaturesarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(agSaturesarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(agSaturesarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleAgSatures=resNbeAlimentxQ
   // 9. Calcule agMonoinsatures
   resNbeAlimentxQ=0
   for (let i = 0; i < agMonoinsaturesarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(agMonoinsaturesarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(agMonoinsaturesarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 
   resNbeAlimentxQ=resNbeAlimentxQ/7
@@ -475,7 +540,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 10. Calcule agPolyinsatures
   resNbeAlimentxQ=0
   for (let i = 0; i < agPolyinsaturesarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(agPolyinsaturesarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(agPolyinsaturesarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleAgPolyinsatures=resNbeAlimentxQ
@@ -483,7 +548,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 11. Calcule agW6G
   resNbeAlimentxQ=0
   for (let i = 0; i < agW6Garray.length; i++) {      
-    resNbeAlimentxQ += ((Number(agW6Garray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(agW6Garray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleAgW6G=resNbeAlimentxQ
@@ -491,7 +556,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 12. Calcule gW3G
   resNbeAlimentxQ=0
   for (let i = 0; i < gW3Garray.length; i++) {      
-    resNbeAlimentxQ += ((Number(gW3Garray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(gW3Garray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleGW3G=resNbeAlimentxQ
@@ -499,14 +564,14 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 13. Calcule cholesterolMg
   resNbeAlimentxQ=0
   for (let i = 0; i < cholesterolMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(cholesterolMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(cholesterolMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleCholesterolMg=resNbeAlimentxQ
   // 14. Calcule calciumMg
   resNbeAlimentxQ=0
   for (let i = 0; i < calciumMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(calciumMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(calciumMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleCalciumMg=resNbeAlimentxQ
@@ -514,14 +579,14 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 15. Calcule cuivreMg
   resNbeAlimentxQ=0
   for (let i = 0; i < cuivreMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(cuivreMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(cuivreMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleCuivreMg=resNbeAlimentxQ
   // 16. Calcule ferMg
   resNbeAlimentxQ=0
   for (let i = 0; i < ferMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(ferMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(ferMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleFerMg=resNbeAlimentxQ
@@ -529,7 +594,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 17. Calcule magnesiumMg
   resNbeAlimentxQ=0
   for (let i = 0; i < magnesiumMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(magnesiumMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(magnesiumMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleMagnesiumMg=resNbeAlimentxQ
@@ -537,7 +602,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 18. Calcule phosphoreMg
   resNbeAlimentxQ=0
   for (let i = 0; i < phosphoreMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(phosphoreMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(phosphoreMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotalePhosphoreMg=resNbeAlimentxQ
@@ -545,7 +610,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 19. Calcule potassiumMg
   resNbeAlimentxQ=0
   for (let i = 0; i < potassiumMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(potassiumMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(potassiumMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotalePotassiumMg=resNbeAlimentxQ
@@ -553,7 +618,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 20. Calcule sodiumMg
   resNbeAlimentxQ=0
   for (let i = 0; i < sodiumMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(sodiumMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(sodiumMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleSodiumMg=resNbeAlimentxQ
@@ -561,7 +626,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 21. Calcule zincMg
   resNbeAlimentxQ=0
   for (let i = 0; i < zincMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(zincMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(zincMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleZincMg=resNbeAlimentxQ
@@ -569,7 +634,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 22. Calcule retinolmg
   resNbeAlimentxQ=0
   for (let i = 0; i < retinolmgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(retinolmgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(retinolmgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleRetinolmg=resNbeAlimentxQ
@@ -577,7 +642,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 23. Calcule vitamineDmg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineDmgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineDmgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineDmgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleVitamineDmg=resNbeAlimentxQ
@@ -585,7 +650,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 24. Calcule vitamineEMg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineEMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineEMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineEMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleVitamineEMg=resNbeAlimentxQ
@@ -593,7 +658,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 25. Calcule vitamineK1mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineK1mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineK1mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineK1mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleVitamineK1mg=resNbeAlimentxQ
@@ -601,7 +666,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 26. Calcule vitamineCMg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineCMgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineCMgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineCMgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleVitamineCMg=resNbeAlimentxQ
@@ -609,7 +674,7 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   // 27. Calcule vitamineB1Mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB1Mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB1Mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB1Mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB1Mg=resNbeAlimentxQ
@@ -617,7 +682,7 @@ nbreTotaleVitamineB1Mg=resNbeAlimentxQ
   // 28. Calcule vitamineB2Mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB2Mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB2Mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB2Mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB2Mg=resNbeAlimentxQ
@@ -625,7 +690,7 @@ nbreTotaleVitamineB2Mg=resNbeAlimentxQ
   // 29. Calcule vitamineB3Mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB3Mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB3Mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB3Mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB3Mg=resNbeAlimentxQ
@@ -633,7 +698,7 @@ nbreTotaleVitamineB3Mg=resNbeAlimentxQ
   //30. Calcule vitamineB5Mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB5Mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB5Mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB5Mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB5Mg=resNbeAlimentxQ
@@ -641,7 +706,7 @@ nbreTotaleVitamineB5Mg=resNbeAlimentxQ
   // 31. Calcule vitamineB6Mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB6Mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB6Mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB6Mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB6Mg=resNbeAlimentxQ
@@ -649,7 +714,7 @@ nbreTotaleVitamineB6Mg=resNbeAlimentxQ
   // 32. Calcule vitamineB9mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB9mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB9mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB9mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB9mg=resNbeAlimentxQ
@@ -657,7 +722,7 @@ nbreTotaleVitamineB9mg=resNbeAlimentxQ
   // 33. Calcule vitamineB12mg
   resNbeAlimentxQ=0
   for (let i = 0; i < vitamineB12mgarray.length; i++) {      
-    resNbeAlimentxQ += ((Number(vitamineB12mgarray[i]) * inputQuantite.value[i])/100)*inputFrequence.value[i]
+    resNbeAlimentxQ += ((Number(vitamineB12mgarray[i]) * inputQuantite[i])/100)*inputFrequence[i]
 }
 resNbeAlimentxQ=resNbeAlimentxQ/7
 nbreTotaleVitamineB12mg=resNbeAlimentxQ
@@ -784,6 +849,7 @@ diviserInputsValues(selectedInputValues:any){
 
 calculerTousNutriments(inputQuantite:any,inputFrequence:any,selectedRepas:any){
 
+
 var calorie=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
@@ -818,6 +884,7 @@ var calorie=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB6Mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleCalorie
+
 
 var glucide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
@@ -1944,22 +2011,22 @@ return {calorie,glucide,lipide,protide,eau,fibreAlimentaire,alcool,agSatures,agM
 
 onCalcule(){
   // PetitDej 
-  this.nbreTotaleCaloriePetitDej=this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).calorie
-  this.nbreTotaleGlucidePetitDej=this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).glucide
-  this.nbreTotaleLipidePetitDej=this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).lipide 
-  this.nbreTotaleProtidePetitDej=this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).protide
+  this.nbreTotaleCaloriePetitDej=this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).calorie
+  this.nbreTotaleGlucidePetitDej=this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).glucide
+  this.nbreTotaleLipidePetitDej=this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).lipide 
+  this.nbreTotaleProtidePetitDej=this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).protide
 
   // Déj 
-  this.nbreTotaleCalorieDejeuner=this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).calorie
-  this.nbreTotaleGlucideDejeuner=this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).glucide
-  this.nbreTotaleLipideDejeuner=this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).lipide 
-  this.nbreTotaleProtideDejeuner=this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).protide
+  this.nbreTotaleCalorieDejeuner=this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).calorie
+  this.nbreTotaleGlucideDejeuner=this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).glucide
+  this.nbreTotaleLipideDejeuner=this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).lipide 
+  this.nbreTotaleProtideDejeuner=this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).protide
   
   // Diner
-  this.nbreTotaleCalorieDiner=this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).calorie
-  this.nbreTotaleGlucideDiner=this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).glucide
-  this.nbreTotaleLipideDiner=this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).lipide 
-  this.nbreTotaleProtideDiner=this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).protide
+  this.nbreTotaleCalorieDiner=this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).calorie
+  this.nbreTotaleGlucideDiner=this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).glucide
+  this.nbreTotaleLipideDiner=this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).lipide 
+  this.nbreTotaleProtideDiner=this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).protide
 
   // Totaux
   this.nbreTotaleCalorieT=this.nbreTotaleCaloriePetitDej + this.nbreTotaleCalorieDejeuner + this.nbreTotaleCalorieDiner
@@ -1973,35 +2040,35 @@ onCalcule(){
   this.resEnqueteService.fromData.lipidesG100G = this.nbreTotaleLipideT
   this.resEnqueteService.fromData.proteinesG100G=this.nbreTotaleProtideT
   
-  this.resEnqueteService.fromData.calciumMg100G=this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).calciumMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).calciumMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).calciumMg // Somme calciumMg100G: Dej + petidéj + Diner : calciumMg100G
-  this.resEnqueteService.fromData.eauG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).eau + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).eau + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).eau
-  this.resEnqueteService.fromData.fibresAlimentairesG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).fibreAlimentaire + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).fibreAlimentaire + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).fibreAlimentaire
-  this.resEnqueteService.fromData.alcoolG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).alcool + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).alcool + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).alcool
-  this.resEnqueteService.fromData.agSaturesG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).agSatures + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).agSatures + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).agSatures
-  this.resEnqueteService.fromData.agMonoinsaturesG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).agMonoinsatures + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).agMonoinsatures + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).agMonoinsatures
-  this.resEnqueteService.fromData.agPolyinsaturesG100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).agPolyinsatures + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).agPolyinsatures + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).agPolyinsatures
-  this.resEnqueteService.fromData.agW6G100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).agW6G + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).agW6G + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).agW6G
-  this.resEnqueteService.fromData.agW3G100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).agW3G + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).agW3G + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).agW3G
-  this.resEnqueteService.fromData.cholesterolMg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).cholesterolMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).cholesterolMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).cholesterolMg
-  this.resEnqueteService.fromData.cuivreMg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).cuivreMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).cuivreMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).cuivreMg
-  this.resEnqueteService.fromData.ferMg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).ferMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).ferMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).ferMg
-  this.resEnqueteService.fromData.magnesiumMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).magnesiumMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).magnesiumMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).magnesiumMg
-  this.resEnqueteService.fromData.phosphoreMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).phosphoreMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).phosphoreMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).phosphoreMg
-  this.resEnqueteService.fromData.potassiumMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).potassiumMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).potassiumMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).potassiumMg
-  this.resEnqueteService.fromData.sodiumMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).sodiumMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).sodiumMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).sodiumMg
-  this.resEnqueteService.fromData.zincMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).zincMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).zincMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).zincMg
-  this.resEnqueteService.fromData.retinolmg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).retinolmg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).retinolmg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).retinolmg
-  this.resEnqueteService.fromData.vitamineDmg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineDmg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineDmg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineDmg
-  this.resEnqueteService.fromData.vitamineEMg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineEMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineEMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineEMg
-  this.resEnqueteService.fromData.vitamineK1mg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineK1mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineK1mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineK1mg
-  this.resEnqueteService.fromData.vitamineCMg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineCMg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineCMg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineCMg
-  this.resEnqueteService.fromData.vitamineB1Mg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB1Mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB1Mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB1Mg
-  this.resEnqueteService.fromData.vitamineB2Mg100G =  this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB2Mg
-  this.resEnqueteService.fromData.vitamineB3Mg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB3Mg
-  this.resEnqueteService.fromData.vitamineB5Mg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB5Mg
-  this.resEnqueteService.fromData.vitamineB6Mg100G  = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB6Mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB6Mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB6Mg
-  this.resEnqueteService.fromData.vitamineB9mg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB9mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB9mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB9mg
-  this.resEnqueteService.fromData.vitamineB12mg100G = this.calculerTousNutriments(this.inputQuantitePetitDejeuner,this.inputFrequencePetitDejeuner,this.selectedpetitDejeuner).vitamineB12mg + this.calculerTousNutriments(this.inputQuantiteDejeuner,this.inputFrequenceDejeuner,this.selectedDejeuner).vitamineB12mg + this.calculerTousNutriments(this.inputQuantiteDiner,this.inputFrequenceDiner,this.selectedDiner).vitamineB12mg
+  this.resEnqueteService.fromData.calciumMg100G=this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).calciumMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).calciumMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).calciumMg // Somme calciumMg100G: Dej + petidéj + Diner : calciumMg100G
+  this.resEnqueteService.fromData.eauG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).eau + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).eau + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).eau
+  this.resEnqueteService.fromData.fibresAlimentairesG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).fibreAlimentaire + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).fibreAlimentaire + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).fibreAlimentaire
+  this.resEnqueteService.fromData.alcoolG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).alcool + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).alcool + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).alcool
+  this.resEnqueteService.fromData.agSaturesG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).agSatures + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).agSatures + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).agSatures
+  this.resEnqueteService.fromData.agMonoinsaturesG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).agMonoinsatures + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).agMonoinsatures + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).agMonoinsatures
+  this.resEnqueteService.fromData.agPolyinsaturesG100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).agPolyinsatures + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).agPolyinsatures + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).agPolyinsatures
+  this.resEnqueteService.fromData.agW6G100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).agW6G + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).agW6G + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).agW6G
+  this.resEnqueteService.fromData.agW3G100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).agW3G + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).agW3G + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).agW3G
+  this.resEnqueteService.fromData.cholesterolMg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).cholesterolMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).cholesterolMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).cholesterolMg
+  this.resEnqueteService.fromData.cuivreMg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).cuivreMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).cuivreMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).cuivreMg
+  this.resEnqueteService.fromData.ferMg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).ferMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).ferMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).ferMg
+  this.resEnqueteService.fromData.magnesiumMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).magnesiumMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).magnesiumMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).magnesiumMg
+  this.resEnqueteService.fromData.phosphoreMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).phosphoreMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).phosphoreMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).phosphoreMg
+  this.resEnqueteService.fromData.potassiumMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).potassiumMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).potassiumMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).potassiumMg
+  this.resEnqueteService.fromData.sodiumMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).sodiumMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).sodiumMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).sodiumMg
+  this.resEnqueteService.fromData.zincMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).zincMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).zincMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).zincMg
+  this.resEnqueteService.fromData.retinolmg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).retinolmg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).retinolmg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).retinolmg
+  this.resEnqueteService.fromData.vitamineDmg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineDmg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineDmg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineDmg
+  this.resEnqueteService.fromData.vitamineEMg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineEMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineEMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineEMg
+  this.resEnqueteService.fromData.vitamineK1mg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineK1mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineK1mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineK1mg
+  this.resEnqueteService.fromData.vitamineCMg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineCMg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineCMg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineCMg
+  this.resEnqueteService.fromData.vitamineB1Mg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB1Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB1Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB1Mg
+  this.resEnqueteService.fromData.vitamineB2Mg100G =  this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB2Mg
+  this.resEnqueteService.fromData.vitamineB3Mg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB3Mg
+  this.resEnqueteService.fromData.vitamineB5Mg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB5Mg
+  this.resEnqueteService.fromData.vitamineB6Mg100G  = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB6Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB6Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB6Mg
+  this.resEnqueteService.fromData.vitamineB9mg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB9mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB9mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB9mg
+  this.resEnqueteService.fromData.vitamineB12mg100G = this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB12mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB12mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB12mg
   
 
   console.log("calciumMg100G",this.resEnqueteService.fromData.calciumMg100G)
@@ -2040,37 +2107,289 @@ onCalcule(){
 
 }
 
-addInputsQuantite(){
-  this.formQuantitePetitDejeuner = this.fb.group({
-    inputQuantitePetitDejeuner:this.fb.array([]),
-    inputFrequencePetitDejeuner:this.fb.array([]),
-  })
-  for(let item of this.selectedpetitDejeuner){
-    this.inputQuantitePetitDejeuner.push(this.fb.control(''));
-    this.inputFrequencePetitDejeuner.push(this.fb.control(''));
+//////////////////////////////////////////////////////////////
+  //Petit dejeuner
+//////////////////////////////////////////////////////////////
+addPtdjInputs() {
+  this.inputQuantitePetitDejeuner.push(
+    new FormGroup({
+      qte: new FormControl(''),
+      freq: new FormControl(''),
+    })
+  );
+}
+
+
+addInputsQuantitePetitDej() {
+  this.addPtdjInputs();
+  this.verificationPetiDej();
+}
+
+resetSelectPtdj() {
+  this.inputQuantitePetitDejeuner.clear();
+}
+
+onRemovePtdj() {
+  this.inputQuantitePetitDejeuner.removeAt(this.selectedpetitDejeuner.length);
+}
+
+getQteFreqPetitdej() {
+  let values: any = [];
+  let qteArray = [];
+  let freqArray = [];
+  this.inputQuantitePetitDejeuner.controls.forEach((control) => {
+    values.push(control.value);
+  });
+  for (let item of values) {
+    if (item.qte != null) {
+      qteArray.push(item.qte);
+    }
+    if (item.freq != null) {
+      freqArray.push(item.freq);
+    }
+  }
+  return {
+    qteArray,
+    freqArray,
+  };
+}
+
+verificationPetiDej() {
+  let values: any = [];
+  let countqte = 0;
+  let countfreq = 0;
+
+  if (this.selectedpetitDejeuner.length == countqte &&this.selectedpetitDejeuner.length == countfreq) {
+    return false;
+  } 
+
+  try {
+    if (this.selectedpetitDejeuner.length != 0) {
+
+
+      this.inputQuantitePetitDejeuner.controls.forEach((control) => {
+        values.push(control.value);
+      });
+      for (let item of values) {
+        if (item.qte != '') {
+          countqte = countqte + 1;
+        }
+        if (item.freq != '') {
+          countfreq = countfreq + 1;
+        }
+      }
+      if (
+        this.selectedpetitDejeuner.length == countqte &&
+        this.selectedpetitDejeuner.length == countfreq
+      ) {
+        return false;
+        // disabled = false
+      } else {  
+        return true;
+        // disabled = true
+      }
+    } else {
+      return true;
+    }
+  } catch {
+
+    return true;
+  }
+}
+//////////////////////////////////////////////////////////////
+  //Déjeuner
+//////////////////////////////////////////////////////////////
+
+adddjInputs() {
+  this.inputQuantiteDejeuner.push(
+    new FormGroup({
+      qte: new FormControl(''),
+      freq: new FormControl(''),
+    })
+  );
+}
+
+addInputsQuantiteDej() {
+  this.adddjInputs();
+  this.verificationDej();
+}
+
+resetSelectdj() {
+  this.inputQuantiteDejeuner.clear();
+}
+
+onRemovedj() {
+  this.inputQuantiteDejeuner.removeAt(this.selectedDejeuner.length);
+}
+
+getQteFreqdej() {
+  let values: any = [];
+  let qteArray = [];
+  let freqArray = [];
+  this.inputQuantiteDejeuner.controls.forEach((control) => {
+    values.push(control.value);
+  });
+  for (let item of values) {
+    if (item.qte != null) {
+      qteArray.push(item.qte);
+    }
+    if (item.freq != null) {
+      freqArray.push(item.freq);
+    }
+  }
+  return {
+    qteArray,
+    freqArray,
+  };
+}
+
+verificationDej() {
+  let values: any = [];
+  let countqte = 0;
+  let countfreq = 0;
+  if ( this.selectedDejeuner.length == countqte && this.selectedDejeuner.length == countfreq) {
+    return false;
+  }
+
+  try {
+    if (this.selectedDejeuner.length != 0) {
+
+
+      this.inputQuantiteDejeuner.controls.forEach((control) => {
+        values.push(control.value);
+      });
+      for (let item of values) {
+        if (item.qte != '') {
+          countqte = countqte + 1;
+        }
+        if (item.freq != '') {
+          countfreq = countfreq + 1;
+        }
+      }
+      if (
+        this.selectedDejeuner.length == countqte &&
+        this.selectedDejeuner.length == countfreq
+      ) {
+        return false;
+        // disabled = false
+      } else {
+
+
+        return true;
+        // disabled = true
+      }
+    } else {
+      return true;
+    }
+  } catch {
+    return true;
   }
 }
 
-addInputsQuantiteDej(){
-  this.formQuantiteDejeuner=this.fb.group({
-    inputQuantiteDejeuner:this.fb.array([]),
-    inputFrequenceDejeuner:this.fb.array([]),
-  })
-  for(let item of this.selectedDejeuner){
-    this.inputQuantiteDejeuner.push(this.fb.control(''));
-    this.inputFrequenceDejeuner.push(this.fb.control(''));
+//////////////////////////////////////////////////////////////
+  //Diner
+//////////////////////////////////////////////////////////////
+
+adddinerInputs() {
+  this.inputQuantiteDiner.push(
+    new FormGroup({
+      qte: new FormControl(''),
+      freq: new FormControl(''),
+    })
+  );
+}
+
+addInputsQuantiteDiner() {
+  this.adddinerInputs();
+  this.verificationDiner();
+}
+
+resetSelectdiner() {
+  this.inputQuantiteDiner.clear();
+}
+
+onRemovediner() {
+  this.inputQuantiteDiner.removeAt(this.selectedDiner.length);
+}
+
+getQteFreqdiner() {
+  let values: any = [];
+  let qteArray = [];
+  let freqArray = [];
+  this.inputQuantiteDiner.controls.forEach((control) => {
+    values.push(control.value);
+  });
+  for (let item of values) {
+    if (item.qte != null) {
+      qteArray.push(item.qte);
+    }
+    if (item.freq != null) {
+      freqArray.push(item.freq);
+    }
+  }
+  return {
+    qteArray,
+    freqArray,
+  };
+}
+
+verificationDiner() {
+  let values: any = [];
+  let countqte = 0;
+  let countfreq = 0;
+
+  if ( this.selectedDiner.length == countqte && this.selectedDiner.length == countfreq) {
+    return false;
+  }
+
+  try {
+    if (this.selectedDiner.length != 0) {
+
+
+      this.inputQuantiteDiner.controls.forEach((control) => {
+        values.push(control.value);
+      });
+      for (let item of values) {
+        if (item.qte != '') {
+          countqte = countqte + 1;
+        }
+        if (item.freq != '') {
+          countfreq = countfreq + 1;
+        }
+      }
+      if ( this.selectedDiner.length == countqte && this.selectedDiner.length == countfreq) {
+        return false;
+        // disabled = false
+      } else {
+        return true;
+        // disabled = true
+      }
+    } else {
+      return true;
+    }
+  } catch {
+    return true;
   }
 }
 
-addInputsDiner(){
-  this.formQuantiteDiner=this.fb.group({
-    inputQuantiteDiner:this.fb.array([]),
-    inputFrequenceDiner:this.fb.array([]),
-  })
-  for(let item of this.selectedDiner){
-    this.inputQuantiteDiner.push(this.fb.control(''));
-    this.inputFrequenceDiner.push(this.fb.control(''));
+verificationDisabledButtonCalculer(){
+
+  if( this.verificationPetiDej()==false  && this.verificationDej()==false   && this.verificationDiner() ==false ){
+    return false
   }
+    return true
 }
+
+
+verificationDisabledButtonConfirm(){
+    if( this.selectedDiner.length ==0  && this.selectedpetitDejeuner.length==0   && this.selectedDejeuner.length ==0 ){
+      return true
+    }
+    if(this.verificationDisabledButtonCalculer()){
+      return true
+    }
+      return false
+  }
+
 
 }

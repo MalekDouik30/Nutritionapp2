@@ -4,10 +4,6 @@
   <div class="container-fluid page-body-wrapper">
    <div class="main-panel">
 
-
-
-
-
           <!--//////////////////////////////////////////////////////////////////////////////////////-->
           <ng-container  *ngIf="this.verifcationExistDossier==true">
             <div class="content-wrapper pb-0">
@@ -127,7 +123,7 @@
                                   <input #check type="checkbox" class="form-check-input" [checked]="pathologieAnswer.indexOf(option)>=0" (change)="onChangePathologie(option,check.checked)"> {{option}} <i class="input-helper"></i> 
                               </label>
                           </div>
-                          <label>Autre</label> <input type="text" [(ngModel)]="pathologieInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                          <label>Autre</label> <input type="text" [(ngModel)]="pathologieInput" name="somthing" class="form-control form-control-lg" [disabled]="autrePathologie" placeholder="Autre choix">
                       </div>
                     </div>
                     <!--Antécedents-->
@@ -139,13 +135,13 @@
                                   <input #check type="checkbox" class="form-check-input" [checked]="antecedentAnswer.indexOf(option)>=0" (change)="onChangeAntecedent(option,check.checked)"> {{option}} <i class="input-helper"></i> 
                               </label>
                           </div>
-                          <label>Autre</label> <input type="text" [(ngModel)]="antecedentInput" name="somthing" class="form-control form-control-lg" placeholder="Autre choix">
+                          <label>Autre</label> <input type="text" [(ngModel)]="antecedentInput" name="somthingElse" class="form-control form-control-lg" placeholder="Autre choix" [disabled]="autreAntecedentPersonnel" >
                       </div>
                   </div>
                   <!--Antécédents Familiaux-->
                   <div class="row">
                       <div class="form-group">
-                          <label><b>Antécédents Familiaux</b></label> <input type="text" [(ngModel)]="antecedentFamiliauxInput" name="somthing" class="form-control form-control-lg" placeholder="Antécédents Familiaux">
+                          <label><b>Antécédents Familiaux</b></label> <input type="text" [(ngModel)]="antecedentFamiliauxInput" name="somthingElseELse" class="form-control form-control-lg" placeholder="Antécédents Familiaux">
                       </div>
                   </div>
                   </div>
@@ -507,7 +503,6 @@
     </ng-container>
 
     <!--------------------- View 6 ------------------------------------------------------------->
-
     <ng-container *ngIf="displayView=='view6'">
       <h3 class="mb-3">Troubles du comportement alimentaire TCA </h3>
       <div class="card">
@@ -551,84 +546,118 @@
             <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAlimentaire()"><i class="mdi mdi-page-first"></i></button>
         </span>
         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
-            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewEnqueteAlimentaire()"><i class="mdi mdi-page-last"></i></button>
+            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewInfoPoidsTaille()"><i class="mdi mdi-page-last"></i></button>
         </span>
       </div>
     </ng-container>
-    <!--------------------- View 7 : Enquete Alimentaire------------------------------------------------------------->
+
+    <!--------------------- View 7 : info Dossier passient ------------------------------------------------------------->
+    <ng-container *ngIf="displayView=='view9'">
+      <h3 class="mb-3">Information sur le passient </h3>
+      <div class="card">
+        <div class="col-md-4">
+          <div class="card border-0">
+            <div class="card-body">
+              
+              <div class="row">
+                <div class="form-group">
+                    <label><b>Poids (Kg)</b></label>
+                   <input type="number" [(ngModel)]="this.patService.fromData.patPoids" name="poids_input"  class="form-control form-control-lg" placeholder="Poids" max="200">
+                </div>
+               </div>
+
+                <div class="row">
+                  <div class="form-group">
+                      <label><b>Taille </b></label>
+
+                      <table>
+                        <tr>
+                          <td>
+                            <input type="number" [(ngModel)]="patTailleinput1" name="taille_input1" class="form-control form-control-lg" placeholder="m" max="3">
+                          </td>
+                          <td>
+                            <input type="number" [(ngModel)]="patTailleinput2" name="taille_input2" class="form-control form-control-lg" placeholder="cm" >
+                          </td>
+                        </tr>
+                      </table>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                      <label><b>Tour de taille  </b></label><input type="number" [(ngModel)]="this.patService.fromData.patToureTaille" name="tour_taille_input" class="form-control form-control-lg" placeholder="cm">
+                  </div>
+                </div>
+
+              </div>
+              </div>
+              </div>
+            </div>
+      
+
+      
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
+            <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewHistoriqueAlimentaire()"><i class="mdi mdi-page-first"></i></button>
+        </span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+            <button type="button" title="Suivant" class="btn btn-inverse-danger btn-icon" (click)="changeViewEnqueteAlimentaire()"><i class="mdi mdi-page-last"></i></button>
+        </span>
+      </div>
+
+    </ng-container>
+    <!--------------------- View 8 : Enquete Alimentaire------------------------------------------------------------->
     <ng-container *ngIf="displayView=='view7'"> 
         <h3 class="mb-3">Enquête alimentaire</h3>
         <div class="card">
           
             <div class="card border-0">
               <div class="card-body">
-                <div class="row">
-                  <!--------Petit Déj ---------------->
-                  <div class="col-md-6">
-                    <div class="form-group"> 
-                      <h3 class="font-weight-500 mb-xl-4 text-primary"> Petit-déjeuner </h3>
-                          <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedpetitDejeuner" name="selectedpetitDejeuner" (change)="addInputsQuantite()">
-                              <ng-option *ngFor="let item of alimService.listAliments" 
+        <!--------Petit Déj ---------------------------------------------------------------------->
+        <div class="row">
+
+          <div class="col-md-6 grid-margin">
+            <div class="form-group"> 
+              <h3 class="font-weight-500 mb-xl-4 text-primary"> Petit-déjeuner </h3>
+                  <ng-select 
+                  placeholder="Choisir un aliment "
+                  class="form-control" 
+                  [multiple]="true"
+                   [virtualScroll]="true" 
+                   [(ngModel)]="selectedpetitDejeuner" 
+                   name="selectedpetitDejeuner" 
+                   (add)="addInputsQuantitePetitDej()"
+                   (remove)="onRemovePtdj()" 
+                   (clear)="resetSelectPtdj()">
+
+                      <ng-option *ngFor="let item of alimService.listAliments" 
 value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
 /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
 /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
 /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
-                          </ng-select>
+                  </ng-select>
+            </div>
+          </div>
+
+          <div class="col-md-6 grid-margin">
+            <form [formGroup]="formQuantitePetitDejeuner">
+              <div formArrayName="inputQuantitePetitDejeuner">
+                <div
+                  *ngFor="let item of inputQuantitePetitDejeuner.controls; let i = index" [formGroupName]="i"
+                >
+                  <label>Aliment  - {{i + 1}} : Petit-déjeuner</label>
+                    <div class="row">
+                      <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationPetiDej()" min="0" />
+                      <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationPetiDej()" min="0" />
                     </div>
                   </div>
-                  <div class="col-md-6 table-freq-quant-inputs">
-                    <form [formGroup]="formQuantitePetitDejeuner" style="overflow:x">
-                      <table>
-                        <!--Quantite-->
-                          <tr> 
-                            <ng-container formArrayName="inputQuantitePetitDejeuner" *ngFor ="let item of inputQuantitePetitDejeuner.controls; let i = index">
-                              <td >
-                                  <label>Quantité(g)</label>
-                                      <input  class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
-                              </td>
-                            </ng-container>
-                          </tr>
-                            <!--Fréquence-->
-                          <tr> 
-                              <ng-container formArrayName="inputFrequencePetitDejeuner" *ngFor ="let item of inputFrequencePetitDejeuner.controls; let i = index">
-                                <td >
-                                  <label>Fréquence(S) </label>
-                                    <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
-                                </td>
-                              </ng-container>
-                          </tr>
-                      </table>
-                    </form>
-                  </div>
-                </div>
-                <div class="row table-scroll-x">
-                  <table>
-                    <tr> 
-                        <td>
-                            <label>Protides</label>
-                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtidePetitDej | number : '1.2-2'}}" disabled/> 
-                        </td>
-                        <td>
-                            <label>Lipides</label>
-                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipidePetitDej | number : '1.2-2'}}" disabled/> 
-                        </td>
-                        <td>
-                            <label>Glucides</label>
-                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucidePetitDej | number : '1.2-2'}}" disabled/> 
-                        </td>
-                        <td>
-                            <label>Calories</label>
-                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCaloriePetitDej | number : '1.2-2'}}" disabled/> 
-                        </td>
-                        <td>
-                            <label>%Kcal</label>
-                            <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorie | number : '1.2-2'}}" disabled/> 
-                        </td>
+              </div>            
+            </form>     
+        </div>
+        </div>
 
-                    </tr>
-                </table>
-                </div>
-
+               
                 <br>
 
                 <!-------- Déj ---------------->
@@ -636,137 +665,85 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                   <div class="col-md-6">
                     <div class="form-group"> 
                       <h3 class="font-weight-500 mb-xl-4 text-primary"> Déjeuner </h3>
-                          <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedDejeuner" name="selectedDejeuner" (change)="addInputsQuantiteDej()">
-                              <ng-option *ngFor="let item of alimService.listAliments"
-value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
-/{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
-/{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
-/{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
-                          </ng-select>
+                      <ng-select 
+                      placeholder="Choisir un aliment "
+                      class="form-control" 
+                      [multiple]="true"
+                       [virtualScroll]="true" 
+                       [(ngModel)]="selectedDejeuner" 
+                       name="selectedDejeuner" 
+                       (add)="addInputsQuantiteDej()"
+                       (remove)="onRemovedj()" 
+                       (clear)="resetSelectdj()">
+                          <ng-option *ngFor="let item of alimService.listAliments" 
+    value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+    /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+    /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+    /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                      </ng-select>
                     </div>
                   </div>
                 
-                <div class="col-md-6 table-freq-quant-inputs">
-                  <form [formGroup]="formQuantiteDejeuner">
-                    <table>
-                      <!--Quantite-->
-                        <tr> 
-                          <ng-container formArrayName="inputQuantiteDejeuner" *ngFor ="let item of inputQuantiteDejeuner.controls; let i = index">
-                            <td >
-                                <label>Quantité(g)</label>
-                                    <input class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
-                            </td>
-                          </ng-container>
-                        </tr>
-                          <!--Fréquence-->
-                        <tr> 
-                            <ng-container formArrayName="inputFrequenceDejeuner" *ngFor ="let item of inputFrequenceDejeuner.controls; let i = index">
-                              <td >
-                                <label>Fréquence(S) </label>
-                                  <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
-                              </td>
-                            </ng-container>
-                        </tr>
-                    </table>
-                  </form>
+                  <div class="col-md-6 grid-margin">
+                    <form [formGroup]="formQuantiteDejeuner">
+                      <div formArrayName="inputQuantiteDejeuner">
+                        <div
+                          *ngFor="let item of inputQuantiteDejeuner.controls; let i = index" [formGroupName]="i"
+                        >
+                          <label>Aliment  - {{i + 1}} : Déjeuner</label>
+                            <div class="row">
+                              <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationDej()" min="0" />
+                              <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationDej()" min="0" />
+                            </div>
+                          </div>
+                      </div>            
+                    </form>     
                 </div>
-              </div>
-              <div class="row table-scroll-x">
-                <table >
-                  <tr> 
-                      <td>
-                          <label>Protides</label>
-                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDejeuner | number : '1.2-2'}}" disabled/> 
-                      </td>
-                      <td>
-                          <label>Lipides</label>
-                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDejeuner | number : '1.2-2'}}" disabled/> 
-                      </td>
-                      <td>
-                          <label>Glucides</label>
-                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDejeuner | number : '1.2-2'}}" disabled/> 
-                      </td>
-                      <td>
-                          <label>Calories</label>
-                          <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDejeuner | number : '1.2-2'}}" disabled/> 
-                      </td>
-                      <td>
-                          <label>%Kcal</label>
-                          <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
-                      </td>
 
-                  </tr>
-              </table>
               </div>
+             
               <br>
               <!-------- Diner ---------------->
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group"> 
                     <h3 class="font-weight-500 mb-xl-4 text-primary"> Diner </h3>
-                        <ng-select class="form-control" [multiple]="true" [virtualScroll]="true" [(ngModel)]="selectedDiner" name="selectedDiner" (change)="addInputsDiner()">
-                            <ng-option *ngFor="let item of alimService.listAliments"
+                  <ng-select 
+                  placeholder="Choisir un aliment "
+                  class="form-control" 
+                  [multiple]="true"
+                   [virtualScroll]="true" 
+                   [(ngModel)]="selectedDiner" 
+                   name="selectedDiner" 
+                   (add)="addInputsQuantiteDiner()"
+                   (remove)="onRemovediner()" 
+                   (clear)="resetSelectdiner()">
+                      <ng-option *ngFor="let item of alimService.listAliments" 
 value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
 /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
 /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
 /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
-                        </ng-select>
+                  </ng-select>
                   </div>
                 </div>
-              
-              <div class="col-md-6 table-freq-quant-inputs">
-                <form [formGroup]="formQuantiteDiner">
-                  <table>
-                    <!--Quantite-->
-                      <tr> 
-                        <ng-container formArrayName="inputQuantiteDiner" *ngFor ="let item of inputQuantiteDiner.controls; let i = index">
-                          <td >
-                              <label>Quantité(g)</label>
-                                  <input  class="form-control enquete-input" [formControlName]="i" placeholder="Quantité" min="0"/>
-                          </td>
-                        </ng-container>
-                      </tr>
-                        <!--Fréquence-->
-                      <tr> 
-                          <ng-container formArrayName="inputFrequenceDiner" *ngFor ="let item of inputFrequenceDiner.controls; let i = index">
-                            <td >
-                              <label>Fréquence(S) </label>
-                                <input  class="form-control enquete-input" [formControlName]="i" placeholder="Fréquence" min="0"/>
-                            </td>
-                          </ng-container>
-                      </tr>
-                  </table>
-                </form>
+                <div class="col-md-6 grid-margin">
+                  <form [formGroup]="formQuantiteDiner">
+                    <div formArrayName="inputQuantiteDiner">
+                      <div
+                        *ngFor="let item of inputQuantiteDiner.controls; let i = index" [formGroupName]="i"
+                      >
+                        <label>Aliment  - {{i + 1}} : Diner</label>
+                          <div class="row">
+                            <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationDiner()" min="0" />
+                            <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationDiner()" min="0" />
+                          </div>
+                        </div>
+                    </div>            
+                  </form>     
               </div>
-            </div>
-            <div class="row table-scroll-x">
-              <table>
-                <tr> 
-                    <td>
-                        <label>Protides</label>
-                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDiner | number : '1.2-2'}}" disabled/> 
-                    </td>
-                    <td>
-                        <label>Lipides</label>
-                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDiner | number : '1.2-2'}}" disabled/> 
-                    </td>
-                    <td>
-                        <label>Glucides</label>
-                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDiner | number : '1.2-2'}}" disabled/> 
-                    </td>
-                    <td>
-                        <label>Calories</label>
-                        <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDiner | number : '1.2-2'}}" disabled/> 
-                    </td>
-                    <td>
-                        <label>%Kcal</label>
-                        <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
-                    </td>
 
-                </tr>
-            </table>
             </div>
-            
+          
             <br>
             <!---------------- Totaux ---------------->
             <div class="row">
@@ -796,10 +773,12 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                               <label>Calories</label>
                               <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieT | number : '1.2-2'}}" disabled/> 
                           </td>
+                          <!--
                           <td>
                               <label>%Kcal</label>
                               <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorieT/100 | number : '1.2-2'}}" disabled/> 
                           </td>
+                          -->
       
                       </tr>
                   </table>
@@ -808,7 +787,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
             
             <!--Button Calculer-->
             <div class="text-center">
-              <button type="button" class="btn btn-inverse-info btn-fw" (click)="onCalcule()"> Calculer</button>
+              <button type="button" class="btn btn-inverse-info btn-fw" (click)="onCalcule()" [disabled]="verificationDisabledButtonCalculer()"> Calculer</button>
             </div>
               </div>
             </div>
@@ -818,13 +797,13 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
 
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"> 
-                <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewTroubleTCA()"><i class="mdi mdi-page-first"></i></button>
+                <button type="button" title="Précedent" class="btn btn-inverse-danger btn-icon" (click)="changeViewInfoPoidsTaille()"><i class="mdi mdi-page-first"></i></button>
             </span>
 
             <!--Button Confirmer-->
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
               <div class="text-center">
-                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="monform.invalid">Confirmer</button>
+                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="verificationDisabledButtonConfirm()">Confirmer</button>
                 </div>
           </span>
   
@@ -849,7 +828,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
             <!--button type="button" class="btn btn-inverse-primary btn-fw"> <i class="mdi mdi-swap-horizontal"></i>Modifier </button-->                        
             <button type="button" class="btn btn-inverse-danger btn-fw" mwlConfirmationPopover 
             (confirm)="onDelete(this.patService.idPatient)"
-            popoverTitle="Êtes-vous sûr de vouloir supprimer ce Dossier ?"> <i class="mdi mdi-delete-forever" ></i>Supprimer </button>  
+            popoverTitle="Supprimer ce Dossier ?"> <i class="mdi mdi-delete-forever" ></i>Supprimer </button>  
           </div>
           <br>
 
@@ -905,9 +884,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                             <li > <p class="mb-2 mb-xl-0"><span class="iconify text-primary" data-icon="gis:pin-earth"></span> &nbsp; Origine : {{this.patService.PatientById.patToureTaille}}</p></li>
                             <li > <h3 class="font-weight-500 mb-xl-4 text-primary"> IMC : {{this.patService.PatientById.patImc | number: '1.2-2' }}</h3></li>
                             <li ><h3 class="card-title"> Motif de consultation :</h3>  {{this.patService.PatientById.patMotifConsultation}} </li>
-      
                         </ul>               
-            
                       </div>
                     </div>
                   </div>
@@ -1150,7 +1127,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                   </div>
                 </div>
                 <!--------------------------------------------------->
-                <!--Enquete Alimentaire-->
+                <!-- Affichage Enquete Alimentaire-->
                 <div class="tab-pane fade" id="pills-enqueteAlimentaire" role="tabpanel" aria-labelledby="pills-contact-tab">
                   <div class="media">
                     <div class="media-body">
@@ -1170,31 +1147,128 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                           <tbody> 
                             <tr>
                               <td> <b>Petit-déjeuner</b></td>
-                              <td>{{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }}</td>
-                              <td>{{ listResultatEnquetebyId.ptDejLipide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.ptDejGluicide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.ptDejCalorie  | number : '1.2-2' }}</td>
+                              <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejProtide <= 10 || listResultatEnquetebyId.ptDejProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejProtide <= 10 || listResultatEnquetebyId.ptDejProtide > 20)) ;else contenu_bonptDejProtide ">
+                                <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }} </span> </td>
+                               </ng-container>         
+                                <ng-template #contenu_bonptDejProtide >
+                                 <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }} </span> </td>
+                                </ng-template>
+
+                                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejLipide <= 35 || listResultatEnquetebyId.ptDejLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejLipide <= 35 || listResultatEnquetebyId.ptDejLipide > 40)) ;else contenu_bonptDejLipide ">
+                                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejLipide | number : '1.2-2' }} </span> </td>
+                                 </ng-container>         
+                                  <ng-template #contenu_bonptDejLipide >
+                                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejLipide | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+
+                                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejGluicide <= 40 || listResultatEnquetebyId.ptDejGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejGluicide <= 40 || listResultatEnquetebyId.ptDejGluicide > 55)) ;else contenu_bonptDejGluicide ">
+                                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejGluicide | number : '1.2-2' }} </span> </td>
+                                   </ng-container>         
+                                    <ng-template #contenu_bonptDejGluicide >
+                                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejGluicide | number : '1.2-2' }} </span> </td>
+                                    </ng-template>
+
+                                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejCalorie <= 1995 || listResultatEnquetebyId.ptDejCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejCalorie <= 2470 || listResultatEnquetebyId.ptDejCalorie > 2730)) ;else contenu_bonptDejCalorie ">
+                                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejCalorie | number : '1.2-2' }} </span> </td>
+                                    </ng-container>         
+                                    <ng-template #contenu_bonptDejCalorie >
+                                      <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejCalorie | number : '1.2-2' }} </span> </td>
+                                    </ng-template>
+
                             </tr>
                             <tr>
                               <td> <b>Déjeuner</b></td>
-                              <td>{{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }}</td>
-                              <td>{{ listResultatEnquetebyId.dejLipide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.dejGluicide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.dejCalorie  | number : '1.2-2' }}</td>
+                              <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejProtide <= 10 || listResultatEnquetebyId.dejProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejProtide <= 10 || listResultatEnquetebyId.dejProtide > 20)) ;else contenu_bondejProtide ">
+                                <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }} </span> </td>
+                               </ng-container>         
+                                <ng-template #contenu_bondejProtide >
+                                 <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }} </span> </td>
+                                </ng-template>
+
+                                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejLipide <= 35 || listResultatEnquetebyId.dejLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejLipide <= 35 || listResultatEnquetebyId.dejLipide > 40)) ;else contenu_bondejLipide ">
+                                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejLipide | number : '1.2-2' }} </span> </td>
+                                 </ng-container>         
+                                  <ng-template #contenu_bondejLipide >
+                                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejLipide | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+
+                                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejGluicide <= 40 || listResultatEnquetebyId.dejGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejGluicide <= 40 || listResultatEnquetebyId.dejGluicide > 55)) ;else contenu_bondejGluicide ">
+                                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejGluicide | number : '1.2-2' }} </span> </td>
+                                   </ng-container>         
+                                    <ng-template #contenu_bondejGluicide >
+                                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejGluicide | number : '1.2-2' }} </span> </td>
+                                    </ng-template>
+
+                                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejCalorie <= 1995 || listResultatEnquetebyId.dejCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejCalorie <= 2470 || listResultatEnquetebyId.dejCalorie > 2730)) ;else contenu_bondejCalorie ">
+                                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejCalorie | number : '1.2-2' }} </span> </td>
+                                    </ng-container>         
+                                    <ng-template #contenu_bondejCalorie >
+                                      <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejCalorie | number : '1.2-2' }} </span> </td>
+                                    </ng-template>
+
                             </tr>
                             <tr>
                               <td> <b>Diner</b></td>
-                              <td>{{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }}</td>
-                              <td>{{ listResultatEnquetebyId.dinerLipide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.dinerGluicide  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.dinerCalorie  | number : '1.2-2' }}</td>
+                              <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerProtide <= 10 || listResultatEnquetebyId.dinerProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerProtide <= 10 || listResultatEnquetebyId.dinerProtide > 20)) ;else contenu_bondinerProtide ">
+                                <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }} </span> </td>
+                               </ng-container>         
+                                <ng-template #contenu_bondinerProtide >
+                                 <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }} </span> </td>
+                                </ng-template>
+
+                                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerLipide <= 35 || listResultatEnquetebyId.dinerLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerLipide <= 35 || listResultatEnquetebyId.dinerLipide > 40)) ;else contenu_bondinerLipide ">
+                                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerLipide | number : '1.2-2' }} </span> </td>
+                                 </ng-container>         
+                                  <ng-template #contenu_bondinerLipide >
+                                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerLipide | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+
+                                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerGluicide <= 40 || listResultatEnquetebyId.dinerGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerGluicide <= 40 || listResultatEnquetebyId.dinerGluicide > 55)) ;else contenu_bondinerGluicide ">
+                                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerGluicide | number : '1.2-2' }} </span> </td>
+                                   </ng-container>         
+                                    <ng-template #contenu_bondinerGluicide >
+                                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerGluicide | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+                                
+                                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerCalorie <= 1995 || listResultatEnquetebyId.dinerCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerCalorie <= 2470 || listResultatEnquetebyId.dinerCalorie > 2730)) ;else contenu_bondinerCalorie ">
+                                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerCalorie | number : '1.2-2' }} </span> </td>
+                                  </ng-container>         
+                                  <ng-template #contenu_bondinerCalorie >
+                                    <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerCalorie | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+
                             </tr>
                             <tr>
-                              <td> <b>Totaux</b></td>
-                              <td>{{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }}</td>
-                              <td>{{ listResultatEnquetebyId.lipidesG100G  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.glucidesG100G  | number : '1.2-2'  }}</td>
-                              <td>{{ listResultatEnquetebyId.energieKcal100G  | number : '1.2-2' }}</td>
+                              <td> <b>Totaux ( pourcentage calorique )</b></td>
+                              <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20)) ;else contenu_bonproteinesG100G ">
+                                <td> <span style="color: red;" > {{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }} </span> </td>
+                               </ng-container>         
+                                <ng-template #contenu_bonproteinesG100G >
+                                 <td> <span style="color: green;"> {{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }} </span> </td>
+                                </ng-template>
+                                
+                                
+                                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.lipidesG100G <= 35 || listResultatEnquetebyId.lipidesG100G > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.lipidesG100G <= 35 || listResultatEnquetebyId.lipidesG100G > 40)) ;else contenu_bonlipidesG100G ">
+                                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.lipidesG100G | number : '1.2-2' }} </span> </td>
+                                 </ng-container>         
+                                  <ng-template #contenu_bonlipidesG100G >
+                                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.lipidesG100G | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+                                
+                                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.glucidesG100G <= 40 || listResultatEnquetebyId.glucidesG100G > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.glucidesG100G <= 40 || listResultatEnquetebyId.glucidesG100G > 55)) ;else contenu_bonglucidesG100G ">
+                                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.glucidesG100G | number : '1.2-2' }} </span> </td>
+                                   </ng-container>         
+                                  <ng-template #contenu_bonglucidesG100G >
+                                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.glucidesG100G | number : '1.2-2' }} </span> </td>
+                                  </ng-template>
+
+                                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.energieKcal100G <= 1995 || listResultatEnquetebyId.energieKcal100G > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.energieKcal100G <= 2470 || listResultatEnquetebyId.energieKcal100G > 2730)) ;else contenu_bonenergieKcal100G ">
+                                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.energieKcal100G | number : '1.2-2' }} </span> </td>
+                                </ng-container>         
+                                <ng-template #contenu_bonenergieKcal100G >
+                                  <td> <span style="color: green;"> {{ listResultatEnquetebyId.energieKcal100G | number : '1.2-2' }} </span> </td>
+                                </ng-template>
+
                             </tr>
                                
                           </tbody>
@@ -1213,92 +1287,199 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                         </thead>
                         <tbody> 
                           <tr>
-                            <td> <b>EauG</b></td>
-                            <td> {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }}</td>
-                            <td> <b>SodiumMg</b></td>
-                            <td> {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }}</td>                  
+                            <td> <b>Eau (g) </b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.eauG100G <= 1900 || listResultatEnquetebyId.eauG100G > 2100  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.eauG100G <= 2375 || listResultatEnquetebyId.eauG100G > 2625)) ;else contenu_boneauG100G ">
+                             <td> <span style="color: red;" > {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                             <ng-template #contenu_boneauG100G >
+                              <td> <span style="color: green;"> {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }} </span> </td>
+                             </ng-template>
+
+                            <td> <b>Sodium (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.sodiumMg100G > 2100  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.sodiumMg100G > 2625)) ;else contenu_bonsodiumMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonsodiumMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template> 
                           </tr>
 
                           <tr>
-                            <td> <b>FibresAlimentairesG</b></td>
-                            <td> {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </td>
-                            <td> <b>ZincMg</b></td>
-                            <td> {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }}</td>  
+                            <td> <b>Fibres Alimentaires (g)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.fibresAlimentairesG100G <= 30  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.fibresAlimentairesG100G <= 30)) ;else contenu_bonfibresAlimentairesG100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                            <ng-template #contenu_bonfibresAlimentairesG100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </span> </td>
+                            </ng-template> 
+
+
+                            <td> <b>Zinc (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.zincMg100G <= 11  || listResultatEnquetebyId.zincMg100G > 25  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.zincMg100G <= 14 || listResultatEnquetebyId.zincMg100G > 25 )) ;else contenu_bonzincMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                            <ng-template #contenu_bonzincMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template> 
                           </tr>
                           <tr>
-                            <td> <b>AlcoolG</b></td>
+                            <td> <b>Alcool (g)</b></td>
                             <td>{{ listResultatEnquetebyId.alcoolG100G | number : '1.2-2' }} </td>
-                            <td> <b>RetinolΜg</b></td>
+                            <td> <b>Retinol (mg)</b></td>
                             <td>{{ listResultatEnquetebyId.retinolmg100G | number : '1.2-2' }} </td>  
                           </tr>
                           <tr>
-                            <td> <b>AgSaturésG</b></td>
-                            <td> {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }}</td>
-                            <td> <b>VitamineDΜg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </td>  
+                            <td> <b>AgSaturés (g)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.agSaturesG100G > 12   )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.agSaturesG100G > 12 )) ;else contenu_bonagSaturesG100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                            <ng-template #contenu_bonagSaturesG100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+                            <td> <b>Vitamine D (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineDmg100G < 15 || listResultatEnquetebyId.vitamineDmg100G > 50  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineDmg100G <=15 || listResultatEnquetebyId.vitamineDmg100G > 50)) ;else contenu_bonvitamineDmg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonvitamineDmg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template>
                           </tr>
                           <tr>
-                            <td> <b>AgMonoinsaturésG</b></td>
+                            <td> <b>AgMonoinsaturés (g)</b></td>
                             <td> {{ listResultatEnquetebyId.agMonoinsaturesG100G | number : '1.2-2' }}</td>
-                            <td> <b>VitamineEMg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </td>  
+                            <td> <b>Vitamine E (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineEMg100G > 300  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineEMg100G > 300)) ;else contenu_bonvitamineEMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonvitamineEMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template>
+                            
                           </tr>
                           <tr>
-                            <td> <b>AgPolyinsaturésG</b></td>
+                            <td> <b>AgPolyinsaturés (g)</b></td>
                             <td>{{ listResultatEnquetebyId.agPolyinsaturesG100G | number : '1.2-2' }} </td>
-                            <td> <b>VitamineK1Μg</b></td>
+                            <td> <b>Vitamine K1 (mg)</b></td>
                             <td> {{ listResultatEnquetebyId.vitamineK1mg100G | number : '1.2-2' }}</td>  
                           </tr>
                           <tr>
-                            <td> <b>AgW6G100G </b></td>
+                            <td> <b>AgW6G (g) </b></td>
                             <td> {{ listResultatEnquetebyId.agW6G100G | number : '1.2-2' }}</td>
-                            <td> <b>VitamineCMg</b></td>
-                            <td> {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }}</td>  
+                            <td> <b>Vitamine C (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000)) ;else contenu_bonvitamineCMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonvitamineCMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template>
                           </tr>
                           <tr>
-                            <td> <b>AgW3G</b></td>
+                            <td> <b>AgW3 (g)</b></td>
                             <td> {{ listResultatEnquetebyId.agW3G100G | number : '1.2-2' }}</td>
                             <td> <b>VitamineB1Mg</b></td>
-                            <td> {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }}</td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058 )) ;else contenu_bonvitamineB1Mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonvitamineB1Mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template> 
                           </tr>
                           <tr>
-                            <td> <b>CholestérolMg</b></td>
+                            <td> <b>Cholestérol (mg)</b></td>
                             <td>{{ listResultatEnquetebyId.cholesterolMg100G | number : '1.2-2' }} </td>
                             <td> <b>VitamineB2Mg</b></td>
-                            <td> {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }}</td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071 )) ;else contenu_bonvitamineB2Mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }} </span> </td>
+                             </ng-container>         
+                              <ng-template #contenu_bonvitamineB2Mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }} </span> </td>
+                              </ng-template>
                           </tr>
                           <tr>
-                            <td> <b>CalciumMg</b></td>
-                            <td> {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }}</td>
+                            <td> <b>Calcium (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.calciumMg100G <= 1000 || listResultatEnquetebyId.calciumMg100G > 2500  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.calciumMg100G <=1000 || listResultatEnquetebyId.calciumMg100G > 2500)) ;else contenu_boncalciumMg100G">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_boncalciumMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+
                             <td> <b>VitamineB3Mg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <= 0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <=0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900)) ;else contenu_bonvitamineB3Mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonvitamineB3Mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
                           </tr>
                           <tr>
-                            <td> <b>CuivreMg</b></td>
-                            <td> {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }}</td>
+                            <td> <b>Cuivre (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.cuivreMg100G <= 1 || listResultatEnquetebyId.cuivreMg100G > 5  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.cuivreMg100G <=1.25 || listResultatEnquetebyId.cuivreMg100G > 5)) ;else contenu_boncuivreMg100G">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_boncuivreMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+
                             <td> <b>VitamineB5Mg</b></td>
                             <td>{{ listResultatEnquetebyId.vitamineB5Mg100G | number : '1.2-2' }} </td>  
                           </tr>
                           <tr>
-                            <td> <b>FerMg</b></td>
-                            <td>{{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </td>
+                            <td> <b>Fer (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ferMg100G <= 16  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ferMg100G <=11)) ;else contenu_bonferMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonferMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+
+
                             <td> <b>VitamineB6Mg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <= 1.5 || listResultatEnquetebyId.vitamineB6Mg100G > 25  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <=1.8 || listResultatEnquetebyId.vitamineB6Mg100G > 25)) ;else contenu_bonvitamineB6Mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonvitamineB6Mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+
                           </tr>
                           <tr>
-                            <td> <b>MagnesiumMg</b></td>
-                            <td> {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }}</td>
+                            <td> <b>Magnesium (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.magnesiumMg100G <= 360  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.magnesiumMg100G <=420)) ;else contenu_bonmagnesiumMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonmagnesiumMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>
+
                             <td> <b>VitamineB9Μg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB9mg100G <= 330  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB9mg100G <=330)) ;else contenu_bonvitamineB9mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonvitamineB9mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template> 
+
                           </tr>
                           <tr>
-                            <td> <b>PhosphoreMg</b></td>
-                            <td> {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }}</td>
+                            <td> <b>Phosphore (mg)</b></td>
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.phosphoreMg100G <= 700  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.phosphoreMg100G <=700)) ;else contenu_bonphosphoreMg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonphosphoreMg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template> 
+
                             <td> <b>VitamineB12Μg</b></td>
-                            <td>{{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </td>  
+                            <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB12mg100G <= 4  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB12mg100G <=4)) ;else contenu_bonvitamineB12mg100G ">
+                              <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-container>         
+                            <ng-template #contenu_bonvitamineB12mg100G >
+                               <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </span> </td>
+                            </ng-template>  
                           </tr>
                           <tr>
-                            <td> <b>PotassiumMg</b></td>
+                            <td> <b>Potassium (mg)</b></td>
                             <td> {{ listResultatEnquetebyId.potassiumMg100G | number : '1.2-2' }}</td>
                             <td> </td>
                             <td> </td>  

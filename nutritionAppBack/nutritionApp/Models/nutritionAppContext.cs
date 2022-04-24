@@ -27,6 +27,7 @@ namespace nutritionApp.Models
         public virtual DbSet<ResultatEnquete> ResultatEnquetes { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Utilisateur> Utilisateurs { get; set; }
+        public virtual DbSet<ContrainteAlimentaire> ContrainteAlimentaires { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -628,6 +629,25 @@ namespace nutritionApp.Models
                 entity.Property(e => e.UtiRole).HasColumnName("uti_role");
             });
 
+
+            modelBuilder.Entity<ContrainteAlimentaire>(entity =>
+            {
+                entity.HasKey(e => e.Con_id);
+
+                entity.ToTable("contrainte_alimentaire");
+
+                entity.Property(e => e.Con_id).HasColumnName("con_id");
+
+                entity.Property(e => e.Con_nutriment)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("con_nutriment");
+
+                entity.Property(e => e.Con_homme_inf).HasColumnName("con_homme_inf");
+                entity.Property(e => e.Con_femme_inf).HasColumnName("con_femme_inf");
+                entity.Property(e => e.Con_homme_sup).HasColumnName("con_homme_sup");
+                entity.Property(e => e.Con_femme_sup).HasColumnName("con_femme_sup");
+            });
             OnModelCreatingPartial(modelBuilder);
         }
 

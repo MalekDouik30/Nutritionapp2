@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     // Initialize some variables that the user does not suppose to give them when registering 
     const date = new Date()
     this.service.fromData.utiDateCreation = this.datePipe.transform(date,"yyyy-MM-dd")||'{}';
-    this.service.fromData.utiEtat=false
+    this.service.fromData.utiEtat=true
     this.service.fromData.utiRole=2 //  By default we assign role 2 which is a normal user to someone who uses the "register" interface to register for the platform and if we want to change the role it's up to the admin to assign it a new role 
 
     this.service.addUtilisateur().subscribe(

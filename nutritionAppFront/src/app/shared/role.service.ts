@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { Role } from './role';
 
 
@@ -11,7 +11,7 @@ import { Role } from './role';
 export class RoleService {
 
   constructor(public http:HttpClient) { }
-  readonly baseURL = data.back_webservices.role_url;
+  readonly baseURL = environment.role_url;
   listRole : Role[] | undefined;
   fromData:Role = new Role();
 

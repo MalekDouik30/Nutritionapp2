@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\moham\Documents\workspace\nutritionApp-testDeploy\nutritionAppBack\nutritionApp\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2022-04-16T14:04:41.1985348Z;True|2022-04-14T02:38:01.7902445+01:00;True|2022-04-14T01:49:47.0515079+01:00;True|2022-04-14T01:38:30.8899343+01:00;True|2022-04-14T01:12:16.2716794+01:00;</History>
+  </PropertyGroup>
+</Project>

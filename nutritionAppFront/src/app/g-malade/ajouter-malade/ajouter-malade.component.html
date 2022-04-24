@@ -129,9 +129,21 @@
               Entrez une adresse e-mail valide!
             </div>
           </div>
-          </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+              <label>Motif de consultation </label>
+              <input type="text" class="form-control form-control-lg" placeholder="Motif de consultation" #motifConsultation="ngModel"
+              [(ngModel)]="patService.fromData.patMotifConsultation" name="motifConsultation" required/>
+      
+        </div>
+      </div>
+
+
+
+          <!--
           <div class="col-md-6">
-            <!--Poids-->
+            
             <div class="form-group">
               <label>Poids(Kg) <span class="error-msg">*</span> </label>
               <input type="number" class="form-control form-control-lg" placeholder="Poids(Kg)" #poids="ngModel"
@@ -142,11 +154,13 @@
               </div>
             </div>
           </div>
+        -->
     </div>
 
+    <!--
     <div class="row">
       <div class="col-md-6">
-        <!--Taille-->
+        
         <div class="form-group">
           <label>Taille <span class="error-msg">*</span> </label>
           <input type="number" class="form-control form-control-lg" placeholder="Taille" #taille="ngModel"
@@ -159,7 +173,7 @@
       </div>
 
       <div class="col-md-6">
-        <!--Tour du Taille-->
+        
         <div class="form-group">
           <label>Tour du taille <span class="error-msg">*</span> </label>
           <input type="number" class="form-control form-control-lg" placeholder="Tour du taille" #tourTaille="ngModel"
@@ -171,21 +185,9 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-group">
-        <label>Motif de consultation <span class="error-msg">*</span> </label>
-        <input type="text" class="form-control form-control-lg" placeholder="Motif de consultation" #motifConsultation="ngModel"
-        [(ngModel)]="patService.fromData.patMotifConsultation" name="motifConsultation" required/>
-
-        <div class="error-msg" *ngIf="(motifConsultation.touched || monform.submitted) && motifConsultation.errors?.required">
-          Motif de consultation est obligatoire!
-        </div>
+    -->
 
 
-
-      </div>
-
-    </div>
               
       <div class="mt-3">
           <div class="text-center">

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Parametre } from './parametre';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class ParametreService {
   
   constructor(private http:HttpClient) { }
 
-  readonly baseURL = data.back_webservices.parametre_url;
+  readonly baseURL = environment.parametre_url;
 
    listparametres : Parametre[] ;
    fromData:Parametre = new Parametre();

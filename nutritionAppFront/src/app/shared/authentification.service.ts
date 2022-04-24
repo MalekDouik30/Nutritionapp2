@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UtilisateurService } from './utilisateur.service';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthentificationService implements CanActivate {
   
   login:string
   password:string
-  readonly baseURL = data.back_webservices.utilisateur_url;
+  readonly baseURL =environment.utilisateur_url;
 
   postlogin(){
 

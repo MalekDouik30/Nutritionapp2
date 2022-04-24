@@ -5,3 +5,12 @@ td{
     word-break:break-word
 }
 
+
+.close-MatDialog {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    margin-top: -15px;
+    margin-right: 10px;
+}

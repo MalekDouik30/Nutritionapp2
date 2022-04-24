@@ -17,12 +17,11 @@ namespace nutritionApp.Controllers
     public class RendezvousController : ControllerBase
     {
         private readonly nutritionAppContext _context;
-        private IHostingEnvironment _hostingEnvironnment;
+     
 
-        public RendezvousController(nutritionAppContext context,IHostingEnvironment hostingEnvironnment)
+        public RendezvousController(nutritionAppContext context)
         {
             _context = context;
-            _hostingEnvironnment = hostingEnvironnment;
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rendezvou>>> GetRendezvous()

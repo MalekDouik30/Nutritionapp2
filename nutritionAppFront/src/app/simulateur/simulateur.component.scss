@@ -1,0 +1,30 @@
+.enquete-input{
+    padding-top: 7px;
+    padding-left: 7px;
+    padding-bottom: 7px;
+    padding-right: 7px;
+}
+
+
+
+@media screen {
+    
+}
+
+
+@media screen and (min-width: 294px) {
+    .freq-input{
+        margin-left: 15px;
+    }
+  }
+  @media screen and (max-width: 294px) {
+    .freq-input{
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+  }
+
+.margin-bottom{
+    margin-bottom: 50px;
+}
+

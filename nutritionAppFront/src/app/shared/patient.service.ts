@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import data from '../config/appSettings.json';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Patient } from './patient';
 import { UtilisateurService } from './utilisateur.service';
 @Injectable({
@@ -9,7 +10,7 @@ import { UtilisateurService } from './utilisateur.service';
 export class PatientService {
 
   constructor(public http:HttpClient,public utiService:UtilisateurService) { }
-  readonly baseURL = data.back_webservices.malade_url;
+  readonly baseURL = environment.malade_url;
 
   listPatient : Patient[];
   fromData:Patient = new Patient();
@@ -22,6 +23,8 @@ export class PatientService {
       res => {this.listPatient = res as Patient[]
     }
     )}
+
+
     
   putPatient(){return this.http.put(`${this.baseURL}/${this.fromData.patId}`, this.fromData);}
   deletePatient(id:number){return this.http.put(`${this.baseURL}/delete/${id}`, this.fromData);}
@@ -31,5 +34,10 @@ export class PatientService {
     this.http.get(`${this.baseURL}/${id}`).subscribe(
       res => {this.PatientById = res as Patient
     })
+    }
+
+
+    getPatientByIdResolver(id:Number):Observable<Patient>{
+      return this.http.get<Patient>(`${this.baseURL}/${id}`)
     }
 }

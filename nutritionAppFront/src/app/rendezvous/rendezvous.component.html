@@ -10,12 +10,12 @@
                 <div class="form-group row">
                   <table>
                     <tr>
-                      <td>
+                      <td class="filter">
                         <button type="button" class="btn btn-outline-secondary" (click)="ondisplayFilter()">
                           <i class="mdi mdi-filter"></i>
                         </button>
                         </td> 
-                      <td>
+                      <td class="filter">
                       <div class="col-sm-9">
                         <input type="text" class="form-control" placeholder="Recherche..."
                         [(ngModel)]="searchWord">                     
@@ -32,11 +32,11 @@
                
                       
                     <tr>
-                      <td><button type="button" class="close" aria-label="Close" (click)="oncloseFilter()" >
+                      <td class="filter" ><button type="button" class="close" aria-label="Close" (click)="oncloseFilter()" >
 
                         <span aria-hidden="true">&times;</span>
                     </button></td>
-                      <td>
+                      <td class="filter">
                         <div class="col-14 border-left-top-lg border-left-top-sm">
                           <div class="d-flex p-2">
                           <mat-form-field appearance="fill" class="example-full-width" >
@@ -53,7 +53,7 @@
                       </div>
                       </div>  
                       </td>
-                      <td>
+                      <td class="filter">
                         <button class="btn btn-outline-primary"> Recherche</button>
                       </td>
                     </tr>

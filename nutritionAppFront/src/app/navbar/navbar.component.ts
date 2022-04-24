@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import data from '../config/appSettings.json';
 import { UtilisateurService } from '../shared/utilisateur.service';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

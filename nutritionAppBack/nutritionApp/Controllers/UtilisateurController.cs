@@ -67,7 +67,7 @@ namespace nutritionApp.Controllers
                                 issuer: "https://localhost:44343",
                                 audience: "https://localhost:44343",
                                 claims: claims,
-                                expires: DateTime.Now.AddMinutes(30),
+                                expires: DateTime.Now.AddMinutes(120),
                                 signingCredentials: signinCredentials
                                 );
                             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

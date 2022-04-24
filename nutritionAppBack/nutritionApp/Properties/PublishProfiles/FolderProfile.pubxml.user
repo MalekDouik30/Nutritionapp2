@@ -3,4 +3,8 @@
 https://go.microsoft.com/fwlink/?LinkID=208121. 
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\nutri</_PublishTargetUrl>
+    <History>False|2022-04-14T00:10:37.6975572Z;</History>
+  </PropertyGroup>
 </Project>

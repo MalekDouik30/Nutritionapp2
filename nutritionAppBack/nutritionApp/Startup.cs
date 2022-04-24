@@ -99,8 +99,29 @@ namespace nutritionApp
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "nutritionApp v1"));
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                //for deploy
+               app.UseHsts(); 
+            }
 
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+
+
+            app.UseCors("EnableCORS");
             app.UseHttpsRedirection();
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -108,6 +129,13 @@ namespace nutritionApp
             {
                 endpoints.MapControllers();
             });
+
+       
+
+
+
+
+
 
         }
 

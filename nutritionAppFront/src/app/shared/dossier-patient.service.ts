@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { DossierPatient } from './dossierPatient';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DossierPatientService {
 
   constructor(private http:HttpClient) { }
 
-  readonly baseURL = data.back_webservices.dossierPatient_url;
+  readonly baseURL = environment.dossierPatient_url;
 
    listDossierPatient : DossierPatient[] ;
    fromDataDossierPatient:DossierPatient = new DossierPatient();

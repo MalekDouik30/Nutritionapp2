@@ -5,6 +5,7 @@ import { PatientService } from '../shared/patient.service';
 import { Remarque } from '../shared/remarque';
 import { RemarqueService } from '../shared/remarque.service';
 import { DatePipe } from '@angular/common'
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-remarque',
   templateUrl: './remarque.component.html',
@@ -12,7 +13,12 @@ import { DatePipe } from '@angular/common'
 })
 export class RemarqueComponent implements OnInit {
 
-  constructor(public patService:PatientService,public remService:RemarqueService,public toaster:ToastrService,public datepipe: DatePipe) { }
+  constructor(
+    public patService:PatientService,
+    public remService:RemarqueService,
+    public toaster:ToastrService,
+    public datepipe: DatePipe,
+    public dialog:MatDialog) { }
   importance:string
   searchWord=""
   p :number = 1; // paginator
@@ -66,6 +72,9 @@ export class RemarqueComponent implements OnInit {
   ngOnInit(): void {
     this.remService.getRemarque(this.patService.idPatient)
   }
+
+  closeDialog(){
+    this.dialog.closeAll();  }
 
   
 }

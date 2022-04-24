@@ -13,14 +13,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { NgxMatSelectSearchModule }from 'ngx-mat-select-search'; // npm install ngx-mat-select-search
 import { RouterModule, Routes } from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination'; 
-import { NgxMatDatetimePickerModule, 
-  NgxMatTimepickerModule } from '@angular-material-components/datetime-picker'; // Date time Picker
+import { NgxMatDatetimePickerModule,NgxMatTimepickerModule } from '@angular-material-components/datetime-picker'; // Date time Picker
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker'; // datePicker
 import {MatNativeDateModule} from '@angular/material/core'; //  datePicker
 /* Select option search*/ 
 import { NgSelectModule } from '@ng-select/ng-select'; // npm i @ng-select/ng-select@7.1.1
+import { MatSelectFilterModule } from 'mat-select-filter'; // npm i mat-select-filter
+
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -53,6 +54,7 @@ import { GDossierMalade2Component } from './g-dossier-malade2/g-dossier-malade2.
 import {RendezvousComponent  } from './rendezvous/rendezvous.component';
 import { AddRendezvousComponent } from './g-rendezvous/add-rendezvous/add-rendezvous.component';
 import { AddrendezvousComponent } from './rendezvous/addrendezvous/addrendezvous.component';
+import { SimulateurComponent } from './simulateur/simulateur.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,7 @@ import { AddrendezvousComponent } from './rendezvous/addrendezvous/addrendezvous
     GDossierMaladeComponent,
     RemarqueComponent,
     GDossierMalade2Component,   
-    RendezvousComponent, AddRendezvousComponent, AddrendezvousComponent, 
+    RendezvousComponent, AddRendezvousComponent, AddrendezvousComponent, SimulateurComponent, 
   ],
   imports: [
     BrowserModule,
@@ -111,6 +113,7 @@ import { AddrendezvousComponent } from './rendezvous/addrendezvous/addrendezvous
     NgSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectFilterModule,
   ],
   providers: [DatePipe,GUtilisateurComponent,NgxMatSelectSearchModule],
   bootstrap: [AppComponent],

@@ -1,0 +1,309 @@
+<app-header></app-header>
+<div class="main-panel">
+    <div class="container-scroller">
+        <app-navbar></app-navbar>
+        <div class="content-wrapper pb-0">
+        <div class="">
+            <div class="header-left">
+              <h2>Simulateur alimentaire </h2>
+              <div class="card">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <!--------Petit Déj ---------------------------------------------------------------------->
+                    <div class="row">
+            
+                      <div class="col-md-6 grid-margin">
+                        <div class="form-group"> 
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Petit-déjeuner </h3>
+                              <ng-select 
+                              placeholder="Choisir un aliment "
+                              class="form-control" 
+                              [multiple]="true"
+                               [virtualScroll]="true" 
+                               [(ngModel)]="selectedpetitDejeuner" 
+                               name="selectedpetitDejeuner" 
+                               (add)="addInputsQuantitePetitDej()"
+                               (remove)="onRemovePtdj()" 
+                               (clear)="resetSelectPtdj()">
+            
+                                  <ng-option *ngFor="let item of alimService.listAliments" 
+            value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+            /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+            /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+            /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                              </ng-select>
+                        </div>
+                      </div>
+            
+                      <div class="col-md-6 grid-margin">
+                        <form [formGroup]="formQuantitePetitDejeuner">
+                          <div formArrayName="inputQuantitePetitDejeuner">
+                            <div
+                              *ngFor="let item of inputQuantitePetitDejeuner.controls; let i = index" [formGroupName]="i"
+                            >
+                              <label>Aliment  - {{i + 1}} : Petit-déjeuner</label>
+                                <div class="row">
+                                  <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationPetiDej()" min="0" />
+                                  <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationPetiDej()" min="0" />
+                                </div>
+                              </div>
+                          </div>            
+                        </form>     
+                    </div>
+                    </div>
+
+                    <div class="row table-scroll-x">
+                      <table>
+                        <tr> 
+                            <td>
+                                <label>Protides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtidePetitDej | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Lipides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipidePetitDej | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Glucides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucidePetitDej | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Calories</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCaloriePetitDej | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <!--
+                            <td>
+                                <label>%Kcal</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorie | number : '1.2-2'}}" disabled/> 
+                              </td>
+                            -->
+    
+                        </tr>
+                    </table>
+                    </div> <br>
+
+            
+                     <!-------- Déj ----------------------------------------------------------------------->
+                     <div class="row">
+                      <div class="col-md-6 grid-margin">
+                        <div class="form-group"> 
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Déjeuner </h3>
+                              <ng-select 
+                              placeholder="Choisir un aliment "
+                              class="form-control" 
+                              [multiple]="true"
+                               [virtualScroll]="true" 
+                               [(ngModel)]="selectedDejeuner" 
+                               name="selectedDejeuner" 
+                               (add)="addInputsQuantiteDej()"
+                               (remove)="onRemovedj()" 
+                               (clear)="resetSelectdj()">
+            
+                                  <ng-option *ngFor="let item of alimService.listAliments" 
+            value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+            /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+            /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+            /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                              </ng-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 grid-margin">
+                        <form [formGroup]="formQuantiteDejeuner">
+                          <div formArrayName="inputQuantiteDejeuner">
+                            <div
+                              *ngFor="let item of inputQuantiteDejeuner.controls; let i = index" [formGroupName]="i"
+                            >
+                              <label>Aliment  - {{i + 1}} : Déjeuner</label>
+                                <div class="row">
+                                  <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationDej()" min="0" />
+                                  <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationDej()" min="0" />
+                                </div>
+                              </div>
+                          </div>            
+                        </form>     
+                    </div>
+                    </div>
+
+                    <div class="row table-scroll-x">
+                      <table >
+                        <tr> 
+                            <td>
+                                <label>Protides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDejeuner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Lipides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDejeuner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Glucides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDejeuner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Calories</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDejeuner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <!--
+                            <td>
+                                <label>%Kcal</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            -->
+      
+                        </tr>
+                    </table>
+                    </div>
+                    <br>
+            
+                    <!-------- Diner -------------------------------------------------------------------------------------->
+                    <div class="row">
+                      <div class="col-md-6 grid-margin">
+                        <div class="form-group"> 
+                          <h3 class="font-weight-500 mb-xl-4 text-primary"> Diner </h3>
+                              <ng-select 
+                              placeholder="Choisir un aliment "
+                              class="form-control" 
+                              [multiple]="true"
+                               [virtualScroll]="true" 
+                               [(ngModel)]="selectedDiner" 
+                               name="selectedDiner" 
+                               (add)="addInputsQuantiteDiner()"
+                               (remove)="onRemovediner()" 
+                               (clear)="resetSelectdiner()">
+            
+                                  <ng-option *ngFor="let item of alimService.listAliments" 
+            value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{item.proteinesG100G}}/{{item.eauG100G}}/{{item.fibresAlimentairesG100G}}/{{item.alcoolG100G}}/{{item.agSaturesG100G}}
+            /{{item.agMonoinsaturesG100G}}/{{item.agPolyinsaturesG100G}}/{{item.agW6G100G}}/{{item.agW3G100G}}/{{item.cholesterolMg100G}}/{{item.calciumMg100G}}/{{item.cuivreMg100G}}/{{item.ferMg100G}}/{{item.magnesiumMg100G}}
+            /{{item.phosphoreMg100G}}/{{item.potassiumMg100G}}/{{item.sodiumMg100G}}/{{item.zincMg100G}}/{{item.retinolmg100G}}/{{item.vitamineDmg100G}}/{{item.vitamineEMg100G}}/{{item.vitamineK1mg100G}}/{{item.vitamineCMg100G}}
+            /{{item.vitamineB1Mg100G}}/{{item.vitamineB2Mg100G}}/{{item.vitamineB3Mg100G}}/{{item.vitamineB5Mg100G}}/{{item.vitamineB6Mg100G}}/{{item.vitamineB9mg100G}}/{{item.vitamineB12mg100G}}+">{{item.alimNomFr}}</ng-option>
+                              </ng-select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 grid-margin">
+                        <form [formGroup]="formQuantiteDiner">
+                          <div formArrayName="inputQuantiteDiner">
+                            <div
+                              *ngFor="let item of inputQuantiteDiner.controls; let i = index" [formGroupName]="i"
+                            >
+                              <label>Aliment  - {{i + 1}} : Diner</label>
+                                <div class="row">
+                                  <input type="number" class="form-control enquete-input" formControlName="qte" placeholder="Quantité" (change)="verificationDiner()" min="0" />
+                                  <input type="number" class="form-control enquete-input freq-input" formControlName="freq" placeholder="Fréquance" (change)="verificationDiner()" min="0" />
+                                </div>
+                              </div>
+                          </div>            
+                        </form>     
+                    </div>
+                    </div>
+
+                    <div class="row table-scroll-x">
+                      <table>
+                        <tr> 
+                            <td>
+                                <label>Protides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideDiner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Lipides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideDiner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Glucides</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideDiner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <td>
+                                <label>Calories</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieDiner | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            <!--
+                            <td>
+                                <label>%Kcal</label>
+                                <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorie/100 | number : '1.2-2'}}" disabled/> 
+                            </td>
+                            -->
+        
+                        </tr>
+                    </table>
+                    </div>
+                    <br>
+
+                    <!---------------- Totaux ---------------->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group"> 
+                  <h3 class="font-weight-500 mb-xl-4 text-primary"> Totaux % calorique </h3>
+            </div>
+            </div>
+            </div>
+
+            <div class="row table-scroll-x">
+                    <table>
+                      <tr> 
+                          <td>
+                              <label>Protides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleProtideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Lipides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleLipideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Glucides</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleGlucideT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <td>
+                              <label>Calories</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieT | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          <!--
+                          <td>
+                              <label>%Kcal</label>
+                              <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorieT/100 | number : '1.2-2'}}" disabled/> 
+                          </td>
+                          -->
+      
+                      </tr>
+                  </table>
+                  </div>
+            <br>   
+
+            
+            
+            
+            
+                    </div>
+            
+            
+            
+            
+            
+                    <div class="text-center">
+                      <button type="button" class="btn btn-inverse-info btn-fw margin-bottom" (click)="onCalcule()" [disabled]="verificationDisabledButton()"> Calculer</button>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+          
+          </div>
+        </div>
+      </div>
+<app-footer></app-footer>
+
+
+
+ 
+
+
+
+  
+
+ 

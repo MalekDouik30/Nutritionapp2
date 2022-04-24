@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Remarque } from './remarque';
 
@@ -9,7 +9,7 @@ import { Remarque } from './remarque';
 export class RemarqueService {
 
   constructor(private http:HttpClient) { }
-  readonly baseURL = data.back_webservices.remarque_url;
+  readonly baseURL = environment.remarque_url;
 
   listRemarqueByPatient : Remarque[] ;
   fromData:Remarque = new Remarque();

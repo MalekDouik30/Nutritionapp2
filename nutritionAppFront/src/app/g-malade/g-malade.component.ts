@@ -64,6 +64,13 @@ export class GMaladeComponent implements OnInit {
 
   ngOnInit(): void {
     this.patService.getPatient()
+    
+
+    if(localStorage.getItem('refrechComponent')=='1'){
+      window.location.reload()
+      localStorage.setItem('refrechComponent', "2")
+    }
+
   }
 
 }

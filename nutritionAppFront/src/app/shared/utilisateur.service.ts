@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Utilisateur } from './utilisateur';
 import { HttpClient} from '@angular/common/http'
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ export class UtilisateurService {
 
   constructor(public http:HttpClient) { }
 
-  readonly baseURL = data.back_webservices.utilisateur_url;
+  readonly baseURL = environment.utilisateur_url;
   listUtilisateur : Utilisateur[] | undefined;
   fromData:Utilisateur = new Utilisateur();
   dataBetweenComponent :string;

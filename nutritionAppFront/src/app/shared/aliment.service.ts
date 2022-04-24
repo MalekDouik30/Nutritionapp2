@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import data from '../config/appSettings.json';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Aliment } from './aliment';
 
@@ -9,7 +9,7 @@ import { Aliment } from './aliment';
 export class AlimentService {
 
   constructor(private http:HttpClient) { }
-  readonly baseURL = data.back_webservices.aliment_url;
+  readonly baseURL = environment.aliment_url;
 
   listAliments : Aliment[] ;
   fromData:Aliment = new Aliment();
