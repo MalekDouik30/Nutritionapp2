@@ -4,6 +4,7 @@ export class DossierPatient  {
  dosPathologies= ""
  dosAntecedentsPersonnels= ""
  dosAntecedentsFamiliaux= ""
+ dosTypeObesite=""
  dosPoidsMaximal= 0
  dosCirconstancePrisePoids= ""
  dosRegime= ""

@@ -58,6 +58,12 @@ namespace nutritionApp.Models
         public double? DinerGluicide { get; set; }
         public double? DinerCalorie { get; set; }
 
+
+        public double? GrinotageProtide { get; set; }
+        public double? GrinotageLipide { get; set; }
+        public double? GrinotageGluicide { get; set; }
+        public double? GrinotageCalorie { get; set; }
+
         public virtual Patient EnqAlimIdPatientNavigation { get; set; }
     }
 }

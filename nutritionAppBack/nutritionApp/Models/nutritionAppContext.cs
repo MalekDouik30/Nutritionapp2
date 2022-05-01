@@ -239,6 +239,11 @@ namespace nutritionApp.Models
                     .IsUnicode(false)
                     .HasColumnName("dos_cause_arret_regime");
 
+                    entity.Property(e => e.DosTypeObesite)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("dos_type_obesite");
+
                 entity.Property(e => e.DosCirconstancePrisePoids)
                     .HasMaxLength(50)
                     .IsUnicode(false)
@@ -560,6 +565,11 @@ namespace nutritionApp.Models
                 entity.Property(e => e.DinerLipide).HasColumnName("dinerLipide");
                 entity.Property(e => e.DinerGluicide).HasColumnName("dinerGluicide");
                 entity.Property(e => e.DinerCalorie).HasColumnName("dinerCalorie");
+
+                entity.Property(e => e.GrinotageProtide).HasColumnName("grinotageProtide");
+                entity.Property(e => e.GrinotageLipide).HasColumnName("grinotageLipide");
+                entity.Property(e => e.GrinotageGluicide).HasColumnName("grinotageGluicide");
+                entity.Property(e => e.GrinotageCalorie).HasColumnName("grinotageCalorie");
 
                 entity.Property(e => e.ZincMg100G).HasColumnName("Zinc (mg/100 g)");
 

@@ -11,6 +11,7 @@ namespace nutritionApp.Models
         public string DosPathologies { get; set; }
         public string DosAntecedentsPersonnels { get; set; }
         public string DosAntecedentsFamiliaux { get; set; }
+        public string DosTypeObesite { get; set; }
         public double? DosPoidsMaximal { get; set; }
         public string DosCirconstancePrisePoids { get; set; }
         public string DosRegime { get; set; }

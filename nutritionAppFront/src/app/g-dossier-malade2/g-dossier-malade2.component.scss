@@ -6,11 +6,9 @@
     transform: translate(-50%, -50%);
   }
 
-
   .card-body{
     margin-left: 20px;
   }
-
 
   .enquete-input{
     padding-top: 7px;
@@ -18,9 +16,6 @@
     padding-bottom: 7px;
     padding-right: 7px;
 }
-
-
-
 
 @media screen and (min-width: 294px) {
     .freq-input{
@@ -33,3 +28,13 @@
         margin-top: 15px;
     }
   }
+
+
+  /*Menu pour choisir un le formulaire*/
+ .center-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ 
+

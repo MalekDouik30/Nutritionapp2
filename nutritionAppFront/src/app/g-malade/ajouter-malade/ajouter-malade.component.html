@@ -120,7 +120,7 @@
         <div class="form-group">
             <label>E-mail</label>
             <input type="email" class="form-control form-control-lg" placeholder="Email" #email="ngModel"
-              [(ngModel)]="patService.fromData.patMail" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required />
+              [(ngModel)]="patService.fromData.patMail" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
             
             <div class="error-msg" *ngIf="(email.touched || monform.submitted) && email.errors?.required">
               Le champs e-mail est obligatoire!

@@ -10,7 +10,7 @@ export class Patient{
     patSexe=""
     patMail=""
     patEtat=true
-    patNutritionnisteId=""
+    patNutritionnisteId=0
     patPoids=0
     patTaille=0
     patToureTaille=0

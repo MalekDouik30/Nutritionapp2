@@ -47,6 +47,13 @@ export class ResultatEnquete{
      dinerGluicide= 0
      dinerCalorie= 0
 
+     grinotageProtide= 0
+     grinotageLipide= 0
+     grinotageGluicide= 0
+     grinotageCalorie= 0
+
+
+     
 
 
 

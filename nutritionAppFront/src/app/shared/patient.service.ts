@@ -26,13 +26,19 @@ export class PatientService {
 
 
     
-  putPatient(){return this.http.put(`${this.baseURL}/${this.fromData.patId}`, this.fromData);}
+  putPatient(){
+
+    return this.http.put(`${this.baseURL}/${this.fromData.patId}`, this.fromData);}
   deletePatient(id:number){return this.http.put(`${this.baseURL}/delete/${id}`, this.fromData);}
   addPatient(){return this.http.post(this.baseURL, this.fromData);}
  
   getPatientById(id:Number){
+  
     this.http.get(`${this.baseURL}/${id}`).subscribe(
-      res => {this.PatientById = res as Patient
+      res => {
+        this.PatientById = res as Patient,
+        console.log("Information patient by Id : " )
+        console.log(res)
     })
     }
 
@@ -40,4 +46,15 @@ export class PatientService {
     getPatientByIdResolver(id:Number):Observable<Patient>{
       return this.http.get<Patient>(`${this.baseURL}/${id}`)
     }
+
+
+
+    putPatientPoidsTaillePatient(patientVar:Patient ){
+  
+      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+      console.log(patientVar)
+
+      return this.http.put(`${this.baseURL}/${patientVar.patId}`, patientVar);
+    }
+    
 }
