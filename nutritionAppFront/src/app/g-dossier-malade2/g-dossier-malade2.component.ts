@@ -2607,6 +2607,6 @@ verificationDisabledButtonConfirm(){
 
   onChangeViewAllToPatients(){
     this.router.navigate(['malade']);  }
-
-
 }
+
+

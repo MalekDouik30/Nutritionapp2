@@ -12,8 +12,10 @@
         <br>
       <input class="form-control" list="rdz_nomPatient"  autocomplete="off" name="rdz_nomPatient" [(ngModel)]="nomPatientVar">
       <datalist id="rdz_nomPatient">
-           <option *ngFor="let item of this.patService.listPatient"  ngValue="{{item.patId}} " >{{item.patNom}} {{item.patPrenom}}</option>
-      </datalist>
+          <ng-container *ngFor="let item of this.patService.listPatient" >
+           <option *ngIf="item.patEtat==true"  ngValue="{{item.patId}} " >{{item.patNom}} {{item.patPrenom}}</option>
+          </ng-container>
+          </datalist>
 
       </div>
 
