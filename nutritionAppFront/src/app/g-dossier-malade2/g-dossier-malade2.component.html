@@ -1692,12 +1692,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
   </ng-container>
 
   <ng-container *ngIf = "this.verifcationExistDossier==2">
-    <div class="tab-pane fade" id="pills-enqueteAlimentaire" role="tabpanel" aria-labelledby="pills-contact-tab">
-      <div class="media">
-        <div class="media-body">
-          <div class="row">
-            <h3 class="font-weight-500 mb-xl-4 text-primary"> Résultat de l'enquête alimentaire : </h3>
-            <table style="margin-bottom: 20px;">
+      <table style="margin-bottom: 20px;">
               <thead>
                 <tr>
                   <th> # </th>
@@ -1705,172 +1700,48 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                   <th>Lipides</th>
                   <th>Glucides</th>
                   <th>Calories</th>
-
                 </tr>
               </thead>
               <tbody> 
                 <tr>
                   <td> <b>Petit-déjeuner</b></td>
-                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejProtide <= 10 || listResultatEnquetebyId.ptDejProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejProtide <= 10 || listResultatEnquetebyId.ptDejProtide > 20)) ;else contenu_bonptDejProtide ">
-                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }} </span> </td>
-                   </ng-container>         
-                    <ng-template #contenu_bonptDejProtide >
-                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejProtide | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejLipide <= 35 || listResultatEnquetebyId.ptDejLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejLipide <= 35 || listResultatEnquetebyId.ptDejLipide > 40)) ;else contenu_bonptDejLipide ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejLipide | number : '1.2-2' }} </span> </td>
-                     </ng-container>         
-                      <ng-template #contenu_bonptDejLipide >
-                       <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejLipide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejGluicide <= 40 || listResultatEnquetebyId.ptDejGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejGluicide <= 40 || listResultatEnquetebyId.ptDejGluicide > 55)) ;else contenu_bonptDejGluicide ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejGluicide | number : '1.2-2' }} </span> </td>
-                       </ng-container>         
-                        <ng-template #contenu_bonptDejGluicide >
-                         <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejGluicide | number : '1.2-2' }} </span> </td>
-                        </ng-template>
-
-                        <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ptDejCalorie <= 1995 || listResultatEnquetebyId.ptDejCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ptDejCalorie <= 2470 || listResultatEnquetebyId.ptDejCalorie > 2730)) ;else contenu_bonptDejCalorie ">
-                          <td> <span style="color: red;" > {{ listResultatEnquetebyId.ptDejCalorie | number : '1.2-2' }} </span> </td>
-                        </ng-container>         
-                        <ng-template #contenu_bonptDejCalorie >
-                          <td> <span style="color: green;"> {{ listResultatEnquetebyId.ptDejCalorie | number : '1.2-2' }} </span> </td>
-                        </ng-template>
-
+                    <td> {{ this.nbreTotaleProtidePetitDej | number : '1.2-2' }} </td>
+                    <td> {{ this.nbreTotaleLipidePetitDej | number : '1.2-2' }} </td>
+                    <td> {{ this.nbreTotaleGlucidePetitDej | number : '1.2-2' }} </td>
+                    <td> {{ this.nbreTotaleCaloriePetitDej | number : '1.2-2' }} </td>
                 </tr>
                 <tr>
                   <td> <b>Déjeuner</b></td>
-                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejProtide <= 10 || listResultatEnquetebyId.dejProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejProtide <= 10 || listResultatEnquetebyId.dejProtide > 20)) ;else contenu_bondejProtide ">
-                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }} </span> </td>
-                   </ng-container>         
-                    <ng-template #contenu_bondejProtide >
-                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejProtide | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejLipide <= 35 || listResultatEnquetebyId.dejLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejLipide <= 35 || listResultatEnquetebyId.dejLipide > 40)) ;else contenu_bondejLipide ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejLipide | number : '1.2-2' }} </span> </td>
-                     </ng-container>         
-                      <ng-template #contenu_bondejLipide >
-                       <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejLipide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejGluicide <= 40 || listResultatEnquetebyId.dejGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejGluicide <= 40 || listResultatEnquetebyId.dejGluicide > 55)) ;else contenu_bondejGluicide ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejGluicide | number : '1.2-2' }} </span> </td>
-                       </ng-container>         
-                        <ng-template #contenu_bondejGluicide >
-                         <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejGluicide | number : '1.2-2' }} </span> </td>
-                        </ng-template>
-
-                        <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dejCalorie <= 1995 || listResultatEnquetebyId.dejCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dejCalorie <= 2470 || listResultatEnquetebyId.dejCalorie > 2730)) ;else contenu_bondejCalorie ">
-                          <td> <span style="color: red;" > {{ listResultatEnquetebyId.dejCalorie | number : '1.2-2' }} </span> </td>
-                        </ng-container>         
-                        <ng-template #contenu_bondejCalorie >
-                          <td> <span style="color: green;"> {{ listResultatEnquetebyId.dejCalorie | number : '1.2-2' }} </span> </td>
-                        </ng-template>
+                  <td> {{ this.nbreTotaleProtideDejeuner | number : '1.2-2' }}  </td>
+                  <td> {{ this.nbreTotaleLipideDejeuner | number : '1.2-2' }}  </td>
+                  <td> {{ this.nbreTotaleGlucideDejeuner | number : '1.2-2' }}  </td>
+                  <td> {{ this.nbreTotaleCalorieDejeuner | number : '1.2-2' }}  </td>
 
                 </tr>
                 <tr>
                   <td> <b>Diner</b></td>
-                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerProtide <= 10 || listResultatEnquetebyId.dinerProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerProtide <= 10 || listResultatEnquetebyId.dinerProtide > 20)) ;else contenu_bondinerProtide ">
-                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }} </span> </td>
-                   </ng-container>         
-                    <ng-template #contenu_bondinerProtide >
-                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerProtide | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerLipide <= 35 || listResultatEnquetebyId.dinerLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerLipide <= 35 || listResultatEnquetebyId.dinerLipide > 40)) ;else contenu_bondinerLipide ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerLipide | number : '1.2-2' }} </span> </td>
-                     </ng-container>         
-                      <ng-template #contenu_bondinerLipide >
-                       <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerLipide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerGluicide <= 40 || listResultatEnquetebyId.dinerGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerGluicide <= 40 || listResultatEnquetebyId.dinerGluicide > 55)) ;else contenu_bondinerGluicide ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerGluicide | number : '1.2-2' }} </span> </td>
-                       </ng-container>         
-                        <ng-template #contenu_bondinerGluicide >
-                         <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerGluicide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-                    
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.dinerCalorie <= 1995 || listResultatEnquetebyId.dinerCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.dinerCalorie <= 2470 || listResultatEnquetebyId.dinerCalorie > 2730)) ;else contenu_bondinerCalorie ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.dinerCalorie | number : '1.2-2' }} </span> </td>
-                      </ng-container>         
-                      <ng-template #contenu_bondinerCalorie >
-                        <td> <span style="color: green;"> {{ listResultatEnquetebyId.dinerCalorie | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
+                     <td>  {{ this.nbreTotaleProtideDiner | number : '1.2-2' }} </td>
+                     <td>  {{ this.nbreTotaleLipideDiner| number : '1.2-2' }} </td>
+                     <td>  {{ this.nbreTotaleGlucideDiner | number : '1.2-2' }} </td>
+                     <td>  {{ this.nbreTotaleCalorieDiner | number : '1.2-2' }} </td>
                 </tr>
-
                 <tr>
                   <td> <b>Grignotage / collation</b></td>
-                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.grinotageProtide <= 10 || listResultatEnquetebyId.grinotageProtide > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.grinotageProtide <= 10 || listResultatEnquetebyId.grinotageProtide > 20)) ;else contenu_bongrinotageProtide ">
-                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.grinotageProtide | number : '1.2-2' }} </span> </td>
-                   </ng-container>         
-                    <ng-template #contenu_bongrinotageProtide >
-                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.grinotageProtide | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.grinotageLipide <= 35 || listResultatEnquetebyId.grinotageLipide > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.grinotageLipide <= 35 || listResultatEnquetebyId.grinotageLipide > 40)) ;else contenu_bongrinotageLipide ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.grinotageLipide | number : '1.2-2' }} </span> </td>
-                     </ng-container>         
-                      <ng-template #contenu_bongrinotageLipide >
-                       <td> <span style="color: green;"> {{ listResultatEnquetebyId.grinotageLipide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.grinotageGluicide <= 40 || listResultatEnquetebyId.grinotageGluicide > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.grinotageGluicide <= 40 || listResultatEnquetebyId.grinotageGluicide > 55)) ;else contenu_bongrinotageGluicide ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.grinotageGluicide | number : '1.2-2' }} </span> </td>
-                       </ng-container>         
-                        <ng-template #contenu_bongrinotageGluicide >
-                         <td> <span style="color: green;"> {{ listResultatEnquetebyId.grinotageGluicide | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-                    
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.grinotageCalorie <= 1995 || listResultatEnquetebyId.grinotageCalorie > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.grinotageCalorie <= 2470 || listResultatEnquetebyId.grinotageCalorie > 2730)) ;else contenu_bongrinotageCalorie ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.grinotageCalorie | number : '1.2-2' }} </span> </td>
-                      </ng-container>         
-                      <ng-template #contenu_bongrinotageCalorie >
-                        <td> <span style="color: green;"> {{ listResultatEnquetebyId.grinotageCalorie | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
+                    <td> {{  this.nbreTotaleProtideGrinotage | number : '1.2-2' }}  </td>
+                    <td>  {{ this.nbreTotaleLipideGrinotage | number : '1.2-2' }}  </td>
+                    <td>  {{ this.nbreTotaleGlucideGrinotage | number : '1.2-2' }}  </td>
+                    <td>  {{ this.nbreTotaleCalorieGrinotage| number : '1.2-2' }}  </td>
                 </tr>
-
                 <tr>
                   <td> <b>Totaux ( pourcentage calorique )</b></td>
-                  <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20)) ;else contenu_bonproteinesG100G ">
-                    <td> <span style="color: red;" > {{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }} </span> </td>
-                   </ng-container>         
-                    <ng-template #contenu_bonproteinesG100G >
-                     <td> <span style="color: green;"> {{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-                    
-                    
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.lipidesG100G <= 35 || listResultatEnquetebyId.lipidesG100G > 40  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.lipidesG100G <= 35 || listResultatEnquetebyId.lipidesG100G > 40)) ;else contenu_bonlipidesG100G ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.lipidesG100G | number : '1.2-2' }} </span> </td>
-                     </ng-container>         
-                      <ng-template #contenu_bonlipidesG100G >
-                       <td> <span style="color: green;"> {{ listResultatEnquetebyId.lipidesG100G | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-                    
-                      <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.glucidesG100G <= 40 || listResultatEnquetebyId.glucidesG100G > 55  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.glucidesG100G <= 40 || listResultatEnquetebyId.glucidesG100G > 55)) ;else contenu_bonglucidesG100G ">
-                        <td> <span style="color: red;" > {{ listResultatEnquetebyId.glucidesG100G | number : '1.2-2' }} </span> </td>
-                       </ng-container>         
-                      <ng-template #contenu_bonglucidesG100G >
-                         <td> <span style="color: green;"> {{ listResultatEnquetebyId.glucidesG100G | number : '1.2-2' }} </span> </td>
-                      </ng-template>
-
-                    <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.energieKcal100G <= 1995 || listResultatEnquetebyId.energieKcal100G > 2205  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.energieKcal100G <= 2470 || listResultatEnquetebyId.energieKcal100G > 2730)) ;else contenu_bonenergieKcal100G ">
-                      <td> <span style="color: red;" > {{ listResultatEnquetebyId.energieKcal100G | number : '1.2-2' }} </span> </td>
-                    </ng-container>         
-                    <ng-template #contenu_bonenergieKcal100G >
-                      <td> <span style="color: green;"> {{ listResultatEnquetebyId.energieKcal100G | number : '1.2-2' }} </span> </td>
-                    </ng-template>
-
-                </tr>
-                   
+                    <td>  {{ this.nbreTotaleProtideT| number : '1.2-2' }}  </td>
+                      <td>  {{ this.nbreTotaleLipideT| number : '1.2-2' }}  </td>
+                      <td>  {{ this.nbreTotaleGlucideT | number : '1.2-2' }}  </td>
+                      <td>  {{  this.nbreTotaleCalorieT| number : '1.2-2' }}  </td>
+                </tr>  
               </tbody>
             </table>
-            
+
             <br><br><hr><br>
             <h3>Total par semaine</h3>
             <table>
@@ -1885,216 +1756,109 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
             <tbody> 
               <tr>
                 <td> <b>Eau (g) </b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.eauG100G <= 1900 || listResultatEnquetebyId.eauG100G > 2100  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.eauG100G <= 2375 || listResultatEnquetebyId.eauG100G > 2625)) ;else contenu_boneauG100G ">
-                 <td> <span style="color: red;" > {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                 <ng-template #contenu_boneauG100G >
-                  <td> <span style="color: green;"> {{ listResultatEnquetebyId.eauG100G | number : '1.2-2' }} </span> </td>
-                 </ng-template>
-
+                 <td>  {{ this.resEnqueteService.fromData.eauG100G | number : '1.2-2' }} </td>
                 <td> <b>Sodium (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.sodiumMg100G > 2100  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.sodiumMg100G > 2625)) ;else contenu_bonsodiumMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonsodiumMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.sodiumMg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template> 
+                  <td>  {{ this.resEnqueteService.fromData.sodiumMg100G | number : '1.2-2' }} </td>
               </tr>
-
               <tr>
                 <td> <b>Fibres Alimentaires (g)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.fibresAlimentairesG100G <= 30  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.fibresAlimentairesG100G <= 30)) ;else contenu_bonfibresAlimentairesG100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                <ng-template #contenu_bonfibresAlimentairesG100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.fibresAlimentairesG100G | number : '1.2-2' }} </span> </td>
-                </ng-template> 
+                  <td>  {{ this.resEnqueteService.fromData.fibresAlimentairesG100G | number : '1.2-2' }} </td>
 
 
                 <td> <b>Zinc (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.zincMg100G <= 11  || listResultatEnquetebyId.zincMg100G > 25  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.zincMg100G <= 14 || listResultatEnquetebyId.zincMg100G > 25 )) ;else contenu_bonzincMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                <ng-template #contenu_bonzincMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.zincMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template> 
+                  <td>  {{ this.resEnqueteService.fromData.zincMg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Alcool (g)</b></td>
-                <td>{{ listResultatEnquetebyId.alcoolG100G | number : '1.2-2' }} </td>
+                <td>{{ this.resEnqueteService.fromData.alcoolG100G | number : '1.2-2' }} </td>
                 <td> <b>Retinol (mg)</b></td>
-                <td>{{ listResultatEnquetebyId.retinolmg100G | number : '1.2-2' }} </td>  
+                <td>{{ this.resEnqueteService.fromData.retinolmg100G| number : '1.2-2' }} </td>  
               </tr>
               <tr>
                 <td> <b>AgSaturés (g)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.agSaturesG100G > 12   )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.agSaturesG100G > 12 )) ;else contenu_bonagSaturesG100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                <ng-template #contenu_bonagSaturesG100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.agSaturesG100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.agSaturesG100G | number : '1.2-2' }} </td>
                 <td> <b>Vitamine D (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineDmg100G < 15 || listResultatEnquetebyId.vitamineDmg100G > 50  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineDmg100G <=15 || listResultatEnquetebyId.vitamineDmg100G > 50)) ;else contenu_bonvitamineDmg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonvitamineDmg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineDmg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.vitamineDmg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>AgMonoinsaturés (g)</b></td>
-                <td> {{ listResultatEnquetebyId.agMonoinsaturesG100G | number : '1.2-2' }}</td>
+                <td> {{ this.resEnqueteService.fromData.agMonoinsaturesG100G | number : '1.2-2' }}</td>
                 <td> <b>Vitamine E (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineEMg100G > 300  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineEMg100G > 300)) ;else contenu_bonvitamineEMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonvitamineEMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineEMg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template>
-                
+                  <td>  {{ this.resEnqueteService.fromData.vitamineEMg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>AgPolyinsaturés (g)</b></td>
-                <td>{{ listResultatEnquetebyId.agPolyinsaturesG100G | number : '1.2-2' }} </td>
+                <td>{{ this.resEnqueteService.fromData.agPolyinsaturesG100G | number : '1.2-2' }} </td>
                 <td> <b>Vitamine K1 (mg)</b></td>
-                <td> {{ listResultatEnquetebyId.vitamineK1mg100G | number : '1.2-2' }}</td>  
+                <td> {{ this.resEnqueteService.fromData.vitamineK1mg100G| number : '1.2-2' }}</td>  
               </tr>
               <tr>
                 <td> <b>AgW6G (g) </b></td>
-                <td> {{ listResultatEnquetebyId.agW6G100G | number : '1.2-2' }}</td>
+                <td> {{ this.resEnqueteService.fromData.agW6G100G | number : '1.2-2' }}</td>
                 <td> <b>Vitamine C (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000)) ;else contenu_bonvitamineCMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonvitamineCMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineCMg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template>
+                <td> {{ this.resEnqueteService.fromData.vitamineCMg100G| number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>AgW3 (g)</b></td>
-                <td> {{ listResultatEnquetebyId.agW3G100G | number : '1.2-2' }}</td>
+                <td> {{ this.resEnqueteService.fromData.agW3G100G | number : '1.2-2' }}</td>
                 <td> <b>VitamineB1Mg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058 )) ;else contenu_bonvitamineB1Mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonvitamineB1Mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template> 
+                  <td>  {{ this.resEnqueteService.fromData.vitamineB1Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Cholestérol (mg)</b></td>
-                <td>{{ listResultatEnquetebyId.cholesterolMg100G | number : '1.2-2' }} </td>
+                <td> {{ this.resEnqueteService.fromData.cholesterolMg100G| number : '1.2-2' }} </td>
                 <td> <b>VitamineB2Mg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071 )) ;else contenu_bonvitamineB2Mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }} </span> </td>
-                 </ng-container>         
-                  <ng-template #contenu_bonvitamineB2Mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }} </span> </td>
-                  </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.vitamineB2Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Calcium (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.calciumMg100G <= 1000 || listResultatEnquetebyId.calciumMg100G > 2500  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.calciumMg100G <=1000 || listResultatEnquetebyId.calciumMg100G > 2500)) ;else contenu_boncalciumMg100G">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_boncalciumMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.calciumMg100G | number : '1.2-2' }} </td>
 
                 <td> <b>VitamineB3Mg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <= 0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <=0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900)) ;else contenu_bonvitamineB3Mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonvitamineB3Mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
+                  <td>  {{  this.resEnqueteService.fromData.vitamineB3Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Cuivre (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.cuivreMg100G <= 1 || listResultatEnquetebyId.cuivreMg100G > 5  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.cuivreMg100G <=1.25 || listResultatEnquetebyId.cuivreMg100G > 5)) ;else contenu_boncuivreMg100G">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_boncuivreMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.cuivreMg100G | number : '1.2-2' }} </td>
 
                 <td> <b>VitamineB5Mg</b></td>
-                <td>{{ listResultatEnquetebyId.vitamineB5Mg100G | number : '1.2-2' }} </td>  
+                <td>{{   this.resEnqueteService.fromData.vitamineB5Mg100G | number : '1.2-2' }} </td>  
               </tr>
               <tr>
                 <td> <b>Fer (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.ferMg100G <= 16  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.ferMg100G <=11)) ;else contenu_bonferMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonferMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.ferMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
-
+                  <td>  {{ this.resEnqueteService.fromData.ferMg100G  | number : '1.2-2' }} </td>
 
                 <td> <b>VitamineB6Mg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <= 1.5 || listResultatEnquetebyId.vitamineB6Mg100G > 25  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <=1.8 || listResultatEnquetebyId.vitamineB6Mg100G > 25)) ;else contenu_bonvitamineB6Mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonvitamineB6Mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
-
+                  <td>  {{this.resEnqueteService.fromData.vitamineB6Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Magnesium (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.magnesiumMg100G <= 360  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.magnesiumMg100G <=420)) ;else contenu_bonmagnesiumMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonmagnesiumMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>
+                  <td>  {{ this.resEnqueteService.fromData.magnesiumMg100G  | number : '1.2-2' }} </td>
 
                 <td> <b>VitamineB9Μg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB9mg100G <= 330  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB9mg100G <=330)) ;else contenu_bonvitamineB9mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonvitamineB9mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </span> </td>
-                </ng-template> 
-
+                  <td>  {{ this.resEnqueteService.fromData.vitamineB9mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Phosphore (mg)</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.phosphoreMg100G <= 700  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.phosphoreMg100G <=700)) ;else contenu_bonphosphoreMg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonphosphoreMg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }} </span> </td>
-                </ng-template> 
+                  <td>  {{ this.resEnqueteService.fromData.phosphoreMg100G | number : '1.2-2' }} </td>
 
                 <td> <b>VitamineB12Μg</b></td>
-                <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB12mg100G <= 4  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB12mg100G <=4)) ;else contenu_bonvitamineB12mg100G ">
-                  <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </span> </td>
-                </ng-container>         
-                <ng-template #contenu_bonvitamineB12mg100G >
-                   <td> <span style="color: green;"> {{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </span> </td>
-                </ng-template>  
+                  <td>  {{ this.resEnqueteService.fromData.vitamineB12mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Potassium (mg)</b></td>
-                <td> {{ listResultatEnquetebyId.potassiumMg100G | number : '1.2-2' }}</td>
+                <td> {{ this.resEnqueteService.fromData.potassiumMg100G | number : '1.2-2' }}</td>
                 <td> </td>
                 <td> </td>  
               </tr>
 
             </tbody>
 
-        
-            <div class="text-center">
-              <button type="button" class="btn btn-inverse-info btn-fw" (click)="onChangeViewAllToPatients()"> OK</button>
-            </div>
-
             </table>
+    
+          
 
-          </div>
-        </div>
-      </div>
-    </div>
+
   </ng-container>
     <!--//////////////////////////////////////////////////////////////////////////////////////-->
     <br>

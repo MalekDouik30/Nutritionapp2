@@ -364,7 +364,6 @@ constructor(public router:Router,
    this.dossPatService.fromDataDossierPatient.dosPatientId=this.patService.idPatient
 
    this.resEnqueteService.fromData.enqAlimIdPatient=this.patService.idPatient
-   console.log(this.dossPatService.fromDataDossierPatient)
 
 
      // Ajouter le poids / la taille / la toure de taille dans la table patient 
@@ -391,22 +390,23 @@ constructor(public router:Router,
       this.patService.getPatient();
       // Ajouter Resultat Enquete
       this.resEnqueteService.addResultatEnqueteAlim().subscribe(res=>{
-      this.verifcationExistDossier=2
+
       this.toaster.success("Enquete Alimentaire ajoutée avec succès","Ajout")
       // this.router.navigate(['malade']); ////////////////////////////////////
       },
         err=>{console.log(err)}
         )
       this.toaster.success("Dossier Patient ajouté avec succès","Ajout")
+      this.verifcationExistDossier=2
+      
+      
 
     },
     err => {
       this.toaster.error("Échec d'ajouter dossier patient : "+ err.error.message,"Ajout")
       console.log(err);}
    )
-
-  
-        
+ 
   }
 
   resetForm(monForm:NgForm){
@@ -544,8 +544,6 @@ calculer(inputQuantite:any,inputFrequence:any,caloriesarray:any,glucidearray:any
   }
   resNbeAlimentxQ=resNbeAlimentxQ/7
   nbreTotaleProtide=resNbeAlimentxQ
-
-
 
   // 5. Calcule Eau
   resNbeAlimentxQ=0
@@ -813,7 +811,6 @@ nbreTotaleVitamineB12mg=resNbeAlimentxQ
 diviserInputsValues(selectedInputValues:any){
   var selectedString=String(selectedInputValues).replace(",","");
   var selectedSplited = selectedString.split("+").slice(0, -1); 
-
   var caloriesarray=[]
   var glucidearray=[]
   var lipidearray=[]
@@ -886,18 +883,52 @@ diviserInputsValues(selectedInputValues:any){
     vitamineB12mgarray.push(itemSplited[30])
   }
 
-  return {caloriesarray,glucidearray,lipidearray,protidearray,
+  return { caloriesarray,glucidearray,lipidearray,protidearray,
     eauarray,fibreAlimentairearray,alcoolarray,agSaturesarray,agMonoinsaturesarray,agPolyinsaturesarray,
     agW6Garray,gW3Garray,cholesterolMgarray,calciumMgarray,cuivreMgarray,ferMgarray,magnesiumMgarray,
     phosphoreMgarray,potassiumMgarray,sodiumMgarray,zincMgarray,retinolmgarray,vitamineDmgarray,
     vitamineEMgarray,vitamineK1mgarray,vitamineCMgarray,vitamineB1Mgarray,vitamineB2Mgarray,vitamineB3Mgarray,
-    vitamineB5Mgarray,vitamineB6Mgarray,vitamineB9mgarray,vitamineB12mgarray}
+    vitamineB5Mgarray,vitamineB6Mgarray,vitamineB9mgarray,vitamineB12mgarray }
 }
 
 calculerTousNutriments(inputQuantite:any,inputFrequence:any,selectedRepas:any){
 
+ let calciumMg =0;
+ let cuivreMg =0;
+ let ferMg =0;
+ let magnesiumMg =0;
+ let phosphoreMg =0;
+ let potassiumMg =0;
+ let sodiumMg =0;
+ let zincMg =0;
+ let retinolmg =0;
+ let vitamineDmg =0;
+ let vitamineEMg =0;
+ let vitamineK1mg =0;
+ let vitamineCMg =0;
+ let vitamineB1Mg =0;
+ let vitamineB2Mg =0;
+ let vitamineB3Mg =0;
+ let vitamineB5Mg =0;
+ let vitamineB6Mg =0;
+ let vitamineB9mg =0;
+ let vitamineB12mg =0;
+ let calorie=0;
+ let glucide=0;
+ let lipide = 0;
+ let protide= 0;
+ let eau= 0;
+ let fibreAlimentaire= 0;
+ let alcool= 0;
+ let agSatures= 0;
+ let agMonoinsatures= 0;
+ let agPolyinsatures= 0;
+ let agW6G= 0;
+ let agW3G= 0;
+ let cholesterolMg= 0;
 
-var calorie=this.calculer(inputQuantite,inputFrequence,
+
+ calorie=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
   this.diviserInputsValues(selectedRepas).lipidearray,
@@ -933,7 +964,7 @@ var calorie=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleCalorie
 
 
-var glucide=this.calculer(inputQuantite,inputFrequence,
+ glucide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
   this.diviserInputsValues(selectedRepas).lipidearray,
@@ -968,7 +999,7 @@ var glucide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleGlucide
 
-var lipide=this.calculer(inputQuantite,inputFrequence,
+ lipide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
   this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1003,7 +1034,7 @@ var lipide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleLipide
 
-var protide=this.calculer(inputQuantite,inputFrequence,
+ protide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
   this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1038,7 +1069,7 @@ var protide=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleProtide
 
-var eau=this.calculer(inputQuantite,inputFrequence,
+ eau=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1073,7 +1104,7 @@ var eau=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleEau
 
-var fibreAlimentaire=this.calculer(inputQuantite,inputFrequence,
+ fibreAlimentaire=this.calculer(inputQuantite,inputFrequence,
       this.diviserInputsValues(selectedRepas).caloriesarray,
       this.diviserInputsValues(selectedRepas).glucidearray,
       this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1108,7 +1139,7 @@ var fibreAlimentaire=this.calculer(inputQuantite,inputFrequence,
       this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleFibreAlimentaire
 
-var alcool=this.calculer(inputQuantite,inputFrequence,
+ alcool=this.calculer(inputQuantite,inputFrequence,
         this.diviserInputsValues(selectedRepas).caloriesarray,
         this.diviserInputsValues(selectedRepas).glucidearray,
         this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1143,7 +1174,7 @@ var alcool=this.calculer(inputQuantite,inputFrequence,
         this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleAlcool
 
-var agSatures=this.calculer(inputQuantite,inputFrequence,
+ agSatures=this.calculer(inputQuantite,inputFrequence,
           this.diviserInputsValues(selectedRepas).caloriesarray,
           this.diviserInputsValues(selectedRepas).glucidearray,
           this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1178,7 +1209,7 @@ var agSatures=this.calculer(inputQuantite,inputFrequence,
           this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleAgSatures
 
-var agMonoinsatures=this.calculer(inputQuantite,inputFrequence,
+ agMonoinsatures=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1213,7 +1244,7 @@ var agMonoinsatures=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleAgMonoinsatures
 
-var agPolyinsatures=this.calculer(inputQuantite,inputFrequence,
+ agPolyinsatures=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).caloriesarray,
   this.diviserInputsValues(selectedRepas).glucidearray,
   this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1248,7 +1279,7 @@ var agPolyinsatures=this.calculer(inputQuantite,inputFrequence,
   this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleAgPolyinsatures
 
-var agW6G=this.calculer(inputQuantite,inputFrequence,
+ agW6G=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1283,7 +1314,7 @@ var agW6G=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleAgW6G
 
-var agW3G=this.calculer(inputQuantite,inputFrequence,
+ agW3G=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1318,7 +1349,7 @@ var agW3G=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleGW3G
 
-var cholesterolMg=this.calculer(inputQuantite,inputFrequence,
+ cholesterolMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1353,7 +1384,7 @@ var cholesterolMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleCholesterolMg
 
-var calciumMg=this.calculer(inputQuantite,inputFrequence,
+ calciumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1388,7 +1419,7 @@ var calciumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleCalciumMg
 
-var cuivreMg=this.calculer(inputQuantite,inputFrequence,
+ cuivreMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1423,7 +1454,7 @@ var cuivreMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleCuivreMg
 
-var ferMg=this.calculer(inputQuantite,inputFrequence,
+ ferMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1458,7 +1489,7 @@ var ferMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleFerMg
 
-var magnesiumMg=this.calculer(inputQuantite,inputFrequence,
+ magnesiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1493,7 +1524,7 @@ var magnesiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleMagnesiumMg
 
-var phosphoreMg=this.calculer(inputQuantite,inputFrequence,
+ phosphoreMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1528,7 +1559,7 @@ var phosphoreMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotalePhosphoreMg
 
-var potassiumMg=this.calculer(inputQuantite,inputFrequence,
+ potassiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1563,7 +1594,7 @@ var potassiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotalePotassiumMg
 
-var sodiumMg=this.calculer(inputQuantite,inputFrequence,
+ sodiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1598,7 +1629,7 @@ var sodiumMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleSodiumMg
 
-var zincMg=this.calculer(inputQuantite,inputFrequence,
+ zincMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1633,7 +1664,7 @@ var zincMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleZincMg
 
-var retinolmg=this.calculer(inputQuantite,inputFrequence,
+ retinolmg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1668,7 +1699,7 @@ var retinolmg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleRetinolmg
 
-var vitamineDmg=this.calculer(inputQuantite,inputFrequence,
+ vitamineDmg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1703,7 +1734,7 @@ var vitamineDmg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineDmg
 
-var vitamineEMg=this.calculer(inputQuantite,inputFrequence,
+ vitamineEMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1738,7 +1769,7 @@ var vitamineEMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineEMg
 
-var vitamineK1mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineK1mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1773,7 +1804,7 @@ var vitamineK1mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineK1mg
 
-var vitamineCMg=this.calculer(inputQuantite,inputFrequence,
+ vitamineCMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1808,7 +1839,7 @@ var vitamineCMg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineCMg
 
-var vitamineB1Mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB1Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1843,7 +1874,7 @@ var vitamineB1Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB1Mg
 
-var vitamineB2Mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB2Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1878,7 +1909,7 @@ var vitamineB2Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB2Mg
 
-var vitamineB3Mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB3Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1913,7 +1944,7 @@ var vitamineB3Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB3Mg
 
-var vitamineB5Mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB5Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1948,7 +1979,7 @@ var vitamineB5Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB5Mg
 
-var vitamineB6Mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB6Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -1983,7 +2014,7 @@ var vitamineB6Mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB6Mg
 
-var vitamineB9mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB9mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -2018,7 +2049,7 @@ var vitamineB9mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).vitamineB9mgarray,
   this.diviserInputsValues(selectedRepas).vitamineB12mgarray).nbreTotaleVitamineB9mg
 
-var vitamineB12mg=this.calculer(inputQuantite,inputFrequence,
+ vitamineB12mg=this.calculer(inputQuantite,inputFrequence,
     this.diviserInputsValues(selectedRepas).caloriesarray,
     this.diviserInputsValues(selectedRepas).glucidearray,
     this.diviserInputsValues(selectedRepas).lipidearray,
@@ -2142,7 +2173,7 @@ onCalcule(){
   this.resEnqueteService.fromData.vitamineB2Mg100G =  
   this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB2Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB2Mg + this.calculerTousNutriments(this.getQteFreqgrinotage().qteArray,this.getQteFreqgrinotage().freqArray,this.selectedGrinotage).vitamineB2Mg
   this.resEnqueteService.fromData.vitamineB3Mg100G  =
-   this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB3Mg +  this.calculerTousNutriments(this.getQteFreqgrinotage().qteArray,this.getQteFreqgrinotage().freqArray,this.selectedGrinotage).vitamineB3Mg 
+  this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB3Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB3Mg +  this.calculerTousNutriments(this.getQteFreqgrinotage().qteArray,this.getQteFreqgrinotage().freqArray,this.selectedGrinotage).vitamineB3Mg 
   this.resEnqueteService.fromData.vitamineB5Mg100G = 
   this.calculerTousNutriments(this.getQteFreqPetitdej().qteArray,this.getQteFreqPetitdej().freqArray,this.selectedpetitDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.getQteFreqdej().qteArray,this.getQteFreqdej().freqArray,this.selectedDejeuner).vitamineB5Mg + this.calculerTousNutriments(this.getQteFreqdiner().qteArray,this.getQteFreqdiner().freqArray,this.selectedDiner).vitamineB5Mg + this.calculerTousNutriments(this.getQteFreqgrinotage().qteArray,this.getQteFreqgrinotage().freqArray,this.selectedGrinotage).vitamineB5Mg
   this.resEnqueteService.fromData.vitamineB6Mg100G  = 
@@ -2186,6 +2217,7 @@ onCalcule(){
  
 
   this.resEnqueteService.fromData.enqAlimIdPatient = this.patService.idPatient
+  
 
 }
 
