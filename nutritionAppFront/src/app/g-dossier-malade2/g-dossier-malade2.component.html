@@ -119,11 +119,13 @@
         <div class="col-sm-12 stretch-card grid-margin">
           <div class="card">
             <div class="row">
-              <div class="col-md-4">
+              
                 <div class="card border-0">
                   <div class="card-body"> 
                     <!--Pathologie-->
+                    <div class="container">
                     <div class="row">
+                      <div class="col-sm">
                       <div class="form-group">
                           <label> <b>ANTCD.P</b></label>
                           <div class="form-check form-check-flat form-check-primary" *ngFor="let option of pathologieOptions">
@@ -133,9 +135,9 @@
                           </div>
                           <label>Autre</label> <input type="text" [(ngModel)]="pathologieInput" name="somthing" class="form-control form-control-lg" [disabled]="autrePathologie" placeholder="Autre choix">
                       </div>
-                    </div>
+                      </div>
                     <!--Antécedents-->
-                    <div class="row">
+                    <div class="col-sm">
                       <div class="form-group">
                           <label> <b>ANTCD.F</b></label>
                           <div class="form-check form-check-flat form-check-primary" *ngFor="let option of antecedentOptions">
@@ -145,7 +147,9 @@
                           </div>
                           <label>Autre</label> <input type="text" [(ngModel)]="antecedentInput" name="somthingElse" class="form-control form-control-lg" placeholder="Autre choix" [disabled]="autreAntecedentPersonnel" >
                       </div>
+                    </div>
                   </div>
+                </div>
                   <!--Antécédents Familiaux-->
                   <!--
                   <div class="row">
@@ -156,7 +160,7 @@
                   -->
                   </div>
                 </div>
-              </div>
+           
             </div>
           </div>
         </div>
@@ -176,55 +180,48 @@
           <div class="row">
             <div class="col-sm-12 stretch-card grid-margin">
               <div class="card">
-                <div class="row">
-                  <div class="col-md-4">
                     <div class="card border-0">
                       <div class="card-body">
+                        <div class="container">
+
                         <!--Historique Diabète-->
                         <div class="row">
+                        <div class="col-sm">
                           <div class="form-group"> 
                               <label><b>Type d'obésité</b></label> 
-                            
                               <select class="form-select" [(ngModel)]="typeObesite">
                                 <option  value="" selected disabled>Choisir une réponse</option>
                                 <option value="Gynoïde"> Gynoïde</option>
                                 <option value="Androïde"> Androïde </option>
                               </select>
-
                           </div>
-                      </div>
 
-                        <div class="row">
                           <div class="form-group"> 
                               <label><b>Poids maximal atteint</b></label> <input type="number" [(ngModel)]="historiquePoidsMax" name="somthing" class="form-control form-control-lg" placeholder="Poids maximal atteint" min="0">
                           </div>
-                      </div>
-                      <div class="row">
+                   
                           <div class="form-group">             
                               <label><b>Circonstances de la prise de poids</b></label> <input type="text" [(ngModel)]="historiqueCircoPrisePoids" name="somthing" class="form-control form-control-lg" placeholder="Circonstances de prise de poids">
-          
                           </div>
-                      </div>
-                      <div class="row">
+                        </div>
+                        <div class="col-sm">
                           <div class="form-group">             
                               <label><b>Régime suivi</b></label> <input type="text" [(ngModel)]="historiqueRegimeSuivi" name="somthing" class="form-control form-control-lg" placeholder="Régime suivi">
                           </div>
-                      </div>
-                      <div class="row">
+
                           <div class="form-group">              
                               <label><b>Perte pondérale suite au régime</b></label> <input type="text" [(ngModel)]="historiquePertePonderale" name="somthing" class="form-control form-control-lg" placeholder="Perte pondérale suite au régime">
-          
                           </div>
-                      </div>
-                      <div class="row">
+
                           <div class="form-group">             
                               <label><b>Cause d'arret de régime</b></label> <input type="text" [(ngModel)]="historiqueCause" name="somthing" class="form-control form-control-lg" placeholder="Cause d'arret de régime">
                           </div>
                       </div>
-                      </div>
+                    </div>
+                    
+                    </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -244,35 +241,42 @@
         <div class="row">
           <div class="col-sm-12 stretch-card grid-margin">
             <div class="card">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card border-0">
-                    <div class="card-body">
-                      <!--Historique Amaigrissement-->
-                      <div class="row">
-                        <div class="form-group">
-                            <label><b>Poids minimal atteint</b></label> <input type="text" [(ngModel)]="amaigrissementPoidsMin" name="somthing" class="form-control form-control-lg" placeholder="Poids minimal atteint">
+              <div class="card border-0">
+                <div class="card-body">
+
+                  <div class="container">
+                    <div class="row">
+ 
+                        <!--Historique Amaigrissement-->
+                        <div class="col-sm">
+
+                          <div class="form-group">
+                              <label><b>Poids minimal atteint</b></label> <input type="text" [(ngModel)]="amaigrissementPoidsMin" name="somthing" class="form-control form-control-lg" placeholder="Poids minimal atteint">
+                          </div>
+                          <div class="form-group">
+                              <label><b>Période de perte pondérale</b></label> <input type="text" [(ngModel)]="amaigrissementPeriodePerte" name="somthing" class="form-control form-control-lg" placeholder="Période de perte penderale">
+                          </div>
+
                         </div>
+
+                        <div class="col-sm">
+                         
+                          <div class="form-group">
+                              <label><b>Nombre de Kg perdus</b></label> <input type="text" [(ngModel)]="amaigrissementNbeKgPerdus" name="somthing" class="form-control form-control-lg" placeholder="Nbre de Kg perdus">
+                          </div>
+                          <div class="form-group">
+                              <label><b>Cause de la perte pondérale</b></label> <input type="text" [(ngModel)]="amaigrissementCausePerte" name="somthing" class="form-control form-control-lg" placeholder="Cause de la perte">
+                          </div>
+
                       </div>
-                      <div class="row">
-                        <div class="form-group">
-                            <label><b>Période de perte pondérale</b></label> <input type="text" [(ngModel)]="amaigrissementPeriodePerte" name="somthing" class="form-control form-control-lg" placeholder="Période de perte penderale">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                            <label><b>Nombre de Kg perdus</b></label> <input type="text" [(ngModel)]="amaigrissementNbeKgPerdus" name="somthing" class="form-control form-control-lg" placeholder="Nbre de Kg perdus">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group">
-                            <label><b>Cause de la perte pondérale</b></label> <input type="text" [(ngModel)]="amaigrissementCausePerte" name="somthing" class="form-control form-control-lg" placeholder="Cause de la perte">
+              
                       </div>
                     </div>
-                    </div>
-                  </div>
                 </div>
+
               </div>
+
+
             </div>
           </div>
         </div>
@@ -294,12 +298,14 @@
       <div class="row">
         <div class="col-sm-12 stretch-card grid-margin">
           <div class="card">
-            <div class="row">
-              <div class="col-md-4">
+         
                 <div class="card border-0">
                   <div class="card-body">
 
-                    <div class="row">
+                    <div class="container">
+                      <div class="row">
+               
+                    <div class="col-sm">
                       <div class="form-group">
                           <br>
                           <!-- Type diabète -->
@@ -319,6 +325,10 @@
                                   <input class="form-check-input" type="radio" name="diabete" value="Diabète gestationnel" [(ngModel)]="historiquetypeDiabete"> Diabète gestationnel <i class="input-helper"></i>
                               </label>
                           </div>
+                        </div>
+                        </div>
+                        <div class="col-sm">
+                          <div class="form-group">
   
                           <!-- Traitement -->
                           <label> <b>Traitement </b></label>
@@ -338,12 +348,11 @@
                               </label>
                           </div>
                       </div>
-                  </div>
-
+                      </div>
+                     </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -364,12 +373,13 @@
       <h3 class="mb-3">Habitudes alimentaires</h3>
         <div class="col-sm-12 stretch-card grid-margin">
           <div class="card">
-              <div class="col-md-4">
                 <div class="card border-0">
                   <div class="card-body">
 
-                    <div class="row">
-                      <div class="form-group">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm">
+                        <div class="form-group">
                           <br>
                           <label><b> Préférences gustatives</b></label>
                           <div class="form-check form-check-flat form-check-primary">
@@ -383,8 +393,7 @@
                               </label>
                           </div>
                       </div>
-                  </div>
-                  <div class="row">
+      
                       <div class="form-group">
                           <label> <b>Alcool</b></label>
                           <div class="form-check form-check-flat form-check-primary">
@@ -399,10 +408,9 @@
                           </div>
                           <label><b>Quantité</b></label> <input type="text" [(ngModel)]="habitudeAlcoolQuantite" name="somthing1" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeAlcool=='Non'">
                       </div>
-                  </div>
-                  <div class="row">
+                
                       <div class="form-group">
-                          <label> Tabac</label>
+                          <label> <b>Tabac</b></label>
                           <div class="form-check form-check-flat form-check-primary">
                               <label class="form-check-label">
                                   <input class="form-check-input" type="radio" name="habitudeTabac" value="Oui" [(ngModel)]="habitudeTabac"> Oui <i class="input-helper"></i>
@@ -415,8 +423,7 @@
                           </div>
                           <label><b>Nombre de cigarettes</b> </label> <input type="text" [(ngModel)]="habitudeTabacQuantite" name="somthing2" class="form-control form-control-lg" placeholder="Quantité" [disabled]="habitudeTabac=='Non'">
                       </div>
-                  </div>             
-                  <div class="row">
+                            
                       <div class="form-group">
                           <label> <b>Où prenez vous vos repas ?</b></label>
                           <div class="form-check form-check-flat form-check-primary" *ngFor="let option of habitudeOuRepasOptions">
@@ -426,14 +433,12 @@
                           </div>
                           <label>Autre</label> <input type="text" [(ngModel)]="habitudeOuRepasInput" name="somthing3" class="form-control form-control-lg" placeholder="Autre choix">
                       </div>
-                  </div>
-                  <div class="row">
+           
                       <div class="form-group">
                           <label><b> Combien de repas prenez vous par jour ?</b></label>
                           <input type="number" [(ngModel)]="habitudeNbreRepasJour" name="somthing10" class="form-control form-control-lg" placeholder="Nombre de repas par jour ">
                       </div>
-                  </div>
-                  <div class="row">
+           
                       <div class="form-group">
                           <label> <b>Vous mangez</b></label>
                           <div class="form-check form-check-flat form-check-primary">
@@ -452,8 +457,9 @@
                               </label>
                           </div>
                       </div>
-                  </div>
-                  <div class="row">
+                    </div>
+             
+                      <div class="col-sm">
                       <div class="form-group">
                           <label> <b>Avez Vous un problème de mastication ? </b></label>
                           <div class="form-check form-check-flat form-check-primary">
@@ -472,13 +478,11 @@
                               </label>
                           </div>
                       </div>
-                  </div>
-                  <div class="row">
+            
                       <div class="form-group">
                           <label> <b>Quantité d'eau par jour ?</b></label><input type="text" [(ngModel)]="habitudeQteEau" name="somthing8" class="form-control form-control-lg" placeholder="Quantité d'eau par jour" >
                       </div>
-                  </div>
-                  <div class="row">
+               
                       <div class="form-group">
                           <label><b>Pratiquer vous du sport ou de l'activité physique ? </b></label>
                           <div class="form-check form-check-flat form-check-primary">
@@ -492,26 +496,25 @@
                               </label>
                           </div>
                       </div>
-                  </div>
+             
 
-                  <div class="row">
                       <div class="form-group">                    
                           <label><b>Quel type de sport ? </b></label><input type="text" [(ngModel)]="habitudeTypeSport" name="somthing5" class="form-control form-control-lg" placeholder="Quel type de sport" [disabled]="habitudeDosSport=='Non'">
                       </div>    
-                  </div>
-                  <div class="row">
+                
                       <div class="form-group">
                           <label><b>Durée</b> </label><input type="text" [(ngModel)]="habitudeDureSport" name="somthing5" class="form-control form-control-lg" placeholder="Durée" [disabled]="habitudeDosSport=='Non'">
                       </div>    
-                  </div>
-                  <div class="row">
+              
                       <div class="form-group">
                           <label><b>Fréquence </b></label><input type="text" [(ngModel)]="habitudeFrequenceSport" name="somthing5" class="form-control form-control-lg" placeholder="Fréquence" [disabled]="habitudeDosSport=='Non'">
                       </div>
-                  </div>
+                    </div>             
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+         
           </div>
         </div>
 
@@ -824,6 +827,8 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
           
             <br>
             <!---------------- Totaux ---------------->
+
+            <!--
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group"> 
@@ -851,22 +856,19 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                               <label>Calories</label>
                               <input type="text" class="form-control form-control-lg enquete-input" value="{{this.nbreTotaleCalorieT | number : '1.2-2'}}" disabled/> 
                           </td>
-                          <!--
-                          <td>
-                              <label>%Kcal</label>
-                              <input type="text" class="form-control form-control-lg enquete-input" value="{{ this.nbreTotaleCalorieT/100 | number : '1.2-2'}}" disabled/> 
-                          </td>
-                          -->
+                      
       
                       </tr>
                   </table>
                   </div>
+                 
             <br>   
             
-            <!--Button Calculer-->
+        
             <div class="text-center">
               <button type="button" class="btn btn-inverse-info btn-fw" (click)="onCalcule()" [disabled]="verificationDisabledButtonCalculer()"> Calculer</button>
             </div>
+             -->
               </div>
             </div>
         </div>
@@ -881,7 +883,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
             <!--Button Confirmer-->
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
               <div class="text-center">
-                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="verificationDisabledButtonConfirm()">Confirmer</button>
+                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" [disabled]="verificationDisabledButtonConfirm() && verificationDisabledButtonCalculer()">Confirmer</button>
                 </div>
           </span>
   
@@ -1292,7 +1294,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                         <table style="margin-bottom: 20px;">
                           <thead>
                             <tr>
-                              <th> # </th>
+                             
                               <th>Protides</th>
                               <th>Lipides</th>
                               <th>Glucides</th>
@@ -1428,7 +1430,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                             </tr>
 
                             <tr>
-                              <td> <b>Totaux ( pourcentage calorique )</b></td>
+                              <td> <b>Totaux</b></td>
                               <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.proteinesG100G <= 10 || listResultatEnquetebyId.proteinesG100G > 20)) ;else contenu_bonproteinesG100G ">
                                 <td> <span style="color: red;" > {{ listResultatEnquetebyId.proteinesG100G | number : '1.2-2' }} </span> </td>
                                </ng-container>         
@@ -1464,16 +1466,8 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                         </table>
                         
                         <br><br><hr><br>
-                        <h3>Total par semaine</h3>
+                        <h3>Apport calorique journalier moyen </h3>
                         <table>
-                          <thead>
-                          <tr>
-                            <th> # </th>
-                            <th></th> 
-                            <th> # </th> 
-                            <th></th> 
-                          </tr>
-                        </thead>
                         <tbody> 
                           <tr>
                             <td> <b>Eau (g) </b></td>
@@ -1552,7 +1546,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                             <td> {{ listResultatEnquetebyId.vitamineK1mg100G | number : '1.2-2' }}</td>  
                           </tr>
                           <tr>
-                            <td> <b>AgW6G (g) </b></td>
+                            <td> <b>AgW6 (g) </b></td>
                             <td> {{ listResultatEnquetebyId.agW6G100G | number : '1.2-2' }}</td>
                             <td> <b>Vitamine C (mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineCMg100G < 1000)) ;else contenu_bonvitamineCMg100G ">
@@ -1565,7 +1559,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                           <tr>
                             <td> <b>AgW3 (g)</b></td>
                             <td> {{ listResultatEnquetebyId.agW3G100G | number : '1.2-2' }}</td>
-                            <td> <b>VitamineB1Mg</b></td>
+                            <td> <b>VitamineB1(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB1Mg100G < 0.00058 )) ;else contenu_bonvitamineB1Mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB1Mg100G | number : '1.2-2' }} </span> </td>
                              </ng-container>         
@@ -1576,7 +1570,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                           <tr>
                             <td> <b>Cholestérol (mg)</b></td>
                             <td>{{ listResultatEnquetebyId.cholesterolMg100G | number : '1.2-2' }} </td>
-                            <td> <b>VitamineB2Mg</b></td>
+                            <td> <b>VitamineB2(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071  )) || (this.patService.PatientById.patSexe == 'Homme' &&  ( listResultatEnquetebyId.vitamineB2Mg100G < 0.00071 )) ;else contenu_bonvitamineB2Mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB2Mg100G | number : '1.2-2' }} </span> </td>
                              </ng-container>         
@@ -1593,7 +1587,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                                <td> <span style="color: green;"> {{ listResultatEnquetebyId.calciumMg100G | number : '1.2-2' }} </span> </td>
                             </ng-template>
 
-                            <td> <b>VitamineB3Mg</b></td>
+                            <td> <b>VitamineB3(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <= 0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB3Mg100G <=0.0067 || listResultatEnquetebyId.vitamineB3Mg100G > 900)) ;else contenu_bonvitamineB3Mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB3Mg100G | number : '1.2-2' }} </span> </td>
                             </ng-container>         
@@ -1610,7 +1604,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                                <td> <span style="color: green;"> {{ listResultatEnquetebyId.cuivreMg100G | number : '1.2-2' }} </span> </td>
                             </ng-template>
 
-                            <td> <b>VitamineB5Mg</b></td>
+                            <td> <b>VitamineB5(mg)</b></td>
                             <td>{{ listResultatEnquetebyId.vitamineB5Mg100G | number : '1.2-2' }} </td>  
                           </tr>
                           <tr>
@@ -1623,7 +1617,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                             </ng-template>
 
 
-                            <td> <b>VitamineB6Mg</b></td>
+                            <td> <b>VitamineB6(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <= 1.5 || listResultatEnquetebyId.vitamineB6Mg100G > 25  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB6Mg100G <=1.8 || listResultatEnquetebyId.vitamineB6Mg100G > 25)) ;else contenu_bonvitamineB6Mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB6Mg100G | number : '1.2-2' }} </span> </td>
                             </ng-container>         
@@ -1641,7 +1635,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                                <td> <span style="color: green;"> {{ listResultatEnquetebyId.magnesiumMg100G | number : '1.2-2' }} </span> </td>
                             </ng-template>
 
-                            <td> <b>VitamineB9Μg</b></td>
+                            <td> <b>VitamineB9(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB9mg100G <= 330  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB9mg100G <=330)) ;else contenu_bonvitamineB9mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB9mg100G | number : '1.2-2' }} </span> </td>
                             </ng-container>         
@@ -1659,7 +1653,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                                <td> <span style="color: green;"> {{ listResultatEnquetebyId.phosphoreMg100G | number : '1.2-2' }} </span> </td>
                             </ng-template> 
 
-                            <td> <b>VitamineB12Μg</b></td>
+                            <td> <b>VitamineB12(mg)</b></td>
                             <ng-container *ngIf="(this.patService.PatientById.patSexe == 'Femme' &&  (listResultatEnquetebyId.vitamineB12mg100G <= 4  )) || (this.patService.PatientById.patSexe == 'Homme' &&  (listResultatEnquetebyId.vitamineB12mg100G <=4)) ;else contenu_bonvitamineB12mg100G ">
                               <td> <span style="color: red;" > {{ listResultatEnquetebyId.vitamineB12mg100G | number : '1.2-2' }} </span> </td>
                             </ng-container>         
@@ -1697,7 +1691,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
       <table style="margin-bottom: 20px;margin-left: 10px;">
               <thead>
                 <tr>
-                  <th> # </th>
+                 
                   <th>Protides</th>
                   <th>Lipides</th>
                   <th>Glucides</th>
@@ -1735,7 +1729,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                     <td>  {{ this.nbreTotaleCalorieGrinotage| number : '1.2-2' }}  </td>
                 </tr>
                 <tr>
-                  <td> <b>Totaux ( pourcentage calorique )</b></td>
+                  <td> <b>Totaux</b></td>
                     <td>  {{ this.nbreTotaleProtideT| number : '1.2-2' }}  </td>
                       <td>  {{ this.nbreTotaleLipideT| number : '1.2-2' }}  </td>
                       <td>  {{ this.nbreTotaleGlucideT | number : '1.2-2' }}  </td>
@@ -1745,16 +1739,9 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
             </table>
 
             <br><br><hr><br>
-            <h3>Total par semaine</h3>
+            <h3>Apport calorique journalier moyen </h3>
             <table style="margin-left: 10px;">
-              <thead>
-              <tr>
-                <th> # </th>
-                <th></th> 
-                <th> # </th> 
-                <th></th> 
-              </tr>
-            </thead>
+     
             <tbody> 
               <tr>
                 <td> <b>Eau (g) </b></td>
@@ -1795,7 +1782,7 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
                 <td> {{ this.resEnqueteService.fromData.vitamineK1mg100G| number : '1.2-2' }}</td>  
               </tr>
               <tr>
-                <td> <b>AgW6G (g) </b></td>
+                <td> <b>AgW6 (g) </b></td>
                 <td> {{ this.resEnqueteService.fromData.agW6G100G | number : '1.2-2' }}</td>
                 <td> <b>Vitamine C (mg)</b></td>
                 <td> {{ this.resEnqueteService.fromData.vitamineCMg100G| number : '1.2-2' }} </td>
@@ -1803,48 +1790,48 @@ value="{{item.energieKcal100G}}/{{item.glucidesG100G}}/{{item.lipidesG100G}}/{{i
               <tr>
                 <td> <b>AgW3 (g)</b></td>
                 <td> {{ this.resEnqueteService.fromData.agW3G100G | number : '1.2-2' }}</td>
-                <td> <b>VitamineB1Mg</b></td>
+                <td> <b>VitamineB1(mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.vitamineB1Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Cholestérol (mg)</b></td>
                 <td> {{ this.resEnqueteService.fromData.cholesterolMg100G| number : '1.2-2' }} </td>
-                <td> <b>VitamineB2Mg</b></td>
+                <td> <b>VitamineB2(mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.vitamineB2Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Calcium (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.calciumMg100G | number : '1.2-2' }} </td>
 
-                <td> <b>VitamineB3Mg</b></td>
+                <td> <b>VitamineB3(mg)</b></td>
                   <td>  {{  this.resEnqueteService.fromData.vitamineB3Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Cuivre (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.cuivreMg100G | number : '1.2-2' }} </td>
 
-                <td> <b>VitamineB5Mg</b></td>
+                <td> <b>VitamineB5(mg)</b></td>
                 <td>{{   this.resEnqueteService.fromData.vitamineB5Mg100G | number : '1.2-2' }} </td>  
               </tr>
               <tr>
                 <td> <b>Fer (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.ferMg100G  | number : '1.2-2' }} </td>
 
-                <td> <b>VitamineB6Mg</b></td>
+                <td> <b>VitamineB6(mg)</b></td>
                   <td>  {{this.resEnqueteService.fromData.vitamineB6Mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Magnesium (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.magnesiumMg100G  | number : '1.2-2' }} </td>
 
-                <td> <b>VitamineB9Μg</b></td>
+                <td> <b>VitamineB9 (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.vitamineB9mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>
                 <td> <b>Phosphore (mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.phosphoreMg100G | number : '1.2-2' }} </td>
 
-                <td> <b>VitamineB12Μg</b></td>
+                <td> <b>VitamineB12(mg)</b></td>
                   <td>  {{ this.resEnqueteService.fromData.vitamineB12mg100G | number : '1.2-2' }} </td>
               </tr>
               <tr>

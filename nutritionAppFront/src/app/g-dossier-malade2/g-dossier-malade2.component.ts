@@ -309,6 +309,8 @@ constructor(public router:Router,
   }
   onSubmit(monform:NgForm){
 
+    this.onCalcule()
+
     this.pathologieAnswer = this.pathologieAnswer.filter(item => item != "AAA");
     this.antecedentAnswer = this.antecedentAnswer.filter(item => item != "AAA");
     
