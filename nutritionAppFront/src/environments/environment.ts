@@ -1,4 +1,4 @@
-export const environment = {
+/*export const environment = {
   production: false,
   "utilisateur_url": "https://localhost:44343/api/Utilisateur",
   "parametre_url": "https://localhost:44343/api/ParametreG",
@@ -11,9 +11,9 @@ export const environment = {
   "rendezvous_url":"https://localhost:44343/api/Rendezvous",
   "contrainteAlim_url":"https://localhost:44343/api/ContrainteNutritionnelle"
 };
+*/
 
 
-/*
 export const environment = {
   production: false,
   "utilisateur_url": "./api/Utilisateur",
@@ -27,6 +27,6 @@ export const environment = {
   "rendezvous_url":"./api/Rendezvous",
   "contrainteAlim_url":"./api/ContrainteNutritionnelle"
 };
-*/
+
 
 
